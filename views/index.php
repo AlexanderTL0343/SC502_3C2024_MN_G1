@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include ("./assets/fragmentos/head.php"); ?>
+<?php include ("./assets/fragmentos/head.php"); ?>//Funcionan como fragmento
 <body>
     <?php include ("./assets/fragmentos/header.php"); ?>
 
