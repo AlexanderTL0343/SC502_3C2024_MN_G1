@@ -25,9 +25,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Perfil">
-                            <i class="bi bi-person "></i>
-                        </a>
+                    <a class="nav-link" href="./fragmentos/register.php" aria-label="Perfil">
+    <i class="bi bi-person"></i>
+</a>
+
+
                     </li>
                     <li class="nav-item">
                         <label for="sidebar-toggle" class="btn btn-outline-primary" aria-label="Mostrar/Ocultar barra lateral">
