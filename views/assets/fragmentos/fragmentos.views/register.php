@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<?php include ("../../fragmentos/head.php"); ?>
 <link rel="stylesheet" href="/SC502_3C2024_MN_G1/views/assets/css/index.css">
-<?php include ("./assets/fragmentos/head.php"); ?>
 <body>
-<?php include ("./assets/fragmentos/header.php"); ?>
+<?php include ("../../fragmentos/header.php"); ?>
 
     
 
@@ -68,8 +69,8 @@
   </section>
 
 
-  <?php include ("./views/assets/fragmentos/footer.php"); ?>
+  <?php include ("../../fragmentos/footer.php"); ?>
 
   </body>
+  <script src="../../bootstrap/js/bootstrap.min.js"></script>
 </html>
-     <script src="../bootstrap/js/bootstrap.min.js"></script>
