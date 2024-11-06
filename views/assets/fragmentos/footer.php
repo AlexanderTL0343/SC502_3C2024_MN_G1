@@ -1,4 +1,4 @@
-<footer class="bg-white border-top py-4 mt-auto">
+<footer class="bg-white border-top py-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
