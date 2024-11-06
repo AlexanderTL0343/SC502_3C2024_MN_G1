@@ -1,4 +1,13 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="/SC502_3C2024_MN_G1/views/assets/css/index.css">
+<?php include ("./assets/fragmentos/head.php"); ?>
+<body>
+<?php include ("./assets/fragmentos/header.php"); ?>
+
+    
 
 <section class="bg-light py-5">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
@@ -57,4 +66,10 @@
         </form>
     </div>
   </section>
+
+
+  <?php include ("./views/assets/fragmentos/footer.php"); ?>
+
+  </body>
+</html>
      <script src="../bootstrap/js/bootstrap.min.js"></script>
