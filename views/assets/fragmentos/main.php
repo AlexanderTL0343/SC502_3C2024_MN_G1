@@ -1,4 +1,9 @@
-<section class="py-5">
+<!DOCTYPE html>
+<html lang="en">
+<?php include ("./head.php"); ?>
+<link rel="stylesheet" href="/SC502_3C2024_MN_G1-Alexander/views/assets/css/index.css">
+<body>
+<?php include ("./header.php"); ?><section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
@@ -200,3 +205,7 @@
                 </div>
             </div>
         </section>
+        <?php include ("./footer.php"); ?>
+</body>
+<?php include ("./scripts.php"); ?>
+</html>
