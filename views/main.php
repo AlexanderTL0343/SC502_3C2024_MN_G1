@@ -2,7 +2,8 @@
 <html lang="es">
 <?php include ("./assets/fragmentos/head.php"); ?>
 <body>
-<?php include ("./assets/fragmentos/header.php"); ?><section class="py-5">
+<?php include ("./assets/fragmentos/header.php"); ?>
+<section>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
@@ -204,7 +205,7 @@
                 </div>
             </div>
         </section>
-        <?php include ("./assets/fragmentos/footer.php"); ?>
+<?php include ("./assets/fragmentos/footer.php"); ?>
 </body>
 <?php include ("./assets/fragmentos/scripts.php"); ?>
 </html>

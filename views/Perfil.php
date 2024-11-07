@@ -3,9 +3,9 @@
 <?php include ("./assets/fragmentos/head.php"); ?>
 <body>
 <?php include ("./assets/fragmentos/header.php"); ?>
-<section style="background-color: #eee;">
-  <div class="container py-5">
-    <div class="row">
+<section class="d-flex flex-fill align-items-center justify-content-center" style="background-color: #eee;">
+  <div class="container">
+    <div class="row ">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
