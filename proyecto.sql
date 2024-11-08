@@ -6,31 +6,22 @@ id_Usuarios int auto_increment primary key,
 cedula  varchar(100) not null ,
 nombre VARCHAR(100)NOT NULL,
 apellido1 VARCHAR (100)NOT NULL,
-apellido2 VARCHAR (100)NOT NULL,
 email varchar (100) NOT NULL,
-password varchar (255)not null,
+contrasena varchar (255)not null,
 edad tinyint not null,
-fecha_nacimiento date not null,
 direccion varchar (255)not null,
+telefono varchar (255)not null ,
 fecha_registro timestamp default current_timestamp
 
 );
 
-CREATE TABLE contratistas (
-    id_Contratista INT auto_increment PRIMARY KEY,
-    especialidad VARCHAR(100),
-    descripcion TEXT,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_Contratista) REFERENCES usuarios(id_Usuarios)
-);
+ALTER TABLE usuarios 
+DROP COLUMN fecha_nacimiento;
 
-CREATE TABLE empleados (
-    id_Empleado INT auto_increment PRIMARY KEY,
-    experiencia TEXT,
-    habilidades VARCHAR(255),
-    disponibilidad VARCHAR(50),
-    FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios)
-);
+
+
+ALTER TABLE usuarios
+ADD COLUMN telefono varchar (255)not null ;
 
 
 CREATE TABLE trabajos (
@@ -102,6 +93,6 @@ CREATE TABLE calificaciones (
     FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios)
 );
 
-SELECT * FROM calificaciones;
-
+SELECT * FROM usuarios;
+DELETE FROM usuarios;
 
