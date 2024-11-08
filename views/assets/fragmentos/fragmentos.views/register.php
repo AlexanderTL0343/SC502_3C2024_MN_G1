@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:views/assets/fragmentos/fragmentos.views/register.php
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,6 +6,15 @@
 
 <?php include ("../../fragmentos/head.php"); ?>
 <link rel="stylesheet" href="/SC502_3C2024_MN_G1/views/assets/css/index.css">
+=======
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+
+<?php include ("./assets/fragmentos/head.php"); ?>
+>>>>>>> Stashed changes:views/register.php
 <body>
 <?php include ("../../fragmentos/header.php"); ?>
 
@@ -72,5 +82,11 @@
   <?php include ("../../fragmentos/footer.php"); ?>
 
   </body>
+<<<<<<< Updated upstream:views/assets/fragmentos/fragmentos.views/register.php
   <script src="../../bootstrap/js/bootstrap.min.js"></script>
+=======
+  <?php include ("./assets/fragmentos/scripts.php"); ?>
+
+
+>>>>>>> Stashed changes:views/register.php
 </html>
