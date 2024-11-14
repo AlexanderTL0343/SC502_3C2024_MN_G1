@@ -1,12 +1,12 @@
 <section class="py-3 py-md-5">
   <div class="container">
     <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
-      <div class="col-12 col-lg-6 col-xl-7 mx-auto">
+      <div class="col-12 col-xl-12">
         <div class="row justify-content-xl-center text-center">
-          <div class="col-12 col-xl-11">
+          <div>
             <h2 class="mb-3 ">Quienes somos?</h2>
-            <p class="lead fs-3 text-secondary text-align-center mb-3">Workly se trata de una organización que busca entregar un nuevo modelo de busqueda de empleo pero enfocado a trabajos más informales.</p>
-            <p class="mb-5">Tiene experiencia cosiendo y quiere ganar dinero facil? Puede publicarlo. Tiene habilidades para pintar una casa pero no quiere ingresar a una empresa? Crea una cuenta y hagase conocer</p>
+            <p class="fs-6 mb-4 text-center wide-paragraph">Workly es una organización que busca revolucionar la búsqueda de empleo, ofreciendo un modelo innovador y accesible que se enfoca en trabajos más informales y flexibles. Nos dirigimos especialmente a aquellos que cuentan con habilidades y talentos en áreas específicas, pero que desean trabajar de manera independiente, sin los compromisos tradicionales de un empleo de oficina. Creemos que existe un mercado laboral inexplorado donde se pueden aprovechar las habilidades de personas que quizás no buscan un empleo formal, sino trabajos casuales que les permitan ingresos extra o un horario más adaptable a sus necesidades. Nuestra plataforma facilita a los usuarios publicar y ofrecer sus servicios, ya sea para tareas como reparaciones, limpieza, asistencia doméstica o cualquier otra habilidad que tengan para compartir. Con Workly, crear una cuenta y darse a conocer es sencillo, abriendo un mundo de oportunidades laborales para todos.</p>
+            <p class="mb-5 text-center wide-paragraph">¿Tiene experiencia cosiendo y desea ganar un dinero extra sin complicaciones? Con Workly, puede publicar sus servicios de manera rápida y sencilla, conectándose con personas que buscan exactamente lo que usted tiene para ofrecer. Si tiene habilidades para pintar una casa o realizar trabajos de mantenimiento, pero prefiere no vincularse con una empresa o ajustarse a horarios rígidos, esta es la plataforma ideal para usted. Solo necesita crear una cuenta, detallar sus capacidades, y empezar a hacerse conocer entre aquellos que necesitan sus servicios. Workly le permite trabajar en sus propios términos, ofreciendo flexibilidad y la oportunidad de mostrar su talento a una comunidad que valora sus habilidades.</p>
             <div class="row gy-4 gy-md-0 gx-xxl-5X">
               <div class="col-12 col-md-6">
                 <div class="d-flex">
@@ -17,7 +17,7 @@
                   </div>
                   <div>
                     <h2 class="h4 mb-3">Los trabajos más sencillos y casuales</h2>
-                    <p class="text-secondary mb-0">Estamos abriendo una oportunidad para que personas con diferentes habilidades puedan aportar a servicios más casuales.</p>
+                    <p class="text-secondary mb-0">Estamos creando una oportunidad única para personas de todos los ámbitos, brindando un espacio en el que puedan ofrecer sus habilidades y talentos sin las barreras tradicionales de los empleos formales. Nuestro objetivo es permitir que aquellos con destrezas prácticas, que tal vez no encuentren fácilmente un espacio en el mercado laboral convencional, puedan aportar a servicios más casuales y específicos. Desde tareas cotidianas hasta labores especializadas, queremos conectar a quienes desean contribuir de manera flexible y libre, sin compromisos de largo plazo. Workly es el lugar donde su talento encuentra el valor que merece en el día a día.</p>
                   </div>
                 </div>
               </div>
@@ -30,7 +30,7 @@
                   </div>
                   <div>
                     <h2 class="h4 mb-3">Filosofía y Metas</h2>
-                    <p class="text-secondary mb-0">Creemos que nosotros como personas tenemos potenciales que pueden ser aprovechadas para hacer algo en la vida diaria, lamentablemente el tiempo y las circunstancias pueden marcar un cambio y nosotros queremos dar la oportunidad a aquellos que tienen bajas oportunidades en la vida.</p>
+                    <p class="text-secondary mb-0">Creemos firmemente que cada persona posee habilidades y talentos únicos que pueden ser aprovechados para hacer una diferencia en su vida diaria y en la de los demás. Lamentablemente, entendemos que las circunstancias, el tiempo y las limitaciones de cada individuo pueden influir en el desarrollo de estas capacidades, cerrando oportunidades para quienes desean progresar. Por eso, nuestra misión es abrir puertas y dar un espacio a aquellos que, a pesar de las dificultades, tienen el deseo de superarse y aprovechar sus talentos. En Workly, queremos brindar una plataforma inclusiva donde las habilidades de todos, sin importar su origen o situación, sean valoradas y reconocidas, permitiendo así que cada uno contribuya a su manera y alcance su máximo potencial.</p>
                   </div>
                 </div>
               </div>
