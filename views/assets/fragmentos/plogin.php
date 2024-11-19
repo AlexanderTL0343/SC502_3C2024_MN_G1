@@ -1,9 +1,14 @@
 <?php
 session_start();
+<<<<<<< Updated upstream
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
+=======
+?>
+
+>>>>>>> Stashed changes
 <section class="d-flex flex-fill align-items-center justify-content-center">
   <div class="container px-4 py-5 text-center text-lg-start">
     <div class="row gx-lg-5 align-items-center">
@@ -20,6 +25,7 @@ session_start();
       <div class="col-lg-6">
         <div class="card">
           <div class="card-body py-5 px-md-5">
+<<<<<<< Updated upstream
             <form method="POST" action="../assets/login.php">
             
               <div class="row">
@@ -58,6 +64,34 @@ session_start();
               
               <button type="submit" class="btn btn-primary btn-block mb-4">Inciar Sesión</button><br />
               </div>
+=======
+            <form method="POST" action ="../php/login.php">
+              
+
+              <div class="form-outline mb-4">
+                <input type="email" 
+                id="email" 
+                class="form-control" 
+                required />
+                <label class="email" for="email">Correo electrónico</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password"
+                 id="password"
+                  class="form-control" 
+                  required />
+                <label  for="password">Contraseña</label>
+              </div>
+              <a href="#" class="forgot-password">He olvidado mi contraseña?</a
+          >
+         
+          <div class="social-login"></div>
+
+             
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
+>>>>>>> Stashed changes
             </form>
           </div>
         </div>
