@@ -7,7 +7,7 @@
                         © 2024 Workly
                     </span>
                 </div>
-                <div class="col-md-8"> //cambié la ruta
+                <div class="col-md-8"> 
                     <ul class="nav justify-content-center justify-content-md-end">
                         <li class="nav-item"><a href="./about.php" class="nav-link px-2 text-muted">Sobre nosotros</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Términos de uso</a></li>
@@ -16,6 +16,5 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        
+        </div>  
 </footer>

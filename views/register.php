@@ -9,50 +9,52 @@
     <div class="p-5 lc-block shadow rounded-3 col-xl-6 offset-xl-3">
         <h3 class="card-title text-center mb-5 font-weight-bold fs-3">Regístrate para acceder a nuestros servicios:</h3>
 
-        <form class="form-horizontal" id="formulario" method="POST" action="../php/registroUser.php" enctype="multipart/form-data">
-
+        <form class="form-horizontal" id="registroUsuario" method="POST" enctype="multipart/form-data">
             <div class="form-group mb-4">
-                <label for="Nombre">Nombre:</label>
-                <input name="Nombre" type="text" class="form-control" id="Nombre" placeholder="Ingrese su Nombre" required/>
+                <label for="cedula">Cedula:</label>
+                <input name="cedula" type="text" class="form-control" id="cedula" placeholder="Ingrese su cedula" required/>
                 <p class="text-danger"></p>
             </div>
 
             <div class="form-group mb-4">
-                <label for="Apellido">Apellido:</label>
-                <input name="Apellido" type="text" class="form-control" id="apellido" placeholder="Ingrese su Apellido" required/>
+                <label for="nombre">Nombre:</label>
+                <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese su Nombre" required/>
                 <p class="text-danger"></p>
             </div>
 
             <div class="form-group mb-4">
-                <label for="Email">Email:</label>
-                <input name="Email" type="email" class="form-control" id="Email" placeholder="Ingrese su Email" required/>
+                <label for="apellido1">Apellido:</label>
+                <input name="apellido1" type="text" class="form-control" id="apellido1" placeholder="Ingrese su Apellido" required/>
                 <p class="text-danger"></p>
             </div>
 
+            <div class="form-group mb-4">
+                <label for="email">Email:</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="Ingrese su Email" required/>
+                <p class="text-danger"></p>
+            </div>
             
-
-            
             <div class="form-group mb-4">
-                <label for="Contrasena">Contraseña:</label>
-                <input name="Contrasena" type="password" class="form-control" id="Contrasena" placeholder="Ingrese una contraseña" required/>
+                <label for="contrasena">Contraseña:</label>
+                <input name="contrasena" type="password" class="form-control" id="contrasena" placeholder="Ingrese una contraseña" required/>
                 <p class="text-danger"></p>
             </div>
 
             <div class="form-group mb-4">
-                <label for="Edad">Edad:</label>
-                <input name="Edad" type="number" class="form-control" id="Edad" placeholder="Ingrese el número de teléfono"/>
+                <label for="edad">Edad:</label>
+                <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese el número de teléfono"/>
                 <p class="text-danger"></p>
             </div>
 
             <div class="form-group mb-4">
-                <label for="Direccion">Dirección:</label>
-                <input name="Direccion" type="text" class="form-control" id="Direccion" placeholder="Ingrese su dirección"/>
+                <label for="direccion">Dirección:</label>
+                <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección"/>
                 <p class="text-danger"></p>
             </div>
 
             <div class="form-group mb-4">
-                <label for="Telefono">Teléfono:</label>
-                <input name="Telefono" type="number" class="form-control" id="Telefono" placeholder="Ingrese el número de teléfono"/>
+                <label for="telefono">Teléfono:</label>
+                <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el número de teléfono"/>
                 <p class="text-danger"></p>
             </div>
 
