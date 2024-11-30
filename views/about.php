@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-<?php include ("./assets/fragmentos/head.php"); ?>
+<?php include ("./assets/fragmentos/head.php");?>
 <body>
     <?php include ("./assets/fragmentos/header.php"); ?>
 
-    <?php include ("./assets/fragmentos/hero1.php"); ?>
+    <?php include ("./assets/fragmentos/aboutus.php"); ?>
 
     <?php include ("./assets/fragmentos/footer.php"); ?>
 </body>

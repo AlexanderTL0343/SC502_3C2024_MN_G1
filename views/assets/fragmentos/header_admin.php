@@ -21,6 +21,11 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#" aria-label="Notificaciones">
+                            <i class="bi bi-person-rolodex"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-label="Notificaciones">
                             <i class="bi bi-bell bi-2x"></i>
                         </a>
                     </li>
@@ -39,6 +44,7 @@
         </div>
     </nav>
     <!-- Sidebar -->
+
     <input type="checkbox" id="sidebar-toggle" class="d-none">
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
         <div class="position-sticky sidebar-sticky">
@@ -51,8 +57,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="bi bi-file-earmark-text me-2"></i>
-                        Mis Publicaciones
+                        <i class="bi bi-bar-chart"></i>
+                        Reportes
                     </a>
                 </li>
                 <li class="nav-item">
@@ -68,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="#">   
                         <i class="bi bi-gear me-2"></i>
                         Configuración
                     </a>

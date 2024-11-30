@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #e3f2fd;
 }
 
 .navbar-brand {
@@ -39,8 +39,16 @@ body {
 .hero{
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     min-height: 80vh; /* Esto hará que el hero ocupe al menos la altura de la pantalla */
-    background-color:#e3f2fd; 
+    background-color:#e3f2fd;
 }
+
+.plogin{margin: 0;}
+
+.wide-paragraph{
+    max-width: 100%; /* Ajusta el ancho al 80% del contenedor padre */
+    margin: 5 auto; /* Centra el párrafo en el contenedor */
+    text-align: justify; /* Justifica el texto */
+  }
