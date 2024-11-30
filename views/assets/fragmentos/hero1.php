@@ -18,7 +18,7 @@
         <div class="border rounded-3 p-4 shadow-sm text-center" style="background-color: #f1f9fe;">
           <h3 class="fw-bold mb-3">¿Eres una Empresa?</h3>
           <p class="text-muted mb-4">Publica tus oportunidades de trabajo y conecta con candidatos interesados de manera rápida y eficiente.</p>
-          <a href="#" class="btn btn-outline-secondary rounded-pill px-4">Descubre más</a>
+          <a href="../views/registroReclutador.php" class="btn btn-outline-secondary rounded-pill px-4">Descubre más</a>
         </div>
       </div>
     </div>

@@ -29,5 +29,30 @@
                 echo json_encode($response);
             }
             break;
+
+        case 'iniciarSesion':
+            $usuario = new User();
+            $usuario->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
+            $usuario->setContrasena(isset($_POST['contrasena']) ? trim($_POST['contrasena']) : "");
+
+            if ($usuario->iniciarSesion2($usuario->getEmail(), $usuario->getContrasena()) == true) {
+
+                $response = array();
+                $response[] = [
+                    "status" => true,
+                    "message" => "Sesión iniciada",
+                    "nombre" => $_SESSION['usuario']['nombre'],
+                    "nombreRol" => $_SESSION['usuario']['nombreRol']//revisar si eliminar
+                ];
+                echo json_encode($response);
+            } else {
+                $response = array();
+                $response[] = [
+                    "status" => false,
+                    "message" => "Error al iniciar sesión"
+                ];
+                echo json_encode($response);
+            }
+            break;
     }
 ?>
