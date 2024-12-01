@@ -21,7 +21,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#" aria-label="Notificaciones">
-                            <i class="bi bi-person-rolodex"></i>
+                            <i class="bi bi-gear-fill"></i>
                         </a>
                     </li>
                     <li class="nav-item">

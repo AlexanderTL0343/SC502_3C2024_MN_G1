@@ -1,72 +1,124 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="es">
 
-<?php include ("./assets/fragmentos/head.php"); ?>
+<?php include("./assets/fragmentos/head.php"); ?>
+
 <body>
-<?php include ("./assets/fragmentos/header.php"); ?>
-    
-<section class="bg-light py-5">
-    <div class="p-5 lc-block shadow rounded-3 col-xl-6 offset-xl-3">
-        <h3 class="card-title text-center mb-5 font-weight-bold fs-3">Regístrate para acceder a nuestros servicios:</h3>
+<?php
+    if (!isset($_SESSION['usuario'])) {
+        // Redirige al login si no hay sesión activa
+        include("./assets/fragmentos/header.php");
 
-        <form class="form-horizontal" id="registroUsuario" method="POST" enctype="multipart/form-data">
-            <div class="form-group mb-4">
-                <label for="cedula">Cedula:</label>
-                <input name="cedula" type="text" class="form-control" id="cedula" placeholder="Ingrese su cedula" required/>
-                <p class="text-danger"></p>
-            </div>
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'ADMIN') {//donde dice [usuario] es la variable de sesion, esta variable almacena un arreglo asociativo
+        include("./assets/fragmentos/header_admin.php");      //[nombreRol] es la llave en el arreglo, es deci (llave=>valor), entonces buscamos el valor de nombreRol
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'RECLUTADOR') {
+        include("./assets/fragmentos/header_reclutador.php");
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'POSTULANTE') {
+        include("./assets/fragmentos/header_postulante.php");
+    } elseif ($_SESSION['usuario']['nombreRol'] === '') {
+        include("./assets/fragmentos/header.php");
+    }
+?>
 
-            <div class="form-group mb-4">
-                <label for="nombre">Nombre:</label>
-                <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese su Nombre" required/>
-                <p class="text-danger"></p>
-            </div>
+    <section class=" py-5 d-flex flex-column justify-content-center align-items-center">
+        <div class="p-5 lc-block shadow rounded-3 bg-white">
+            <h3 class="card-title text-center mb-5 font-weight-bold fs-3">Regístrate para acceder a nuestros servicios:</h3>
 
-            <div class="form-group mb-4">
-                <label for="apellido1">Apellido:</label>
-                <input name="apellido1" type="text" class="form-control" id="apellido1" placeholder="Ingrese su Apellido" required/>
-                <p class="text-danger"></p>
-            </div>
-
-            <div class="form-group mb-4">
-                <label for="email">Email:</label>
-                <input name="email" type="email" class="form-control" id="email" placeholder="Ingrese su Email" required/>
-                <p class="text-danger"></p>
-            </div>
-            
-            <div class="form-group mb-4">
-                <label for="contrasena">Contraseña:</label>
-                <input name="contrasena" type="password" class="form-control" id="contrasena" placeholder="Ingrese una contraseña" required/>
-                <p class="text-danger"></p>
-            </div>
-
-            <div class="form-group mb-4">
-                <label for="edad">Edad:</label>
-                <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese el número de teléfono"/>
-                <p class="text-danger"></p>
-            </div>
-
-            <div class="form-group mb-4">
-                <label for="direccion">Dirección:</label>
-                <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección"/>
-                <p class="text-danger"></p>
-            </div>
-
-            <div class="form-group mb-4">
-                <label for="telefono">Teléfono:</label>
-                <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el número de teléfono"/>
-                <p class="text-danger"></p>
-            </div>
-
-
-            <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-lg btn-primary">Registrarse</button>
+            <form class="form-horizontal" id="registroUsuario" method="POST" enctype="multipart/form-data">
+                
+                <div class="form-group mb-4">
+                    <label for="cedula">Cédula:</label>
+                    <input name="cedula" type="text" class="form-control" id="cedula" placeholder="Ingrese su cédula" required />
+                    <p class="text-danger"></p>
                 </div>
-        </form>
-    </div>
-  </section>
 
-  <?php include ("./assets/fragmentos/footer.php"); ?>
-  </body>
-  <?php include ("./assets/fragmentos/scripts.php"); ?>
+                <div class="row">
+                    <div class="form-group col mb-4">
+                        <label for="nombre">Nombre:</label>
+                        <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese su Nombre" required />
+                        <p class="text-danger"></p>
+                    </div>
+
+                    <div class="form-group col mb-4">
+                        <label for="apellido1">Primer Apellido:</label>
+                        <input name="apellido1" type="text" class="form-control" id="apellido1" placeholder="Primer Apellido" required />
+                        <p class="text-danger"></p>
+                    </div>
+                    <div class="form-group col mb-4">
+                        <label for="apellido2">Segundo Apellido:</label>
+                        <input name="apellido2" type="text" class="form-control" id="apellido2" placeholder="Segundo Apellido" required />
+                        <p class="text-danger"></p>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="edad">Edad:</label>
+                    <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese su edad" required />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="profesion">Profesión:</label>
+                    <select name="profesion" class="form-control" id="profesion" required>
+                        <option value="">Seleccione una Profesión</option>
+                        <option value="Ingeniero">Especialista en Tecnología</option>
+                        <option value="Arquitecto">Profesional Jurídico</option>
+                        <option value="Profesiona-de-la-Salud">Profesional de la Salud</option>
+                        <option value="Ingeniero">Ingeniero </option>
+                        <option value="Técnico-Especializado">Técnico Especializado</option>
+                        <option value="Diseñador">Diseñador</option>
+                        <option value="Operador-de-Transporte">Operador de Transporte</option>
+                    </select>
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="email">Email:</label>
+                    <input name="email" type="email" class="form-control" id="email" placeholder="Ingrese su Email" required />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="contrasena">Contraseña:</label>
+                    <input name="contrasena" type="password" class="form-control" id="contrasena" placeholder="Ingrese una contraseña" required />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="direccion">Dirección:</label>
+                    <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección" required />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="telefono">Teléfono:</label>
+                    <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el número de teléfono" required />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="imagen">Imagen:</label>
+                    <input name="imagen" type="file" class="form-control" id="imagen" />
+                    <p class="text-danger"></p>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="checkTerminos">
+                    <label class="form-check-label" for="checkTerminos">
+                        Acepto los <a href="#">Términos y Condiciones</a>
+                    </label>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" id="botonRegistro" class="btn btn-lg btn-primary" disabled>Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <?php include("./assets/fragmentos/footer.php"); ?>
+</body>
+<?php include("./assets/fragmentos/scripts.php"); ?>
+
 </html>

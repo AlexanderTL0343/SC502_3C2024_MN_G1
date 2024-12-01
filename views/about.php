@@ -1,12 +1,28 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="es">
-<?php include ("./assets/fragmentos/head.php");?>
+<?php include("./assets/fragmentos/head.php"); ?>
+
 <body>
-    <?php include ("./assets/fragmentos/header.php"); ?>
+<?php
+    if (!isset($_SESSION['usuario'])) {
+        // Redirige al login si no hay sesión activa
+        include("./assets/fragmentos/header.php");
 
-    <?php include ("./assets/fragmentos/aboutus.php"); ?>
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'ADMIN') {//donde dice [usuario] es la variable de sesion, esta variable almacena un arreglo asociativo
+        include("./assets/fragmentos/header_admin.php");      //[nombreRol] es la llave en el arreglo, es deci (llave=>valor), entonces buscamos el valor de nombreRol
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'RECLUTADOR') {
+        include("./assets/fragmentos/header_reclutador.php");
+    } elseif ($_SESSION['usuario']['nombreRol'] === 'POSTULANTE') {
+        include("./assets/fragmentos/header_postulante.php");
+    } elseif ($_SESSION['usuario']['nombreRol'] === '') {
+        include("./assets/fragmentos/header.php");
+    }
+?>
+    <?php include("./assets/fragmentos/aboutus.php"); ?>
 
-    <?php include ("./assets/fragmentos/footer.php"); ?>
+    <?php include("./assets/fragmentos/footer.php"); ?>
 </body>
-    <?php include ("./assets/fragmentos/scripts.php"); ?>
+<?php include("./assets/fragmentos/scripts.php"); ?>
+
 </html>

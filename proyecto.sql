@@ -1,98 +1,72 @@
 CREATE DATABASE proyectosql;
 USE proyectosql;
 
-CREATE TABLE usuarios(
-id_Usuarios int auto_increment primary key,
-cedula  varchar(100) not null ,
-nombre VARCHAR(100)NOT NULL,
-apellido1 VARCHAR (100)NOT NULL,
-email varchar (100) NOT NULL,
-contrasena varchar (255)not null,
-edad tinyint not null,
-direccion varchar (255)not null,
-telefono varchar (255)not null ,
-fecha_registro timestamp default current_timestamp
-
+/*------------------------------------------------Creacion de tablas------------------------------------------------*/
+CREATE TABLE ROLES(
+	ID_ROL_PK INT PRIMARY KEY AUTO_INCREMENT,
+    NOMBRE_ROL VARCHAR(100) NOT NULL
 );
 
-ALTER TABLE usuarios 
-DROP COLUMN fecha_nacimiento;
-
-
-
-ALTER TABLE usuarios
-ADD COLUMN telefono varchar (255)not null ;
-
-
-CREATE TABLE trabajos (
-    id_Trabajos int auto_increment primary key,
-    descripcion_trabajo TEXT NOT NULL,
-    tipo_trabajo VARCHAR(100) NOT NULL,
-    id_Contratista INT NOT NULL,
-    id_Empleado INT, -- Relación con la tabla empleados
-    estado VARCHAR(50) DEFAULT 'Pendiente', -- Estado del trabajo
-    fecha_trabajo timestamp default current_timestamp,
-    FOREIGN KEY (id_Contratista) REFERENCES usuarios(id_Usuarios), 
-    FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios) 
+CREATE TABLE USUARIOS(
+	ID_USUARIO_PK INT PRIMARY KEY AUTO_INCREMENT,
+    ID_ROL_FK INT,
+    CEDULA_USUARIO INT NOT NULL,
+    NOMBRE_USUARIO VARCHAR(100)NOT NULL,
+    APELLIDO1 VARCHAR(100)NOT NULL,
+    APELLIDO2 VARCHAR(100)NOT NULL,
+    PROFESION VARCHAR(100)NOT NULL,
+    EDAD INT NOT NULL,
+    DIRECCION VARCHAR(300),
+    TELEFONO VARCHAR(100),
+    EMAIL VARCHAR(100) NOT NULL,
+    CONTRASENA VARCHAR(100) NOT NULL,
+    FACEBOOK VARCHAR(200),
+    INSTAGRAM VARCHAR(200),
+    FECHA_REGISTRO TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    IMAGEN_URL VARCHAR(300),/*POSIBLEMENTE A CAMBIAR*/
+    FOREIGN KEY (ID_ROL_FK) REFERENCES ROLES(ID_ROL_PK)
 );
 
-CREATE TABLE direcciones (
-    id_Direccion int auto_increment primary key,
-    id_Usuario int NOT NULL, -- Relación con la tabla usuarios
-    pais VARCHAR(100) NOT NULL,
-    provincia VARCHAR(100) NOT NULL,
-    canton VARCHAR(100) NOT NULL,
-    distrito VARCHAR(100),
-    direccion_detallada VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_Usuario) REFERENCES usuarios(id_Usuarios)
+CREATE TABLE PUBLICACIONES(
+	ID_PUBLICACION_PK INT PRIMARY KEY AUTO_INCREMENT,
+    ESTADO BOOLEAN,
+    TITULO_PUBLICACION VARCHAR(100) NOT NULL,
+    DESCRIPCION VARCHAR(1024) NOT NULL,
+    FECHA_PUBLICACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    /*AGREGAR IMAGEN QUEDA PENDIENTE*/
+    ID_USUARIO_FK INT NOT NULL,
+    UBICACION VARCHAR(500) NOT NULL,
+    PRECIO_APROX DOUBLE NOT NULL,
+    FOREIGN KEY (ID_USUARIO_FK) REFERENCES USUARIOS(ID_USUARIO_PK)
 );
 
-CREATE TABLE facturas (
-    id_Factura int auto_increment primary key,
-    id_Trabajo int NOT NULL,
-    id_Empleado int NOT NULL,
-    cantidad DECIMAL(10,2) NOT NULL,
-    fecha_pago timestamp default current_timestamp,
-    metodo_pago VARCHAR(50),
-    estado_pago VARCHAR(50) DEFAULT 'Pendiente',
-    FOREIGN KEY (id_Trabajo) REFERENCES trabajos(id_Trabajos),
-    FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios)
+CREATE TABLE CALIFICACION (
+	ID_CALIFICACION_PK INT PRIMARY KEY AUTO_INCREMENT,
+    ID_PUBLICACION_FK INT NOT NULL,
+    ID_USUARIO_FK INT NOT NULL,
+    PUNTUACION INT
 );
+/*------------------------------------------------INSERT DE PRUEBA------------------------------------------------*/
+INSERT INTO ROLES(NOMBRE_ROL) VALUES('ADMIN');
+INSERT INTO ROLES(NOMBRE_ROL) VALUES('POSTULANTE');
+INSERT INTO ROLES(NOMBRE_ROL) VALUES('RECLUTADOR');
 
-CREATE TABLE roles (
-    id_Rol int auto_increment primary key,
-    nombre_rol VARCHAR(50) NOT NULL
-);
+SELECT * FROM ROLES;
 
-CREATE TABLE usuario_roles (
-    id_Usuario int NOT NULL,
-    id_Rol int NOT NULL,
-    FOREIGN KEY (id_Usuario) REFERENCES usuarios(id_Usuarios),
-    FOREIGN KEY (id_Rol) REFERENCES roles(id_Rol)
-);
+-- Insert 1
+INSERT INTO USUARIOS(ID_ROL_FK, CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA) 
+VALUES (1, '123456789', 'Brandon', 'Aguirre', 'Ortiz', 'Ingeniero', 19, 'Calle Ficticia 123', '987654321', 'test', 'test');
 
-CREATE TABLE experiencias_laborales (
-    id_Experiencia int auto_increment primary key,
-    id_Empleado int NOT NULL,
-    empresa VARCHAR(100),
-    puesto VARCHAR(100),
-    fecha_inicio DATE,
-    fecha_fin DATE,
-    descripcion TEXT,
-    FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios)
-);
+-- Insert 1
+INSERT INTO USUARIOS(ID_ROL_FK, CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA) 
+VALUES (1, '123456789', 'Juan', 'Perez', 'Lopez', 'Ingeniero', 30, 'Calle Ficticia 123', '987654321', 'juan.perez@example.com', 'password');
 
-CREATE TABLE calificaciones (
-    id_Calificacion int auto_increment primary key,
-    id_Trabajo int NOT NULL,
-    id_Empleado int NOT NULL,
-    calificacion INT NOT NULL,
-    comentario TEXT,
-    fecha_calificacion timestamp default current_timestamp,
-    FOREIGN KEY (id_Trabajo) REFERENCES trabajos(id_Trabajos),
-    FOREIGN KEY (id_Empleado) REFERENCES usuarios(id_Usuarios)
-);
+-- Insert 2
+INSERT INTO USUARIOS(ID_ROL_FK, CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA) 
+VALUES (2, '987654321', 'Maria', 'Gomez', 'Sanchez', 'Medico', 28, 'Avenida Central 456', '654987123', 'maria.gomez@example.com', 'password');
 
-SELECT * FROM usuarios;
-DELETE FROM usuarios;
+-- Insert 3
+INSERT INTO USUARIOS(ID_ROL_FK, CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA) 
+VALUES (3, '456789123', 'Carlos', 'Martinez', 'Ramirez', 'Arquitecto', 35, 'Calle Real 789', '321654987', 'carlos.martinez@example.com', 'password');
 
+SELECT * FROM USUARIOS;

@@ -9,6 +9,21 @@ function limpiarFormulario() {
   document.getElementById("telefono").value = "";
 }
 
+//FUNCION PARA HABILITAR EL BOTON DE REGISTRAR POR EL CHECKBOX
+document.addEventListener("DOMContentLoaded", function () {
+  // Referencias a los elementos
+  const checkbox = document.getElementById("checkTerminos");
+  const botonRegistro = document.getElementById("botonRegistro");
+
+  // Verifica si los elementos existen en el DOM
+  if (checkbox && botonRegistro) {
+    // Agregar el evento solo si los elementos existen
+    checkbox.addEventListener("change", function () {
+      botonRegistro.disabled = !this.checked;
+    });
+  }
+});
+
 //FUNCION PARA REGISTRAR USUARIO
 $(document).ready(function () {
   $("#registroUsuario").on("submit", function (e) {

@@ -10,98 +10,150 @@ class User extends Conexion
     private $cedula;
     private $nombre;
     private $apellido1;
-    private $email;
-    private $contrasena;
+    private $apellido2;
+    private $profesion;
     private $edad;
     private $direccion;
     private $telefono;
+    private $email;
+    private $contrasena;
+    private $facebook;
+    private $instagram;
+    private $fecha_registro;
+    private $imagen_url;
 
 
     //Constructor
     public function __construct() {}
 
-    //Getters
-    public function getId()
-    {
+    public function getId(){
         return $this->id;
     }
-    public function getIdRol()
-    {
+
+    public function getIdRol(){
         return $this->idRol;
     }
-    public function getCedula()
-    {
+
+    public function getCedula(){
         return $this->cedula;
     }
-    public function getNombre()
-    {
-        return $this->nombre;
+
+    public function getNombre(){
+        return $this->nombre;    
     }
-    public function getApellido1()
-    {
+
+    public function getApellido1(){
         return $this->apellido1;
     }
-    public function getEmail()
-    {
-        return $this->email;
+
+    public function getApellido2(){
+        return $this->apellido2;
     }
-    public function getContrasena()
-    {
-        return $this->contrasena;
+
+    public function getProfesion(){
+        return $this->profesion;
     }
-    public function getEdad()
-    {
+
+    public function getEdad(){
         return $this->edad;
     }
-    public function getDireccion()
-    {
+
+    public function getDireccion(){
         return $this->direccion;
     }
-    public function getTelefono()
-    {
+    
+    public function getTelefono(){
         return $this->telefono;
     }
 
-    //Setters
-    public function setId($id)
-    {
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function getContrasena(){
+        return $this->contrasena;
+    }
+
+    public function getFacebook(){
+        return $this->facebook;
+    }
+
+    public function getInstagram(){
+        return $this->instagram;
+    }
+
+    public function getFechaRegistro(){
+        return $this->fecha_registro;
+    }
+
+    public function getImagenUrl(){
+        return $this->imagen_url;
+    }
+
+    //----------------Setters-----------------
+
+    public function setId($id){
         $this->id = $id;
     }
-    public function setIdRol($idRol)
-    {
+
+    public function setIdRol($idRol){
         $this->idRol = $idRol;
     }
-    public function setCedula($cedula)
-    {
-        $this->cedula = $cedula;
+
+    public function setCedula($cedula){
+        $this->cedula = $cedula;    
     }
-    public function setNombre($nombre)
-    {
+
+    public function setNombre($nombre){
         $this->nombre = $nombre;
     }
-    public function setApellido1($apellido1)
-    {
+
+    public function setApellido1($apellido1){
         $this->apellido1 = $apellido1;
     }
-    public function setEmail($email)
-    {
-        $this->email = $email;
+
+    public function setApellido2($apellido2){
+        $this->apellido2 = $apellido2;
     }
-    public function setContrasena($contrasena)
-    {
-        $this->contrasena = $contrasena;
+
+    public function setProfesion($profesion){
+        $this->profesion = $profesion;
     }
-    public function setEdad($edad)
-    {
+
+    public function setEdad($edad){
         $this->edad = $edad;
     }
-    public function setDireccion($direccion)
-    {
+
+    public function setDireccion($direccion){ 
         $this->direccion = $direccion;
     }
-    public function setTelefono($telefono)
-    {
+
+    public function setTelefono($telefono){
         $this->telefono = $telefono;
+    }
+
+    public function setEmail($email){
+        $this->email = $email; 
+    }
+
+    public function setContrasena($contrasena){
+        $this->contrasena = $contrasena;
+    }
+
+    public function setFacebook($facebook){
+        $this->facebook = $facebook;  
+    }
+
+    public function setInstagram($instagram){
+        $this->instagram = $instagram;
+    }
+
+    public function setFechaRegistro($fecha_registro){
+        $this->fecha_registro = $fecha_registro; 
+    }
+
+    public function setImagenUrl($imagen_url){
+        $this->imagen_url = $imagen_url;
     }
 
     //----------------Métodos-----------------
@@ -118,7 +170,8 @@ class User extends Conexion
 
     public function insertarUsuario()
     {
-        $SQL = "INSERT INTO usuarios(cedula,nombre,apellido1,email,contrasena,edad,direccion,telefono) VALUES(?,?,?,?,?,?,?,?)";
+        $SQL = "INSERT INTO USUARIOS(CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA, IMAGEN_URL) 
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             self::getConexion();
@@ -126,11 +179,14 @@ class User extends Conexion
             $res->bindParam(1, $this->cedula);
             $res->bindParam(2, $this->nombre);
             $res->bindParam(3, $this->apellido1);
-            $res->bindParam(4, $this->email);
-            $res->bindParam(5, $this->contrasena);
+            $res->bindParam(4, $this->apellido2);
+            $res->bindParam(5, $this->profesion);
             $res->bindParam(6, $this->edad);
             $res->bindParam(7, $this->direccion);
             $res->bindParam(8, $this->telefono);
+            $res->bindParam(9, $this->email);
+            $res->bindParam(10, $this->contrasena);
+            $res->bindParam(11, $this->imagen_url);
 
             $res->execute();
             self::desconectar();
@@ -144,9 +200,10 @@ class User extends Conexion
 
 
     public function iniciarSesion2($email, $contrasena){
-        $SQL = "SELECT ID_USUARIOS,NOMBRE_ROL,CEDULA,NOMBRE,APELLIDO1,EMAIL,CONTRASENA,EDAD,DIRECCION,TELEFONO,FECHA_REGISTRO
-                FROM USUARIOS U INNER JOIN ROLES R 
-                ON U.ID_ROL_FK = R.ID_ROL WHERE EMAIL = ? AND CONTRASENA = ?";     
+        $SQL = "SELECT ID_USUARIO_PK,NOMBRE_ROL,CEDULA_USUARIO,NOMBRE_USUARIO,APELLIDO1,APELLIDO2,
+        PROFESION,EDAD,DIRECCION,TELEFONO,EMAIL,CONTRASENA,FACEBOOK,INSTAGRAM,FECHA_REGISTRO,IMAGEN_URL
+        FROM USUARIOS U INNER JOIN ROLES R  ON U.ID_ROL_FK = R.ID_ROL_PK
+        WHERE EMAIL = ? AND CONTRASENA = ?";
         try{
             self::getConexion();
             $res = self::$conn->prepare($SQL);
@@ -155,23 +212,28 @@ class User extends Conexion
             $res->execute();
             self::desconectar();
             $res = $res->fetch();
-
+            
             if ($res) {
-                $_SESSION['usuario'] = ['idUsuario' => $res['ID_USUARIOS'],
-                                        'nombreRol' => $res['NOMBRE_ROL'],
-                                        'cedula' => $res['CEDULA'],
-                                        'nombre' => $res['NOMBRE'],
-                                        'apellido1' => $res['APELLIDO1'],
-                                        'email' => $res['EMAIL'],
-                                        'contrasena' => $res['CONTRASENA'],
-                                        'edad' => $res['EDAD'],
-                                        'direccion' => $res['DIRECCION'],
-                                        'telefono' => $res['TELEFONO'],
-                                        'fecha_registro' => $res['FECHA_REGISTRO']
-                                        ];
-
-                //$_SESSION['Rol'] = $res['NOMBRE_ROL'];
-                
+                $_SESSION['usuario'] = 
+                [
+                    'idUsuario' => $res['ID_USUARIO_PK'],
+                    'nombreRol' => $res['NOMBRE_ROL'],
+                    'cedula' => $res['CEDULA_USUARIO'],
+                    'nombre' => $res['NOMBRE_USUARIO'],
+                    'apellido1' => $res['APELLIDO1'],
+                    'apellido2' => $res['APELLIDO2'],
+                    'profesion' => $res['PROFESION'],
+                    'edad' => $res['EDAD'],
+                    'direccion' => $res['DIRECCION'],
+                    'telefono' => $res['TELEFONO'],
+                    'email' => $res['EMAIL'],
+                    'contrasena' => $res['CONTRASENA'],
+                    'facebook' => $res['FACEBOOK'],
+                    'instagram' => $res['INSTAGRAM'],
+                    'fecha_registro' => $res['FECHA_REGISTRO'],
+                    'imagen_url' => $res['IMAGEN_URL']
+                ]; 
+                               
                 return true;
             }
             return false;

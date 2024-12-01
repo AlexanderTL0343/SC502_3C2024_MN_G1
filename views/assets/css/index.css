@@ -45,8 +45,6 @@ body {
     background-color:#e3f2fd;
 }
 
-.plogin{margin: 0;}
-
 .wide-paragraph{
     max-width: 100%; /* Ajusta el ancho al 80% del contenedor padre */
     margin: 5 auto; /* Centra el párrafo en el contenedor */
