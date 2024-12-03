@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,14 +6,29 @@
 
 <body>
 
-<?php include("../config/session.php");?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+    <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
 
     <section class=" py-5 d-flex flex-column justify-content-center align-items-center">
         <div class="p-5 lc-block shadow rounded-3 bg-white">
-            <h3 class="card-title text-center mb-5 font-weight-bold fs-3">Regístrate para acceder a nuestros servicios:</h3>
+            <h3 class="card-title text-center mb-4 font-weight-bold fs-3">Regístrate para acceder a nuestros servicios:</h3>
 
             <form class="form-horizontal" id="registroUsuario" method="POST" enctype="multipart/form-data">
-                
+
+                <div class="d-flex justify-content-around mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tipoUsuario" id="radioPostulante" value="2" required><!---valor 2 para indicar el id de POSTULANTE para la bsd-->
+                        <label class="form-check-label" for="radioPostulante">
+                            Postulante
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tipoUsuario" id="radioReclutador" value="3" required><!---valor 3 para indicar el id de Rclutador para la bsd-->
+                        <label class="form-check-label" for="radioReclutador">
+                            Reclutador
+                        </label>
+                    </div>
+                </div>
+
                 <div class="form-group mb-4">
                     <label for="cedula">Cédula:</label>
                     <input name="cedula" type="text" class="form-control" id="cedula" placeholder="Ingrese su cédula" required />

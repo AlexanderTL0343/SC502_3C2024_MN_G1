@@ -4,6 +4,7 @@
     switch ($_GET['op']) {
         case 'insertarUsuario':
             $usuario = new User();
+            $usuario->setIdRol(isset($_POST['tipoUsuario']) ? trim($_POST['tipoUsuario']) : 0);
             $usuario->setCedula(isset($_POST['cedula']) ? trim($_POST['cedula']) : "");
             $usuario->setNombre(isset($_POST['nombre']) ? trim($_POST['nombre']) : "");
             $usuario->setApellido1(isset($_POST['apellido1']) ? trim($_POST['apellido1']) : "");
@@ -15,6 +16,7 @@
             $usuario->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
             $usuario->setContrasena(isset($_POST['contrasena']) ? trim($_POST['contrasena']) : "");
             $usuario->setImagenUrl(isset($_FILES['imagen']) ? $_FILES['imagen']['name'] : "");
+
 
             if ($usuario->insertarUsuario() == true) {//true es la respuesta del modelo al insertar la cita
                 

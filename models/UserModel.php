@@ -170,23 +170,24 @@ class User extends Conexion
 
     public function insertarUsuario()
     {
-        $SQL = "INSERT INTO USUARIOS(CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA, IMAGEN_URL) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        $SQL = "INSERT INTO USUARIOS(ID_ROL_FK,CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA, IMAGEN_URL) 
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             self::getConexion();
             $res = self::$conn->prepare($SQL);
-            $res->bindParam(1, $this->cedula);
-            $res->bindParam(2, $this->nombre);
-            $res->bindParam(3, $this->apellido1);
-            $res->bindParam(4, $this->apellido2);
-            $res->bindParam(5, $this->profesion);
-            $res->bindParam(6, $this->edad);
-            $res->bindParam(7, $this->direccion);
-            $res->bindParam(8, $this->telefono);
-            $res->bindParam(9, $this->email);
-            $res->bindParam(10, $this->contrasena);
-            $res->bindParam(11, $this->imagen_url);
+            $res->bindParam(1,$this->idRol);
+            $res->bindParam(2, $this->cedula);
+            $res->bindParam(3, $this->nombre);
+            $res->bindParam(4, $this->apellido1);
+            $res->bindParam(5, $this->apellido2);
+            $res->bindParam(6, $this->profesion);
+            $res->bindParam(7, $this->edad);
+            $res->bindParam(8, $this->direccion);
+            $res->bindParam(9, $this->telefono);
+            $res->bindParam(10, $this->email);
+            $res->bindParam(11, $this->contrasena);
+            $res->bindParam(12, $this->imagen_url);
 
             $res->execute();
             self::desconectar();
