@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="../views/index.php"><!-- RUTA ESTATICA -->
-                <i class="bi bi-briefcase me-2"></i>
+                <i class="bi bi-briefcase icono-header"></i>
                 Workly
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,10 +18,10 @@
                         </button>
                     </form>
                 </div>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#" aria-label="ttt">
-                            <i class="fa-solid fa-lock"></i>
+                            <i class="fa-solid fa-lock icono-sidebar"></i>
                         </a>
                     </li>
                     

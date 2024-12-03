@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #e3f2fd;
+    
 }
 
 .navbar-brand {
@@ -50,3 +51,12 @@ body {
     margin: 5 auto; /* Centra el párrafo en el contenedor */
     text-align: justify; /* Justifica el texto */
   }
+
+.icono-sidebar{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.icono-header{
+    font-size: 20px;
+    margin-right: 10px;
+}
