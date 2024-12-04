@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function listarGrafUsuariosTot(nombres, datos) {
   // Gráfico de cantidad de usuarios
   const ctx2 = document.getElementById("graf-cantidadUsuarios");
+  
   new Chart(ctx2, {
     type: "pie",
     data: {
@@ -51,6 +52,49 @@ function listarGrafUsuariosTot(nombres, datos) {
       datasets: [
         {
           label: "Usuarios",
+          data: datos,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+//---------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  $.ajax({
+    url: "../controllers/GraficoControllers.php?op=getUsuariosPorEdad",
+    type: "POST",
+    dataType: "json",
+    success: function (response) {
+      console.log("Respuesta del servidor:", response); 
+
+      listarGrafUsuariosEdad(response.edad, response.cantidad);
+      
+    },
+    error: function (err) {
+      console.error("Error en la solicitud AJAX:", err);
+      alert("Error inesperado al obtener los datos");
+    },
+  });
+});
+
+function listarGrafUsuariosEdad(edades, datos) {
+  // Gráfico de cantidad de usuarios
+  const ctx3 = document.getElementById("graf-usuarioPorEdad");
+  new Chart(ctx3, {
+    type: "bar",
+    data: {
+      labels: edades,
+      datasets: [
+        {
+          label: "Edad",
           data: datos,
           borderWidth: 1,
         },

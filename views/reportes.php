@@ -13,6 +13,9 @@
     <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
         <canvas id="graf-cantidadUsuarios"></canvas>
     </div>
+    <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
+        <canvas id="graf-usuarioPorEdad"></canvas>
+    </div>
    </section>
 
     <?php include("./assets/fragmentos/footer.php"); ?>
