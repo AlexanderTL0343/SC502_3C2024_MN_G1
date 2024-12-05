@@ -25,13 +25,25 @@ new Chart(ctx, {
 //---------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   $.ajax({
-    url: "../controllers/GraficoControllers.php?op=getDatosGraficos",
+    url: "../controllers/GraficoControllers.php?op=getUsuariosPorRol",
     type: "POST",
-    dataType: "json",
+    data: {},
+    contentType: false,
+    processData: false,
     success: function (response) {
       console.log("Respuesta del servidor:", response); 
+      response = JSON.parse(response);
 
-      listarGrafUsuariosTot(response.NOMBRE_ROL, response.cantidad);
+      roles = [];
+      cantidad = [];
+
+      response.forEach(element => {
+        roles.push(element.NOMBRE_ROL);
+        cantidad.push(element.cantidad);
+      });
+
+
+      listarGrafUsuariosTot(roles, cantidad);
       
     },
     error: function (err) {
@@ -71,11 +83,22 @@ document.addEventListener("DOMContentLoaded", function () {
   $.ajax({
     url: "../controllers/GraficoControllers.php?op=getUsuariosPorEdad",
     type: "POST",
-    dataType: "json",
+    data: {},
+    contentType: false,
+    processData: false,
     success: function (response) {
       console.log("Respuesta del servidor:", response); 
+      response = JSON.parse(response);
 
-      listarGrafUsuariosEdad(response.edad, response.cantidad);
+      edades =  [];
+      cantidad = [];
+
+      response.forEach(element => {
+        edades.push(element.EDAD);
+        cantidad.push(element.CANTIDAD);
+      });
+
+      listarGrafUsuariosEdad(edades, cantidad);
       
     },
     error: function (err) {

@@ -248,66 +248,32 @@ class User extends Conexion
     public function obtenerDatosGraficos(){
         $SQL = "SELECT count(*) as cantidad, NOMBRE_ROL FROM USUARIOS INNER JOIN ROLES ON USUARIOS.ID_ROL_FK = ROLES.ID_ROL_PK GROUP BY NOMBRE_ROL";
         try{
-            self::getConexion();  // Verifica que la conexión esté activa
+            self::getConexion(); 
             $res = self::$conn->prepare($SQL);
             $res->execute();
             self::desconectar();
-            $rows = $res->fetchAll();
-            
-            // Inicializa los arrays para los resultados
-            $nombresRol = [];
-            $cantidades = [];
-    
-            // Organiza los resultados en los dos arrays
-            foreach ($rows as $row) {
-                $nombresRol[] = $row['NOMBRE_ROL'];
-                $cantidades[] = $row['cantidad'];
-            }
-    
-            // Devuelve los resultados en el formato requerido
-            return json_encode([
-                "NOMBRE_ROL" => $nombresRol,
-                "cantidad" => $cantidades
-            ]);
-    
-            return json_encode($res);  // Devuelve los datos como JSON
+
+            return $res->fetchAll();           
+
         }catch(PDOException $Exception){
             self::desconectar();
-            // Captura el error de la base de datos y muestra un mensaje
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
             return json_encode(["status" => false, "message" => $error]);
         }
     }
 
     public function obtenerUsuariosPorEdad(){
-        $SQL = "SELECT count(*) as CANTIDAD, EDAD FROM USUARIOS  GROUP BY EDAD";
+        $SQL = "SELECT count(*) as CANTIDAD, EDAD FROM USUARIOS GROUP BY EDAD";
         try{
-            self::getConexion();  // Verifica que la conexión esté activa
+            self::getConexion(); 
             $res = self::$conn->prepare($SQL);
             $res->execute();
             self::desconectar();
-            $rows = $res->fetchAll();
-            
-            // Inicializa los arrays para los resultados
-            $edades = [];
-            $cantidades = [];
+
+            return $res->fetchAll();
     
-            // Organiza los resultados en los dos arrays
-            foreach ($rows as $row) {
-                $edades[] = $row['EDAD'];
-                $cantidades[] = $row['CANTIDAD'];
-            }
-    
-            // Devuelve los resultados en el formato requerido
-            return json_encode([
-                "edad" => $edades,
-                "cantidad" => $cantidades
-            ]);
-    
-            return json_encode($res);  // Devuelve los datos como JSON
         }catch(PDOException $Exception){
             self::desconectar();
-            // Captura el error de la base de datos y muestra un mensaje
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
             return json_encode(["status" => false, "message" => $error]);
         }

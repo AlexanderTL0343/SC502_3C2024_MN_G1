@@ -2,16 +2,17 @@
 require_once '../models/UserModel.php';
 
 switch ($_GET['op']) {
-    case 'getDatosGraficos':
+    case 'getUsuariosPorRol':
         $usuario = new User();
         $datos = $usuario->obtenerDatosGraficos();
-        echo $datos;
+        echo json_encode($datos);
         break;
 
     case 'getUsuariosPorEdad':
         $usuario = new User();
         $datos = $usuario->obtenerUsuariosPorEdad();
-        echo $datos;
+
+        echo json_encode($datos);
         break;
    
 }
