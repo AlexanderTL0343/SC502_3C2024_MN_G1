@@ -123,17 +123,7 @@ body {
     color: #212529;
 }
 
-header {
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 1rem;
-    text-align: center;
-}
 
-header h1 {
-    margin: 0;
-    font-size: 2rem;
-}
 
 main {
     padding: 2rem;
@@ -268,6 +258,7 @@ form button:hover {
 
 /* Filtros */
 #filtros {
+    margin-top: 10px;
     margin-bottom: 2rem;
     float: right; /* Alinear a la derecha */
     text-align: left; /* Mantener el contenido alineado a la izquierda dentro del contenedor */
@@ -306,7 +297,7 @@ form button:hover {
 
 
         </style>
-         <script src="script.js"></script>
+         <script src="main.js"></script>
 
 <?php include ("./assets/fragmentos/footer.php"); ?>
 </body>
