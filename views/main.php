@@ -1,8 +1,13 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="es">
 <?php include ("./assets/fragmentos/head.php"); ?>
+
 <body>
-<?php include ("./assets/fragmentos/header.php"); ?>
+
+<?php include("../config/session.php");?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+
 <section>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

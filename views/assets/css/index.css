@@ -2,7 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8faf8;
+    background-color: #e3f2fd;
+    
 }
 
 .navbar-brand {
@@ -45,10 +46,17 @@ body {
     background-color:#e3f2fd;
 }
 
-.plogin{margin: 0;}
-
 .wide-paragraph{
     max-width: 100%; /* Ajusta el ancho al 80% del contenedor padre */
     margin: 5 auto; /* Centra el párrafo en el contenedor */
     text-align: justify; /* Justifica el texto */
   }
+
+.icono-sidebar{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.icono-header{
+    font-size: 20px;
+    margin-right: 10px;
+}
