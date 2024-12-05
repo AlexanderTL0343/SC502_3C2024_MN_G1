@@ -1,7 +1,11 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
-<?php include("./assets/fragmentos/head.php"); ?>
+
+<?php 
+include("./assets/fragmentos/admin401.php");
+include("./assets/fragmentos/head.php"); 
+?>
 
 <body>
     <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->

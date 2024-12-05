@@ -1,7 +1,11 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
-<?php include("./assets/fragmentos/head.php"); ?>
+  
+<?php 
+    include ("./assets/fragmentos/sinSesion401.php");
+    include("./assets/fragmentos/head.php");
+?>
 
 <body>
 
