@@ -17,7 +17,6 @@
                     </div>
                 </div>
             </div>
-
             <h2 class="mb-3 ">Redes Sociales</h2>
             <?php
                 $imagen = "../views/assets/imgs/Facebook.png";
@@ -27,16 +26,12 @@
                 $imagen2 = "../views/assets/imgs/Instagram.png";
                 $enlace2 = "https://www.instagram.com";
             ?>
-
             <a href= "<?php echo $enlace; ?>" target="_blank">
                 <img src="<?php echo $imagen; ?>" alt="Facebook" style="width:50px; height:50px;">
             </a>
-
-
             <a href= "<?php echo $enlace2; ?>" target="_blank">
                 <img src="<?php echo $imagen2; ?>" alt="Instagram" style="width:50px; height:50px;">
             </a>
-
           </div>
         </div>
       </div>
