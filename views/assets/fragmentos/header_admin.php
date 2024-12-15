@@ -63,7 +63,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="bi bi-database icono-sidebar"></i>
+                    <i class="bi bi-columns-gap icono-sidebar"></i>
                         Administrar Tablas
                     </a>
                 </li>

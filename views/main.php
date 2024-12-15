@@ -23,8 +23,9 @@ $ofertasFiltradas = array_filter($ofertas, function ($oferta) use ($categoriaSel
 <?php
 include("./assets/fragmentos/sinSesion401.php");
 include("./assets/fragmentos/head.php");
-include("../config/session.php");
+include("../config/session.php"); 
 ?>
+
 
 <body>
     <main>
