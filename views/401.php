@@ -11,26 +11,26 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #e3f2fd; /* Color de fondo celeste claro */
-            color: #0d47a1; /* Color del texto, un azul oscuro para contraste */
+            background-color: #e3f2fd; 
+            color: #0d47a1;
         }
         .error-container {
             text-align: center;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
-            background-color: white; /* Fondo blanco para el contenedor del error */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: white; 
         }
         .error-code {
-            font-size: 6rem; /* Tamaño grande para el código de error */
+            font-size: 6rem; 
             font-weight: bold;
         }
         .btn-custom {
-            background-color: #0d47a1; /* Color personalizado para el botón */
-            color: white; /* Color del texto del botón */
+            background-color: #0d47a1; 
+            color: white; 
         }
         .btn-custom:hover {
-            background-color: #1565c0; /* Color más oscuro al pasar el mouse */
+            background-color: #1565c0;
         }
     </style>
 </head>

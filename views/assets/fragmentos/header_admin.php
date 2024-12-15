@@ -63,6 +63,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
+                        <i class="bi bi-database icono-sidebar"></i>
+                        Administrar Tablas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
                         <i class="bi bi-star icono-sidebar"></i>
                         Favoritos
                     </a>
