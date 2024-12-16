@@ -1,10 +1,11 @@
 <?php
-require_once '../models/TablasModelos.php';
+include '../models/TablaRol.php';
+
 
 switch ($_GET['op']) {
  case 'LlenarTablaRol':
-    $tabla = new TablasModelos();
-    $clientes = $tabla->listarTabla();
+    $tabla = new TablaRol();
+    $clientes = $tabla->listarTablaRol();
     $data = array();
     foreach ($clientes as $reg) {
         $data[] = array(
@@ -20,4 +21,6 @@ switch ($_GET['op']) {
     );
     echo json_encode($resultados);
     break;
+
 }
+?>

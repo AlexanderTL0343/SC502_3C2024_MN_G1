@@ -21,9 +21,11 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Vehículo</th>
-                                            <th>Veces Alquilado</th>
+                                            <th>Edad</th>
+                                            <th>Email</th>
+                                            <th>Profesion</th>
+                                            <th>Fecha Registro</th>
+                                            <th>Rol</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,10 +65,13 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Vehículo</th>
-                                                <th>Veces Alquilado</th>
+                                                <th>Usuario</th>
+                                                <th>Titulo</th>
+                                                <th>Descripcion</th>
+                                                <th>Fecha Publicacion</th>
+                                                <th>Ubicacion</th>
+                                                <th>Precio Aprox</th>
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -148,10 +153,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Nombre</th>
-                                                        <th>Apellido</th>
-                                                        <th>Vehículo</th>
-                                                        <th>Veces Alquilado</th>
+                                                        <th>Publicacion</th>
+                                                        <th>Usuario</th>
+                                                        <th>Puntaje</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

@@ -91,7 +91,7 @@
           <div class="row">
             <div class="col-md-6">
               <?php
-              if (isset($_SESSION['usuario']['nombreRol']) && $_SESSION['usuario']['nombreRol'] === 'USER') { //Se visualiza la tarjeta si el rol es USER
+              if (isset($_SESSION['usuario']['nombreRol']) && $_SESSION['usuario']['nombreRol'] === 'POSTULANTE') { //Se visualiza la tarjeta si el rol es USER
                 $test = '<div class="card mb-4 mb-md-0">
                           <div class="card-body">
                             <p class="mb-4"><span class="text-primary font-italic me-1">Trabajos</span> Trabajos Terminados
@@ -128,7 +128,7 @@
             </div>
             <div class="col-md-6">
             <?php
-              if (isset($_SESSION['usuario']['nombreRol']) && $_SESSION['usuario']['nombreRol'] === 'USER') { //Se visualiza la tarjeta si el rol es USER
+              if (isset($_SESSION['usuario']['nombreRol']) && $_SESSION['usuario']['nombreRol'] === 'POSTULANTE') { //Se visualiza la tarjeta si el rol es USER
                 $test =
               '<div class="card mb-4 mb-md-0">
                 <div class="card-body"><!--Aqui iria la misma logica de arriba-->

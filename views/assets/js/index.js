@@ -94,8 +94,17 @@ $("#login").on("submit", function (e) {
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
-            // Redirigir después de que el cuadro desaparezca
-            window.location.href = "main.php";  // Redirigir a la pagina de PAOLA
+              // Redirigir después de que el cuadro desaparezca
+              var sessionAdmin = datos[0].nombreRol;
+           
+              if (sessionAdmin == "ADMIN") {
+                window.location.href = "reportes.php";
+              }else if (sessionAdmin == "RECLUTADOR") {
+                window.location.href = "main.php";
+              }else if (sessionAdmin == "POSTULANTE") {
+                window.location.href = "main.php";
+              }  
+               //Redirigir a la pagina de PAOLA
             });
           break;
 

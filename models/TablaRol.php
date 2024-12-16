@@ -2,7 +2,7 @@
 session_start();
 require_once '../config/Conexion.php';
 
-class TablasModelos extends Conexion
+class TablaRol extends Conexion
 {
 
     protected static $cnx;
@@ -44,7 +44,7 @@ class TablasModelos extends Conexion
 
     //funcion para listar la tabla de los usuarios 
 
-    public function listarTabla()
+    public function listarTablaRol()
     {
         $query = "SELECT * from roles ";
         $arr = array();
@@ -55,7 +55,7 @@ class TablasModelos extends Conexion
             $resultado->execute();
             self::desconectar();
             foreach ($resultado->fetchAll() as $encontrado) {
-                $client = new TablasModelos();
+                $client = new TablaRol();
                 $client->setIdRolPk($encontrado['ID_ROL_PK']);
                 $client->setNombreRol($encontrado['NOMBRE_ROL']);
                 $arr[] = $client;
