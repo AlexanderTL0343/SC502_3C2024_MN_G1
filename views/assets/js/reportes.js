@@ -132,3 +132,111 @@ function listarGrafUsuariosEdad(edades, datos) {
     },
   });
 }
+//--------------------------------------------------------
+//document.addEventListener("DOMContentLoaded", function () {
+  //$.ajax({
+  //  url: "../controllers/GraficoControllers.php?op=getPublicacionesPorUsuario",
+  //  type: "POST",
+  //  data: {},
+  //  contentType: false,
+  //  processData: false,
+   // success: function (response) {
+   //   console.log("Respuesta del servidor:", response); 
+   //   response = JSON.parse(response);
+
+   //   publi =  [];
+    //  cantidad = [];
+
+    //  response.forEach(element => {
+   //     publi.push(element.ID_USUARIO_FK);
+   //     cantidad.push(element.CANTIDAD);
+   //   });
+
+    //  listarGrafUsuariosPubli(publi, cantidad);
+      
+  //  },
+    //error: function (err) {
+//console.error("Error en la solicitud AJAX:", err);
+    //  alert("Error inesperado al obtener los datos");
+   // },
+ // });
+//});
+
+// function listarGrafUsuariosPubli(publi, datos) {
+  // Gráfico de cantidad de usuarios
+  //const ctx3 = document.getElementById("graf-usuarioPorPubli");
+  //new Chart(ctx3, {
+   // type: "bar",
+   // data: {
+    //  labels: publi,
+     // datasets: [
+     //   {
+       //   label: "Publicaciones",
+       //   data: datos,
+       //   borderWidth: 1,
+       // },
+    //  ],
+  //  },
+   // options: {
+   //   scales: {
+     //   y: {
+     //     beginAtZero: true,
+     //   },
+    //  },
+    //},
+  //});
+//}
+//------------------------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  $.ajax({
+    url: "../controllers/GraficoControllers.php?op=getProfesionPorUsuario",
+    type: "POST",
+    data: {},
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      console.log("Respuesta del servidor:", response); 
+      response = JSON.parse(response);
+
+      profesion =  [];
+      Cantidad  = [];
+
+      response.forEach(element => {
+        profesion.push(element.PROFESION);
+        Cantidad.push(element.CANTIDAD);
+      });
+
+      listarGrafUsuariosProfesion(profesion, Cantidad);
+      
+    },
+    error: function (err) {
+      console.error("Error en la solicitud AJAX:", err);
+      alert("Error inesperado al obtener los datos");
+    },
+  });
+});
+
+function listarGrafUsuariosProfesion(profesion, datos) {
+  // Gráfico de cantidad de usuarios por profesion 
+  const ctx3 = document.getElementById("graf-usuarioPorProfe");
+  new Chart(ctx3, {
+    type: "bar",
+    data: {
+      labels: profesion,
+      datasets: [
+        {
+          label: "Profesion",
+          data: datos,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}

@@ -8,9 +8,10 @@ include("./assets/fragmentos/head.php");
 ?>
 
 <body>
-    <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+    <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->    
     <div>
    <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+   <p style="justify-content:center align-items-center ;">Grafico Prueba</p>
    <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
         <canvas id="myChart"></canvas>
     </div>
@@ -21,6 +22,7 @@ include("./assets/fragmentos/head.php");
 
     <div>
     <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+    <p style="justify-content:center align-items-center ;">Distribucion de Roles por usuarios</p>
     <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
         <canvas id="graf-cantidadUsuarios"></canvas>
     </div>
@@ -30,6 +32,7 @@ include("./assets/fragmentos/head.php");
 
     <div>
     <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+    <p style="justify-content:center align-items-center ;">Recoleccion de Edades por usuarios</p>
     <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
         <canvas id="graf-usuarioPorEdad"></canvas>
     </div>
@@ -38,20 +41,22 @@ include("./assets/fragmentos/head.php");
 
     <br>
 
-    <div>
+    <!--<div>
    <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+   <p style="justify-content:center align-items-center ;">Cantidad de Publicaciones por usuarios</p>
    <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
-        <canvas id="myChart"></canvas>
+        <canvas id="graf-usuarioPorPubli"></canvas>
     </div>
     </section>
     </div>
 
-    <br>
+    <br>-->
 
     <div>
    <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+    <p style="justify-content:center align-items-center ;">Cantidad de Usuarios por Profesion</p>
    <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
-        <canvas id="myChart"></canvas>
+        <canvas id="graf-usuarioPorProfe"></canvas>
     </div>
     </section>
     </div>

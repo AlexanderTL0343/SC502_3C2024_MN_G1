@@ -5,7 +5,7 @@
 
 <body>
 
-<?php include("../config/session.php");?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+  <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
 
   <section class="d-flex flex-fill align-items-center justify-content-center" style="background-color: #eee;">
     <div class="container">
@@ -23,7 +23,7 @@
                   <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Editar</button>
                 </a>
                 <a href="../config/cerrarSesion.php">
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-1">Cerrar SesiÃ³n</button>
+                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger ms-1">Cerrar Sesion</button>
                 </a>
               </div>
 
@@ -40,7 +40,7 @@
                   <i class="bi bi-facebook"></i>
                   <p class="mb-0"><?php if (isset($_SESSION['usuario']['facebook'])) echo $_SESSION['usuario']['facebook']; ?></p>
                 </li>
-                <a href="./agregarRedes.php">
+                <a href="./AgregarRedes.php">
                   <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1" style="align-items: center;">Agregar</button>
                 </a>
               </ul>
@@ -55,8 +55,8 @@
                   <p class="mb-0">Nombre Completo</p>
                 </div>
                 <div class="col-sm-9">
-                  <?php $nombre = $_SESSION['usuario']['nombre'] .' '. $_SESSION['usuario']['apellido1'] . ' '. $_SESSION['usuario']['apellido2']?>
-                  <p class="text-muted mb-0"><?php echo $nombre;?></p>
+                  <?php $nombre = $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido1'] . ' ' . $_SESSION['usuario']['apellido2'] ?>
+                  <p class="text-muted mb-0"><?php echo $nombre; ?></p>
                 </div>
               </div>
               <hr>
@@ -127,10 +127,10 @@
               ?>
             </div>
             <div class="col-md-6">
-            <?php
+              <?php
               if (isset($_SESSION['usuario']['nombreRol']) && $_SESSION['usuario']['nombreRol'] === 'POSTULANTE') { //Se visualiza la tarjeta si el rol es USER
                 $test =
-              '<div class="card mb-4 mb-md-0">
+                  '<div class="card mb-4 mb-md-0">
                 <div class="card-body"><!--Aqui iria la misma logica de arriba-->
                   <p class="mb-4"><span class="text-primary font-italic me-1">Trabajos</span> Trabajos en oferta
                   </p>
@@ -150,9 +150,9 @@
         </div>
       </div>
     </div>';
-    echo $test; //AQUI SE MUESTARA LA TARJETA EN EL HTML
-    }
-   ?>
+                echo $test; //AQUI SE MUESTARA LA TARJETA EN EL HTML
+              }
+              ?>
   </section>
   <?php include("./assets/fragmentos/footer.php"); ?>
 </body>
