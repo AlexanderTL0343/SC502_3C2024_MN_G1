@@ -1,8 +1,12 @@
+<?php session_start();?>
 <!DOCTYPE html>
-<html lang="en">
-<?php include ("./assets/fragmentos/head.php"); ?>//Funcionan como fragmento
+<html lang="es">
+<?php include ("./assets/fragmentos/head.php"); ?>
 <body>
-    <?php include ("./assets/fragmentos/header.php"); ?>
+
+<?php include("../config/session.php");?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+
+    <?php include ("./assets/fragmentos/hero1.php"); ?>
 
     <?php include ("./assets/fragmentos/footer.php"); ?>
 </body>

@@ -1,4 +1,4 @@
-<header>
+<header style="margin-bottom: 10px;">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="../views/index.php"><!-- RUTA ESTATICA -->
@@ -19,15 +19,20 @@
                     </form>
                 </div>
                 <ul class="navbar-nav align-items-center">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="ttt">
-                            <i class="fa-solid fa-lock icono-sidebar"></i>
+                        <a class="nav-link" href="#" aria-label="Notificaciones">
+                            <i class="bi bi-bell icono-header"></i>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="../views/Perfil.php" aria-label="Perfil">
+                            <i class="bi bi-person icono-header"></i>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <label for="sidebar-toggle" class="btn btn-outline-primary" aria-label="Mostrar/Ocultar barra lateral">
-                            <i class="bi bi-list"></i>
+                            <i class="bi bi-list "></i>
                         </label>
                     </li>
                 </ul>
@@ -35,13 +40,42 @@
         </div>
     </nav>
     <!-- Sidebar -->
+
     <input type="checkbox" id="sidebar-toggle" class="d-none">
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
         <div class="position-sticky sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-
+                    <a class="nav-link active" aria-current="page" href="../views/main.php">
+                        <i class="bi bi-house-door icono-sidebar"></i>
+                        Inicio
+                    </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/reportes.php">
+                        <i class="bi bi-bar-chart icono-sidebar"></i>
+                        Reportes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/PanelControl.php">
+                        <i class="bi bi-star icono-sidebar"></i>
+                        Panel de control
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-chat-dots icono-sidebar"></i>
+                        Mensajes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/Analisis.php">
+                        <i class="bi bi-clipboard-data"></i>
+                        Analisis
+                    </a>
+                </li>
+
             </ul>
         </div>
     </nav>

@@ -1,0 +1,61 @@
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="es">
+<?php
+include("./assets/fragmentos/sinSesion401.php");
+include("./assets/fragmentos/head.php");
+?>
+
+<body>
+  <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+
+  <section class="d-flex flex-fill align-items-center justify-content-center ">
+    <form class="w-25">
+      <div class="form-group mb-4">
+        <label for="imagen">Imagen:</label>
+        <input name="imagen" type="file" class="form-control" id="imagen" />
+        <p class="text-danger"></p>
+      </div>
+
+      </div>
+      <div class="mb-3">
+        <label for="profesion">Profesion</label>
+        <input name="profesion" type="text" class="form-control" id="profesion" placeholder="Ingrese su profesion" required />
+      </div>
+     
+      <div class="form-group mb-4">
+        <label for="direccion">Dirección:</label>
+        <input name="direccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección" required />
+        <p class="text-danger"></p>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="telefono">Teléfono:</label>
+        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Ingrese el número de teléfono" required />
+        <p class="text-danger"></p>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="email">Email:</label>
+        <input name="email" type="email" class="form-control" id="email" placeholder="Ingrese su Email" required />
+        <p class="text-danger"></p>
+      </div>
+      <div class="form-group mb-4">
+        <label for="instagram">Instagram:</label>
+        <input name="instagram" type="text" class="form-control" id="instagram" placeholder="Ingrese su instagram" required />
+        <p class="text-danger"></p>
+      </div>
+      <div class="form-group mb-4">
+        <label for="direccion">Facebook:</label>
+        <input name="facebook" type="text" class="form-control" id="facebook" placeholder="Ingrese su Facebook" required />
+        <p class="text-danger"></p>
+      </div>
+
+      <button type="submit" id="guardar" class="btn btn-primary">Guardar</button>
+    </form>
+  </section>
+  <?php include("./assets/fragmentos/footer.php"); ?>
+</body>
+<?php include("./assets/fragmentos/scripts.php"); ?>
+
+</html>

@@ -20,11 +20,20 @@
                 </div>
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="ttt">
-                            <i class="fa-solid fa-lock icono-sidebar"></i>
+                        <a class="nav-link" href="#" aria-label="Notificaciones">
+                            <i class="fa-solid fa-users icono-sidebar"></i>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-label="Notificaciones">
+                            <i class="bi bi-bell icono-sidebar"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../views/Perfil.php" aria-label="Perfil">
+                            <i class="bi bi-person icono-sidebar"></i>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <label for="sidebar-toggle" class="btn btn-outline-primary" aria-label="Mostrar/Ocultar barra lateral">
                             <i class="bi bi-list"></i>
@@ -40,7 +49,34 @@
         <div class="position-sticky sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-
+                    <a class="nav-link active" aria-current="page" href="../views/main.php">
+                        <i class="bi bi-house-door me-2"></i>
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        Mis Publicaciones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-star me-2"></i>
+                        Favoritos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        Mensajes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-gear me-2"></i>
+                        Configuración
+                    </a>
                 </li>
             </ul>
         </div>

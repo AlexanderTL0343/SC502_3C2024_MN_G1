@@ -1,0 +1,10 @@
+// Decodificar el dato en base64 y separar el IV y el texto encriptado
+$data_with_iv = base64_decode($encrypted_data_with_iv);
+$iv = substr($data_with_iv, 0, $iv_length); // Extraer el IV
+$encrypted_data = substr($data_with_iv, $iv_length); // Extraer el texto encriptado
+
+// Desencriptar el dato
+$decrypted_data = openssl_decrypt($encrypted_data, $cipher_method, $encryption_key, 0, $iv);
+
+// Mostrar el dato desencriptado
+echo "Dato desencriptado: " . $decrypted_data;

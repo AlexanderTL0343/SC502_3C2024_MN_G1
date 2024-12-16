@@ -2,11 +2,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    background-color: #e3f2fd;
+    
 }
-main {
-    flex: 1;
-}
+
 .navbar-brand {
     font-weight: bold;
     color: #0d6efd;
@@ -38,24 +37,26 @@ main {
     margin-right: 250px;
 }
 
+.hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Esto hará que el hero ocupe al menos la altura de la pantalla */
+    background-color:#e3f2fd;
+}
 
-/*Esto era para el diseño responsive //NO LO HEMOS VISTO Y YO TAMPOCO*/
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        right: -100%;
-    }
-    #sidebar-toggle:checked ~ .sidebar {
-        right: 0;
-    }
-    .content {
-        margin-right: 0;
-    }
-    #sidebar-toggle:checked ~ .content {
-        margin-right: 0;
-    }
-    .search-form {
-        max-width: 100%;
-        margin-bottom: 1rem;
-    }
+.wide-paragraph{
+    max-width: 100%; /* Ajusta el ancho al 80% del contenedor padre */
+    margin: 5 auto; /* Centra el párrafo en el contenedor */
+    text-align: justify; /* Justifica el texto */
+  }
+
+.icono-sidebar{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.icono-header{
+    font-size: 20px;
+    margin-right: 10px;
 }
