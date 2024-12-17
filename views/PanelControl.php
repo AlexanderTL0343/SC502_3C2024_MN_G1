@@ -16,50 +16,58 @@
                         <div class="col-md-1"></div>
                         <div class="col-md 10">
                             <form name="usuario_update" id="usuario_update" method="POST">
-                                <input type="hidden" class="form-control" id="EId" name="id">
+                                <!--<input type="hidden" class="form-control" id="EId" name="id">-->
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="id">ID</label>
                                             <input type="text" class="form-control" id="Eid"
-                                                name="id" readonly>
+                                                name="Eid" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" class="form-control" id="Enombre"
-                                                name="nombre" required>
+                                                name="Enombre" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="edad">Edad</label>
                                             <input type="text" class="form-control" id="Eedad"
-                                                name="edad" required>
+                                                name="Eedad" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="email">Correo</label>
                                             <input type="text" class="form-control" id="Eemail"
-                                                name="email" required>
+                                                name="Eemail" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="profesion">Profesion</label>
-                                            <input type="text" class="form-control" id="Eprofesion"
-                                                name="profesion" required>
+                                            <select class="form-control" id="Eprofesion" name="Eprofesion" required>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="rol">Rol</label>
-                                            <input type="text" class="form-control" id="Erol"
-                                                name="rol" required>
+                                            <select class="form-control" id="Erol" name="Erol" required>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </div>
                                     </div>
+
 
 
 

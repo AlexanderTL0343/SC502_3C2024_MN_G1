@@ -173,7 +173,11 @@ class TablaUser extends Conexion
 
     public function listarTablaUser()
     {
-        $query = "SELECT u.ID_USUARIO_PK, u.NOMBRE_USUARIO, u.EDAD, u.EMAIL, u.PROFESION, u.FECHA_REGISTRO, r.NOMBRE_ROL FROM usuarios u JOIN roles r ON u.ID_ROL_FK = r.ID_ROL_PK";
+        $query = "SELECT u.ID_USUARIO_PK, u.NOMBRE_USUARIO, u.EDAD, u.EMAIL, p.NOMBRE_PROFESION, u.FECHA_REGISTRO, r.NOMBRE_ROL 
+          FROM usuarios u 
+          JOIN roles r ON u.ID_ROL_FK = r.ID_ROL_PK 
+          JOIN profesiones p ON u.ID_PROFESION_FK = p.ID_PROFESION_PK";
+
         $arr = array();
         try {
             self::getConexion();
@@ -187,7 +191,7 @@ class TablaUser extends Conexion
                 $client->setNombre($encontrado['NOMBRE_USUARIO']);
                 $client->setEdad($encontrado['EDAD']);
                 $client->setEmail($encontrado['EMAIL']);
-                $client->setProfesion($encontrado['PROFESION']);
+                $client->setProfesion($encontrado['NOMBRE_PROFESION']);
                 $client->setFechaRegistro($encontrado['FECHA_REGISTRO']);
                 $client->setIdRol($encontrado['NOMBRE_ROL']);
                 $arr[] = $client;
@@ -201,19 +205,30 @@ class TablaUser extends Conexion
     }
 
     
-    public function verificarExistenciaDb(){
-        $query = "SELECT * FROM usuarios where ID_USUARIO_PK=:ID_USUARIO_PK";
+    public function verificarExistenciaDb($id){
+        $query = "SELECT * FROM usuarios where ID_USUARIO_PK=?";
      try {
          self::getConexion();
             $resultado = self::$cnx->prepare($query);		
-            $id= $this->getId();	
-            $resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
+            //$id= $this->getId();	
+            //$resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
+            $resultado->bindParam(1,$id);
             $resultado->execute();
             self::desconectar();
+            //var_dump($resultado->fetchAll());
             $encontrado = false;
-            foreach ($resultado->fetchAll() as $reg) {
+
+
+            $nombre=$resultado->fetch();
+            if ($nombre!=null)
+            {
                 $encontrado = true;
+                //var_dump($nombre);
             }
+            //foreach ($resultado->fetchAll() as $reg) {
+                //var_dump($encontrado);
+                //$encontrado = true;
+            //}
             return $encontrado;
            } catch (PDOException $Exception) {
                self::desconectar();
@@ -245,9 +260,9 @@ class TablaUser extends Conexion
     {
         $query = "UPDATE usuarios 
             SET NOMBRE_USUARIO = :NOMBRE_USUARIO, 
-                EDAD = :edad, 
-                EMAIL = :email, 
-                PROFESION = :profesion, 
+                EDAD = :EDAD, 
+                EMAIL = :EMAIL, 
+                ID_PROFESION_FK = :ID_PROFESION_FK, 
                 ID_ROL_FK = :ID_ROL_FK
             WHERE ID_USUARIO_PK = :ID_USUARIO_PK";
         try {
@@ -262,9 +277,9 @@ class TablaUser extends Conexion
             $resultado = self::$cnx->prepare($query);
             $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
             $resultado->bindParam(":NOMBRE_USUARIO", $nombre, PDO::PARAM_STR);
-            $resultado->bindParam(":edad", $edad, PDO::PARAM_INT);
-            $resultado->bindParam(":email", $email, PDO::PARAM_STR);
-            $resultado->bindParam(":profesion", $profesion, PDO::PARAM_STR);
+            $resultado->bindParam(":EDAD", $edad, PDO::PARAM_INT);
+            $resultado->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+            $resultado->bindParam(":ID_PROFESION_FK", $profesion, PDO::PARAM_INT);
             $resultado->bindParam(":ID_ROL_FK", $rol, PDO::PARAM_INT);
 
             self::$cnx->beginTransaction(); // desactiva el autocommit
@@ -284,6 +299,6 @@ class TablaUser extends Conexion
 }
 
 //$mode = new Tablauser();
-    //var_dump($mode->actualizarUsuario());
+    //var_dump($mode->verificarExistenciaDb(1));
 
 ?>

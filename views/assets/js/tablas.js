@@ -165,25 +165,27 @@ $('#tblUserCrud tbody').on(
       if (result) {
         var formData = new FormData($('#usuario_update')[0]);
         $.ajax({
+          
           url: '../controllers/TablaUserControllers.php?op=editar',
           type: 'POST',
           data: formData,
           contentType: false,
           processData: false,
           success: function (datos) {
-            //alert(datos);
+            console.log(datos)
+            alert(datos)
             switch (datos) {
-              case '0':
+              case "0":
                 toastr.error('Error: No se pudieron actualizar los datos');
                 break;
-              case '1':
+              case "1":
                 toastr.success('Usuario actualizado exitosamente');
                 tabla.api().ajax.reload();
                 limpiarForms();
                 $('#formulario_update').hide();
                 $('#formulario_add').show();
                 break;
-              case '2':
+              case "2":
                 toastr.error('Error: ID no pertenece al usuario.');
                 break;
             }

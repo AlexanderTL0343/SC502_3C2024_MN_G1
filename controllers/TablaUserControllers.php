@@ -29,17 +29,18 @@ switch ($_GET['op']) {
         echo json_encode($resultados);
         break;
         case 'editar':
-            $id = isset($_POST["ID_USUARIO_PK"]) ? trim($_POST["ID_USUARIO_PK"]) : "";
-            $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
-            $nombre = isset($_POST["NOMBRE_USUARIO"]) ? trim($_POST["NOMBRE_USUARIO"]) : "";
-            $edad = isset($_POST["edad"]) ? trim($_POST["edad"]) : "";
-            $profesion = isset($_POST["profesion"]) ? trim($_POST["profesion"]) : "";
-            $rol = isset($_POST["ID_ROL_FK"]) ? trim($_POST["ID_ROL_FK"]) : "";
+            $id = isset($_POST["Eid"]) ? trim($_POST["Eid"]) : "";
+
+            $email = isset($_POST["Eemail"]) ? trim($_POST["Eemail"]) : "";
+            $nombre = isset($_POST["Enombre"]) ? trim($_POST["Enombre"]) : "";
+            $edad = isset($_POST["Eedad"]) ? trim($_POST["Eedad"]) : "";
+            $profesion = isset($_POST["Eprofesion"]) ? trim($_POST["Eprofesion"]) : "";
+            $rol = isset($_POST["Erol"]) ? trim($_POST["Erol"]) : "";
         
             $usuario = new TablaUser();
-            $usuario->setId($id);
-            $encontrado = $usuario->verificarExistenciaDb();
-        
+
+            $encontrado = $usuario->verificarExistenciaDb($id);
+
             if ($encontrado == 1) {
                 $usuario->llenarCampos($id);
                 $usuario->setNombre($nombre);
@@ -55,6 +56,8 @@ switch ($_GET['op']) {
                     echo 0;
                 }
             } else {
+                //print_r("ERROR DE CONTROLADOR");
+
                 echo 2; 
             }
         break;
