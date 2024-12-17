@@ -15,7 +15,8 @@ switch ($_GET['op']) {
                 "4" => $reg->getProfesion(),
                 "5" => $reg->getFechaRegistro(),
                 "6" => $reg->getIdRol(),
-                "7" => '<button class="btn btn-warning" id="modificarUsuario">Modificar</button> '
+                "7" => '<button class="btn btn-warning" id="modificarUsuario">Modificar</button> '.
+                '<button class="btn btn-danger" id="eliminarUsuario">Eliminar</button> '
                         
             );
         }
@@ -33,7 +34,7 @@ switch ($_GET['op']) {
             $nombre = isset($_POST["NOMBRE_USUARIO"]) ? trim($_POST["NOMBRE_USUARIO"]) : "";
             $edad = isset($_POST["edad"]) ? trim($_POST["edad"]) : "";
             $profesion = isset($_POST["profesion"]) ? trim($_POST["profesion"]) : "";
-            $idRol = isset($_POST["id_rol_fk"]) ? trim($_POST["id_rol_fk"]) : "";
+            $rol = isset($_POST["ID_ROL_FK"]) ? trim($_POST["ID_ROL_FK"]) : "";
         
             $usuario = new TablaUser();
             $usuario->setId($id);
@@ -44,7 +45,7 @@ switch ($_GET['op']) {
                 $usuario->setNombre($nombre);
                 $usuario->setEdad($edad);
                 $usuario->setProfesion($profesion);
-                $usuario->setIdRol($idRol);
+                $usuario->setIdRol($rol);
                 $usuario->setEmail($email);
         
                 $modificados = $usuario->actualizarUsuario();

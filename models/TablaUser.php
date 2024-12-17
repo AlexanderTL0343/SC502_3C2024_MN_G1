@@ -200,13 +200,14 @@ class TablaUser extends Conexion
         }
     }
 
+    
     public function verificarExistenciaDb(){
         $query = "SELECT * FROM usuarios where ID_USUARIO_PK=:ID_USUARIO_PK";
      try {
          self::getConexion();
             $resultado = self::$cnx->prepare($query);		
             $id= $this->getId();	
-            $resultado->bindParam(":ID_USUARIO_PK",$email,PDO::PARAM_STR);
+            $resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
             $resultado->execute();
             self::desconectar();
             $encontrado = false;
@@ -231,7 +232,7 @@ class TablaUser extends Conexion
         self::desconectar();
         foreach ($resultado->fetchAll() as $encontrado) {
             $this->setId($encontrado['ID_USUARIO_PK']);
-            $this->setNombre($encontrado['nombre']);
+            $this->setNombre($encontrado['NOMBRE_USUARIO']);
         }
         } catch (PDOException $Exception) {
         self::desconectar();
@@ -243,11 +244,11 @@ class TablaUser extends Conexion
     public function actualizarUsuario()
     {
         $query = "UPDATE usuarios 
-            SET NOMBRE_USUARIO = :nombre, 
+            SET NOMBRE_USUARIO = :NOMBRE_USUARIO, 
                 EDAD = :edad, 
                 EMAIL = :email, 
                 PROFESION = :profesion, 
-                ID_ROL_FK = (SELECT ID_ROL_PK FROM roles WHERE NOMBRE_ROL = :nombreRol) 
+                ID_ROL_FK = :ID_ROL_FK
             WHERE ID_USUARIO_PK = :ID_USUARIO_PK";
         try {
             self::getConexion();
@@ -256,15 +257,15 @@ class TablaUser extends Conexion
             $edad = $this->getEdad();
             $email = $this->getEmail();
             $profesion = $this->getProfesion();
-            $nombreRol = $this->getIdRol();
+            $rol = $this->getIdRol();
         
             $resultado = self::$cnx->prepare($query);
-            $resultado->bindParam(":ID_ROL_PK", $id, PDO::PARAM_INT);
-            $resultado->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
+            $resultado->bindParam(":NOMBRE_USUARIO", $nombre, PDO::PARAM_STR);
             $resultado->bindParam(":edad", $edad, PDO::PARAM_INT);
             $resultado->bindParam(":email", $email, PDO::PARAM_STR);
             $resultado->bindParam(":profesion", $profesion, PDO::PARAM_STR);
-            $resultado->bindParam(":nombreRol", $nombreRol, PDO::PARAM_STR);
+            $resultado->bindParam(":ID_ROL_FK", $rol, PDO::PARAM_INT);
 
             self::$cnx->beginTransaction(); // desactiva el autocommit
             $resultado->execute();
@@ -278,8 +279,11 @@ class TablaUser extends Conexion
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
             return $error;
         }
-}
+    }
 
 }
+
+//$mode = new Tablauser();
+    //var_dump($mode->actualizarUsuario());
 
 ?>

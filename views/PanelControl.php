@@ -120,10 +120,6 @@
     <br>
     <div style="justify-content: center align-items-center;">
         <div class="form-group col-md-12">
-            <input type="submit" class="form-control btn btn-danger"
-                value="Eliminar">
-            <input type="submit" class="form-control btn btn-warning" id="modificarUsuario"
-                value="Modificar">
             <input type="submit" class="form-control btn btn-success"
                 value="Agregar">
         </div>
