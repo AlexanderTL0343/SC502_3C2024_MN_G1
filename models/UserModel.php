@@ -276,6 +276,94 @@ class User extends Conexion
             return json_encode($error);
         }
     }
+    public function llenarCampos($id)
+    {
+        $query = "SELECT * FROM usuarios where id=:ID_USUARIO_PK";
+        try {
+            self::getConexion();
+            $resultado = self::$conn->prepare($query);
+            $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
+            $resultado->execute();
+            self::desconectar();
+            foreach ($resultado->fetchAll() as $encontrado) {
+                $this->setId($encontrado['ID_USUARIO_PK']);
+                $this->setNombre($encontrado['NOMBRE_USUARIO']);
+                $this->setEmail($encontrado['EMAIL']);
+                $this->setProfesion($encontrado['PROFESION']);
+                $this->setTelefono($encontrado['TELEFONO']);
+                $this->setFacebook($encontrado['FACEBOOK']);
+                $this->setInstagram($encontrado['INSTAGRAM']);
+                $this->setDireccion($encontrado['DIRECCION']);
+            }
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();;
+            return json_encode($error);
+        }
+    }
+
+    public function actualizarUsuario()
+    {
+        $query = "update USUARIOS set nombre=:NOMBRE_USUARIO',telefono=:TELEFONO,email=:EMAIL,instagram=:INSTAGRAM,facebook=:FACEBOOK,profesion=:PROFESION,imagen_url=:IMAGEN_URL,direccion=:DIRECCION
+        where id=:ID_USUARIO_PK and email=:EMAIL";
+        try {
+            self::getConexion();
+            $id = $this->getId();
+            $email = $this->getEmail();
+            $imagen_url = $this->getImagenUrl();
+            $instagram = $this->getInstagram();
+            $facebook = $this->getFacebook();
+            $profesion = $this->getProfesion();
+            $nombre = $this->getNombre();
+            $telefono = $this->getTelefono();
+            $direccion = $this->getDireccion();
+            $resultado = self::$conn->prepare($query);
+            $resultado->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+            $resultado->bindParam(":DIRECCION", $direccion, PDO::PARAM_STR);
+            $resultado->bindParam(":INSTAGRAM", $instagram, PDO::PARAM_STR);
+            $resultado->bindParam(":FACEBOOK", $facebook, PDO::PARAM_STR);
+            $resultado->bindParam(":IMAGEN_URL", $imagen_url, PDO::PARAM_STR);
+            $resultado->bindParam(":PROFESION", $profesion, PDO::PARAM_STR);
+            $resultado->bindParam(":TELEFONO", $telefono, PDO::PARAM_STR);
+            $resultado->bindParam(":NOMBRE_USUARIO", $nombre, PDO::PARAM_STR);
+            $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
+            self::$conn->beginTransaction(); //desactiva el autocommit
+            $resultado->execute();
+            self::$conn->commit(); //realiza el commit y vuelve al modo autocommit
+            self::desconectar();
+            return $resultado->rowCount();
+        } catch (PDOException $Exception) {
+            self::$conn->rollBack();
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
+    public function verificarExistenciaDb()
+    {
+        $query = "SELECT * FROM USUARIOS where email=:EMAIL";
+        try {
+            self::getConexion();
+            $resultado = self::$conn->prepare($query);
+            $email = $this->getEmail();
+            $resultado->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+            $resultado->execute();
+            self::desconectar();
+            $encontrado = false;
+            foreach ($resultado->fetchAll() as $reg) {
+                $encontrado = true;
+            }
+            return $encontrado;
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //aqui pintamos los graficos 
 
     public function obtenerDatosGraficos()
     {
@@ -328,6 +416,8 @@ class User extends Conexion
         }
     }
 }
+
+//codigo para probar que el modelo pinte los datos
 //$usuario = new User();
 //$resultado = $usuario->obtenerUsuariosPorProfesion();
 

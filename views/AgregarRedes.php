@@ -9,7 +9,7 @@ include("./assets/fragmentos/head.php");
 <body>
     <?php include("../config/session.php"); ?>
     <section class="d-flex flex-fill align-items-center justify-content-center ">
-        <form class="w-25">
+        <form class="w-25" id="guardarRedes">
             <div class="form-group mb-4">
                 <label for="instagram">Instagram:</label>
                 <input name="instagram" type="text" class="form-control" id="instagram" placeholder="Ingrese su instagram" required />
@@ -21,7 +21,7 @@ include("./assets/fragmentos/head.php");
                 <p class="text-danger"></p>
             </div>
 
-            <button type="submit" id="guardar" class="btn btn-primary">Guardar</button>
+            <button type="submit"  class="btn btn-primary">Guardar</button>
         </form>
     </section>
     <?php include("./assets/fragmentos/footer.php"); ?>

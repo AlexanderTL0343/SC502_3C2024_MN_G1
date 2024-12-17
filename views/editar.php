@@ -10,10 +10,16 @@ include("./assets/fragmentos/head.php");
   <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
 
   <section class="d-flex flex-fill align-items-center justify-content-center ">
-    <form class="w-25">
+    <form class="w-25" id="editaruser">
       <div class="form-group mb-4">
         <label for="imagen">Imagen:</label>
         <input name="imagen" type="file" class="form-control" id="imagen" />
+        <p class="text-danger"></p>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="nombre">Nombre:</label>
+        <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required />
         <p class="text-danger"></p>
       </div>
 
@@ -51,7 +57,7 @@ include("./assets/fragmentos/head.php");
         <p class="text-danger"></p>
       </div>
 
-      <button type="submit" id="guardar" class="btn btn-primary">Guardar</button>
+      <button type="submit"  class="btn btn-primary">Guardar</button>
     </form>
   </section>
   <?php include("./assets/fragmentos/footer.php"); ?>
