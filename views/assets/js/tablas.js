@@ -1,3 +1,16 @@
+/*Funcion para limpieza de los formularios*/
+function limpiarForms() {
+    $('#modulos_add').trigger('reset');
+    $('#modulos_update').trigger('reset');
+  }
+  
+  /*Funcion para cancelacion del uso de formulario de modificación*/
+  function cancelarForm() {
+    limpiarForms();
+    $('#formulario_add').show();
+    $('#formulario_update').hide();
+  }
+
 function listarRolCrud() {
     tabla = $('#tblRolesCrud').dataTable({
         aProcessing: true,
@@ -23,6 +36,7 @@ function listarRolCrud() {
         ]
     });
 }
+
 
 function listarUserCrud() {
     tabla = $('#tblUserCrud').dataTable({
@@ -50,6 +64,7 @@ function listarUserCrud() {
             { data: "4" },
             { data: "5" },
             { data: "6" },
+            { data: "7" },
         ]
     });
 }
@@ -113,6 +128,70 @@ function listarCaliCrud() {
         ]
     });
 }
+
+/*
+  Funcion Principal
+  */
+  $(function () {
+    $('#formulario_update').hide();
+    listarUserCrud();
+  });
+  /*
+  CRUD
+  */
+/*Habilitacion de form de modificacion al presionar el boton en la tabla*/
+$('#tblUserCrud tbody').on(
+    'click',
+    'button[id="modificarUsuario"]',
+    function () {
+      var data = $('#tblUserCrud').DataTable().row($(this).parents('tr')).data();
+      limpiarForms();
+      $('#formulario_add').hide();
+      $('#formulario_update').show();
+      $('#Eid').val(data[0]);
+      $('#Enombre').val(data[1]);
+      $('#Eedad').val(data[2]);
+      $('#Eemail').val(data[3]);
+      $('#Eprofesion').val(data[4]);
+      $('#Erol').val(data[6]);
+      return false;
+    }
+  );
+  
+  /*Funcion para modificacion de datos de usuario*/
+  $('#usuario_update').on('submit', function (event) {
+    event.preventDefault();
+    bootbox.confirm('¿Desea modificar los datos?', function (result) {
+      if (result) {
+        var formData = new FormData($('#usuario_update')[0]);
+        $.ajax({
+          url: '../controllers/TablaUserControllers.php?op=editar',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (datos) {
+            //alert(datos);
+            switch (datos) {
+              case '0':
+                toastr.error('Error: No se pudieron actualizar los datos');
+                break;
+              case '1':
+                toastr.success('Usuario actualizado exitosamente');
+                tabla.api().ajax.reload();
+                limpiarForms();
+                $('#formulario_update').hide();
+                $('#formulario_add').show();
+                break;
+              case '2':
+                toastr.error('Error: ID no pertenece al usuario.');
+                break;
+            }
+          },
+        });
+      }
+    });
+  });
 
 $(document).ready(function () {
     listarRolCrud();

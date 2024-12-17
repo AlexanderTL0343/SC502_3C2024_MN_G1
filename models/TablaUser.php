@@ -173,7 +173,7 @@ class TablaUser extends Conexion
 
     public function listarTablaUser()
     {
-        $query = "SELECT * FROM usuarios ";
+        $query = "SELECT u.ID_USUARIO_PK, u.NOMBRE_USUARIO, u.EDAD, u.EMAIL, u.PROFESION, u.FECHA_REGISTRO, r.NOMBRE_ROL FROM usuarios u JOIN roles r ON u.ID_ROL_FK = r.ID_ROL_PK";
         $arr = array();
         try {
             self::getConexion();
@@ -189,7 +189,7 @@ class TablaUser extends Conexion
                 $client->setEmail($encontrado['EMAIL']);
                 $client->setProfesion($encontrado['PROFESION']);
                 $client->setFechaRegistro($encontrado['FECHA_REGISTRO']);
-                $client->setIdRol($encontrado['ID_ROL_FK']);
+                $client->setIdRol($encontrado['NOMBRE_ROL']);
                 $arr[] = $client;
             }
             return $arr;
@@ -199,6 +199,87 @@ class TablaUser extends Conexion
             return json_encode($error);
         }
     }
+
+    public function verificarExistenciaDb(){
+        $query = "SELECT * FROM usuarios where ID_USUARIO_PK=:ID_USUARIO_PK";
+     try {
+         self::getConexion();
+            $resultado = self::$cnx->prepare($query);		
+            $id= $this->getId();	
+            $resultado->bindParam(":ID_USUARIO_PK",$email,PDO::PARAM_STR);
+            $resultado->execute();
+            self::desconectar();
+            $encontrado = false;
+            foreach ($resultado->fetchAll() as $reg) {
+                $encontrado = true;
+            }
+            return $encontrado;
+           } catch (PDOException $Exception) {
+               self::desconectar();
+               $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();
+             return $error;
+           }
+    }
+
+    public function llenarCampos($id){
+        $query = "SELECT * FROM usuarios where ID_USUARIO_PK=:ID_USUARIO_PK";
+        try {
+        self::getConexion();
+        $resultado = self::$cnx->prepare($query);		 	
+        $resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
+        $resultado->execute();
+        self::desconectar();
+        foreach ($resultado->fetchAll() as $encontrado) {
+            $this->setId($encontrado['ID_USUARIO_PK']);
+            $this->setNombre($encontrado['nombre']);
+        }
+        } catch (PDOException $Exception) {
+        self::desconectar();
+        $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();;
+        return json_encode($error);
+        }
+    }
+
+    public function actualizarUsuario()
+    {
+        $query = "UPDATE usuarios 
+            SET NOMBRE_USUARIO = :nombre, 
+                EDAD = :edad, 
+                EMAIL = :email, 
+                PROFESION = :profesion, 
+                ID_ROL_FK = (SELECT ID_ROL_PK FROM roles WHERE NOMBRE_ROL = :nombreRol) 
+            WHERE ID_USUARIO_PK = :ID_USUARIO_PK";
+        try {
+            self::getConexion();
+            $id = $this->getId();
+            $nombre = $this->getNombre();
+            $edad = $this->getEdad();
+            $email = $this->getEmail();
+            $profesion = $this->getProfesion();
+            $nombreRol = $this->getIdRol();
+        
+            $resultado = self::$cnx->prepare($query);
+            $resultado->bindParam(":ID_ROL_PK", $id, PDO::PARAM_INT);
+            $resultado->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $resultado->bindParam(":edad", $edad, PDO::PARAM_INT);
+            $resultado->bindParam(":email", $email, PDO::PARAM_STR);
+            $resultado->bindParam(":profesion", $profesion, PDO::PARAM_STR);
+            $resultado->bindParam(":nombreRol", $nombreRol, PDO::PARAM_STR);
+
+            self::$cnx->beginTransaction(); // desactiva el autocommit
+            $resultado->execute();
+            self::$cnx->commit(); // realiza el commit y vuelve al modo autocommit
+            self::desconectar();
+
+            return $resultado->rowCount();
+        } catch (PDOException $Exception) {
+            self::$cnx->rollBack();
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+}
+
 }
 
 ?>
