@@ -7,11 +7,11 @@ class User extends Conexion
     protected static $conn;
     private $id;
     private $idRol;
+    private $idProfesion;
     private $cedula;
     private $nombre;
     private $apellido1;
     private $apellido2;
-    private $profesion;
     private $edad;
     private $direccion;
     private $telefono;
@@ -50,8 +50,8 @@ class User extends Conexion
         return $this->apellido2;
     }
 
-    public function getProfesion(){
-        return $this->profesion;
+    public function getIdProfesion(){
+        return $this->idProfesion;
     }
 
     public function getEdad(){
@@ -116,8 +116,8 @@ class User extends Conexion
         $this->apellido2 = $apellido2;
     }
 
-    public function setProfesion($profesion){
-        $this->profesion = $profesion;
+    public function setIdProfesion($idProfesion){
+        $this->idProfesion = $idProfesion;
     }
 
     public function setEdad($edad){
@@ -170,18 +170,18 @@ class User extends Conexion
 
     public function insertarUsuario()
     {
-        $SQL = "INSERT INTO USUARIOS(ID_ROL_FK,CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, PROFESION, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA, IMAGEN_URL) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        $SQL = "INSERT INTO USUARIOS(ID_ROL_FK, ID_PROFESION_FK, CEDULA_USUARIO, NOMBRE_USUARIO, APELLIDO1, APELLIDO2, EDAD, DIRECCION, TELEFONO, EMAIL, CONTRASENA, IMAGEN_URL)
+                values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             self::getConexion();
             $res = self::$conn->prepare($SQL);
-            $res->bindParam(1,$this->idRol);
-            $res->bindParam(2, $this->cedula);
-            $res->bindParam(3, $this->nombre);
-            $res->bindParam(4, $this->apellido1);
-            $res->bindParam(5, $this->apellido2);
-            $res->bindParam(6, $this->profesion);
+            $res->bindParam(1, $this->idRol);
+            $res->bindParam(2, $this->idProfesion);
+            $res->bindParam(3, $this->cedula);
+            $res->bindParam(4, $this->nombre);
+            $res->bindParam(5, $this->apellido1);
+            $res->bindParam(6, $this->apellido2);
             $res->bindParam(7, $this->edad);
             $res->bindParam(8, $this->direccion);
             $res->bindParam(9, $this->telefono);
@@ -195,15 +195,18 @@ class User extends Conexion
         } catch (PDOException $Exception) {
             self::desconectar(); //Esto lo robe del ejemplo crud
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
-            return json_encode($error);
+            return false;
         }
     }
 
     public function iniciarSesion2($email, $contrasena){
-        $SQL = "SELECT ID_USUARIO_PK,NOMBRE_ROL,CEDULA_USUARIO,NOMBRE_USUARIO,APELLIDO1,APELLIDO2,
-        PROFESION,EDAD,DIRECCION,TELEFONO,EMAIL,CONTRASENA,FACEBOOK,INSTAGRAM,FECHA_REGISTRO,IMAGEN_URL
-        FROM USUARIOS U INNER JOIN ROLES R  ON U.ID_ROL_FK = R.ID_ROL_PK
-        WHERE EMAIL = ? AND CONTRASENA = ?";
+        $SQL = "SELECT ID_USUARIO_PK,NOMBRE_ROL,NOMBRE_ESTADO,NOMBRE_PROFESION,CEDULA_USUARIO,NOMBRE_USUARIO,APELLIDO1,APELLIDO2,
+                EDAD,DIRECCION,TELEFONO,EMAIL,FACEBOOK,INSTAGRAM,FECHA_REGISTRO,IMAGEN_URL 
+                FROM USUARIOS U 
+                INNER JOIN ROLES R  ON U.ID_ROL_FK = R.ID_ROL_PK
+                INNER JOIN ESTADOS E ON U.ID_ESTADO_FK = E.ID_ESTADO_PK
+                INNER JOIN PROFESIONES P ON U.ID_PROFESION_FK = P.ID_PROFESION_PK
+                WHERE EMAIL = ? AND CONTRASENA = ?;";
         try{
             self::getConexion();
             $res = self::$conn->prepare($SQL);
@@ -212,41 +215,40 @@ class User extends Conexion
             $res->execute();
             self::desconectar();
             $res = $res->fetch();
-            
-            if ($res) {
+
+            if ($res) {    
                 $_SESSION['usuario'] = 
                 [
                     'idUsuario' => $res['ID_USUARIO_PK'],
                     'nombreRol' => $res['NOMBRE_ROL'],
+                    'nombreEstado' => $res['NOMBRE_ESTADO'],
+                    'nombreProfesion' => $res['NOMBRE_PROFESION'],
                     'cedula' => $res['CEDULA_USUARIO'],
                     'nombre' => $res['NOMBRE_USUARIO'],
                     'apellido1' => $res['APELLIDO1'],
                     'apellido2' => $res['APELLIDO2'],
-                    'profesion' => $res['PROFESION'],
                     'edad' => $res['EDAD'],
                     'direccion' => $res['DIRECCION'],
                     'telefono' => $res['TELEFONO'],
                     'email' => $res['EMAIL'],
-                    'contrasena' => $res['CONTRASENA'],
                     'facebook' => $res['FACEBOOK'],
                     'instagram' => $res['INSTAGRAM'],
                     'fecha_registro' => $res['FECHA_REGISTRO'],
                     'imagen_url' => $res['IMAGEN_URL']
-                ]; 
-                               
+                ];             
                 return true;
             }
             return false;
         }catch(PDOException $Exception){
             self::desconectar(); //Esto lo robe del ejemplo crud
-            $error = "Error ".$Exception->getCode( ).": ".$Exception->getMessage( );
-            return json_encode($error);
+            error_log("Error ".$Exception->getCode().": ".$Exception->getMessage());
+            return false;
         }
 
     }
 
-    public function obtenerDatosGraficos(){
-        $SQL = "SELECT count(*) as cantidad, NOMBRE_ROL FROM USUARIOS INNER JOIN ROLES ON USUARIOS.ID_ROL_FK = ROLES.ID_ROL_PK GROUP BY NOMBRE_ROL";
+    public function obtenerProfesiones(){
+        $SQL = "SELECT * FROM PROFESIONES";
         try{
             self::getConexion(); 
             $res = self::$conn->prepare($SQL);
@@ -262,21 +264,74 @@ class User extends Conexion
         }
     }
 
-    public function obtenerUsuariosPorEdad(){
-        $SQL = "SELECT count(*) as CANTIDAD, EDAD FROM USUARIOS GROUP BY EDAD";
-        try{
-            self::getConexion(); 
+   
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //aqui pintamos los graficos 
+
+    public function obtenerDatosGraficos()
+    {
+        $SQL = "SELECT count(*) as cantidad, NOMBRE_ROL FROM USUARIOS INNER JOIN ROLES ON USUARIOS.ID_ROL_FK = ROLES.ID_ROL_PK GROUP BY NOMBRE_ROL";
+        try {
+            self::getConexion();
             $res = self::$conn->prepare($SQL);
             $res->execute();
             self::desconectar();
 
             return $res->fetchAll();
-    
-        }catch(PDOException $Exception){
+        } catch (PDOException $Exception) {
             self::desconectar();
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
             return json_encode(["status" => false, "message" => $error]);
         }
     }
-    
+
+    public function obtenerUsuariosPorEdad()
+    {
+        $SQL = "SELECT count(*) as CANTIDAD, EDAD FROM USUARIOS GROUP BY EDAD";
+        try {
+            self::getConexion();
+            $res = self::$conn->prepare($SQL);
+            $res->execute();
+            self::desconectar();
+
+            return $res->fetchAll();
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return json_encode(["status" => false, "message" => $error]);
+        }
+    }
+
+   /* public function obtenerUsuariosPorProfesion()
+    {
+        $SQL = "SELECT  PROFESION,  COUNT(*) AS CANTIDAD FROM  USUARIOS GROUP BY PROFESION ORDER BY CANTIDAD;";
+        try {
+            self::getConexion();
+            $res = self::$conn->prepare($SQL);
+            $res->execute();
+            self::desconectar();
+
+            return $res->fetchAll();
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return json_encode(["status" => false, "message" => $error]);
+        }
+    }*/
 }
+
+
+//codigo para probar que el modelo pinte los datos
+//$usuario = new User();
+//$resultado = $usuario->obtenerUsuariosPorProfesion();
+
+//if (is_array($resultado)) {
+    //foreach ($resultado as $fila) {
+       // echo "Profesión: " . $fila['PROFESION'] . " - CANTIDAD: " . $fila['CANTIDAD'] . PHP_EOL;
+   // }
+//} else {
+ //   echo "Error: " . $resultado;
+//}
+
+?>

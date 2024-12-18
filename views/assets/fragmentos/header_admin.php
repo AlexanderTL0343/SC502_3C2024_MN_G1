@@ -1,4 +1,4 @@
-<header>
+<header style="margin-bottom: 10px;">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="../views/index.php"><!-- RUTA ESTATICA -->
@@ -19,11 +19,7 @@
                     </form>
                 </div>
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" aria-label="Notificaciones">
-                            <i class="bi bi-gear-fill icono-header"></i>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" aria-label="Notificaciones">
                             <i class="bi bi-bell icono-header"></i>
@@ -56,21 +52,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./reportes.php">
+                    <a class="nav-link" href="../views/reportes.php">
                         <i class="bi bi-bar-chart icono-sidebar"></i>
                         Reportes
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <i class="bi bi-columns-gap icono-sidebar"></i>
-                        Administrar Tablas
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="../views/PanelControl.php">
                         <i class="bi bi-star icono-sidebar"></i>
-                        Favoritos
+                        Panel de control
                     </a>
                 </li>
                 <li class="nav-item">
@@ -80,11 +70,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">   
-                        <i class="bi bi-gear icono-sidebar"></i>
-                        Configuración
+                    <a class="nav-link" href="../views/Analisis.php">
+                        <i class="bi bi-clipboard-data"></i>
+                        Analisis
                     </a>
                 </li>
+
             </ul>
         </div>
     </nav>

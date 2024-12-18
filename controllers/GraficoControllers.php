@@ -14,5 +14,13 @@ switch ($_GET['op']) {
 
         echo json_encode($datos);
         break;
-   
+
+
+    case 'getProfesionPorUsuario':
+        $usuario = new User();
+        $datos = $usuario->obtenerUsuariosPorProfesion();
+
+        echo json_encode($datos);
+        break;
 }
+?>

@@ -8,6 +8,16 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+                <div class="d-flex flex-grow-1 justify-content-center">
+                    <form class="form-busqueda d-flex mx-2">
+                        <input class="form-control me-2" type="search" placeholder="Buscar trabajos o postulantes" aria-label="Buscar">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="bi bi-search"></i>
+                            <span class="visually-hidden">Buscar</span>
+                        </button>
+                    </form>
+                </div>
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#" aria-label="ttt">

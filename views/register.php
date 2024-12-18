@@ -31,7 +31,7 @@
 
                 <div class="form-group mb-4">
                     <label for="cedula">Cédula:</label>
-                    <input name="cedula" type="text" class="form-control" id="cedula" placeholder="Ingrese su cédula" required />
+                    <input name="cedula" type="number" class="form-control" id="cedula" placeholder="Ingrese su cédula" required />
                     <p class="text-danger"></p>
                 </div>
 
@@ -56,7 +56,7 @@
 
                 <div class="form-group mb-4">
                     <label for="edad">Edad:</label>
-                    <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese su edad" required />
+                    <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese su edad" min="16" max="150" required />
                     <p class="text-danger"></p>
                 </div>
 
@@ -64,13 +64,13 @@
                     <label for="profesion">Profesión:</label>
                     <select name="profesion" class="form-control" id="profesion" required>
                         <option value="">Seleccione una Profesión</option>
-                        <option value="Ingeniero">Especialista en Tecnología</option>
+                        <!--<option value="Ingeniero">Especialista en Tecnología</option>
                         <option value="Arquitecto">Profesional Jurídico</option>
                         <option value="Profesiona-de-la-Salud">Profesional de la Salud</option>
                         <option value="Ingeniero">Ingeniero </option>
                         <option value="Técnico-Especializado">Técnico Especializado</option>
                         <option value="Diseñador">Diseñador</option>
-                        <option value="Operador-de-Transporte">Operador de Transporte</option>
+                        <option value="Operador-de-Transporte">Operador de Transporte</option>-->
                     </select>
                     <p class="text-danger"></p>
                 </div>
