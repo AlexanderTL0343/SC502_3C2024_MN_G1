@@ -319,7 +319,24 @@ class User extends Conexion
             return json_encode(["status" => false, "message" => $error]);
         }
     }
+    public function obtenerUsuariosPorEstado()
+    {
+        $SQL = "SELECT e.NOMBRE_ESTADO, COUNT(*) AS CANTIDAD FROM ESTADOS e JOIN USUARIOS u ON e.ID_ESTADO_PK = u.ID_ESTADO_FK GROUP BY e.NOMBRE_ESTADO ORDER BY CANTIDAD;";
+        try {
+            self::getConexion();
+            $res = self::$conn->prepare($SQL);
+            $res->execute();
+            self::desconectar();
+
+            return $res->fetchAll();
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return json_encode(["status" => false, "message" => $error]);
+        }
+    }
 }
+
 
 
 //codigo para probar que el modelo pinte los datos

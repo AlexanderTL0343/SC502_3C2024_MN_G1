@@ -22,5 +22,11 @@ switch ($_GET['op']) {
 
         echo json_encode($datos);
         break;
+
+    case 'getEstadoPorUsuario':
+        $usuario = new User();
+        $datos = $usuario->obtenerUsuariosPorEstado();
+
+        echo json_encode($datos);
+        break;
 }
-?>
