@@ -187,7 +187,7 @@ class TablaUser extends Conexion
                 $client->setNombre($encontrado['NOMBRE_USUARIO']);
                 $client->setEdad($encontrado['EDAD']);
                 $client->setEmail($encontrado['EMAIL']);
-                $client->setProfesion($encontrado['PROFESION']);
+                $client->setProfesion($encontrado[' ID_PROFESION_FK']);
                 $client->setFechaRegistro($encontrado['FECHA_REGISTRO']);
                 $client->setIdRol($encontrado['ID_ROL_FK']);
                 $arr[] = $client;
