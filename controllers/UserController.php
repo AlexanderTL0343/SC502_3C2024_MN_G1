@@ -3,6 +3,8 @@ require_once '../models/UserModel.php';
 
 switch ($_GET['op']) {
     case 'insertarUsuario':
+        $contrasena=(isset($_POST['contrasena']) ? trim($_POST['contrasena']) : "");
+        $clavehash = hash('SHA256', trim($contrasena));
         $usuario = new User();
         $usuario->setIdRol(isset($_POST['tipoUsuario']) ? trim($_POST['tipoUsuario']) : 0);
         $usuario->setIdProfesion(isset($_POST['profesion']) ? trim($_POST['profesion']) : 0);
@@ -14,8 +16,9 @@ switch ($_GET['op']) {
         $usuario->setDireccion(isset($_POST['direccion']) ? trim($_POST['direccion']) : "");
         $usuario->setTelefono(isset($_POST['telefono']) ? trim($_POST['telefono']) : 0);
         $usuario->setEmail(isset($_POST['email']) ? trim($_POST['email']) : "");
-        $usuario->setContrasena(isset($_POST['contrasena']) ? trim($_POST['contrasena']) : "");
+        $usuario->setContrasena($clavehash) ;
         $usuario->setImagenUrl(isset($_FILES['imagen']) ? $_FILES['imagen']['name'] : "");
+    
 
 
         if ($usuario->insertarUsuario() == true) { //true es la respuesta del modelo al insertar la cita
