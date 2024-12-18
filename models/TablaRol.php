@@ -67,6 +67,7 @@ class TablaRol extends Conexion
             return json_encode($error);
         }
     }
+
 }
 
 ?>

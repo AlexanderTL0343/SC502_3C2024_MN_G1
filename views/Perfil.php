@@ -6,6 +6,7 @@
 <body>
 
   <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
+  
 
   <section class="d-flex flex-fill align-items-center justify-content-center" style="background-color: #eee;">
     <div class="container">
@@ -16,7 +17,7 @@
               <img src="./assets/imgs/Imagen1.png" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3"><?php if (isset($_SESSION['usuario']['nombre'])) echo $_SESSION['usuario']['nombre']; ?></h5><!--Si la variable de sesion tiene un dato, lo printea, si no lo deja en blanco;-->
-              <p class="text-muted mb-1"><?php if (isset($_SESSION['usuario']['profesion'])) echo $_SESSION['usuario']['profesion']; ?></p>
+              <p class="text-muted mb-1"><?php if (isset($_SESSION['usuario']['nombreProfesion'])) echo $_SESSION['usuario']['nombreProfesion']; ?></p>
               <p class="text-muted mb-4"><?php if (isset($_SESSION['usuario']['direccion'])) echo $_SESSION['usuario']['direccion']; ?></p>
               <div class="d-flex justify-content-center mb-2">
                 <a href="./editar.php">

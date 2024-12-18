@@ -29,6 +29,7 @@ switch ($_GET['op']) {
         );
         echo json_encode($resultados);
         break;
+       
         case 'editar':
             $id = isset($_POST["Eid"]) ? trim($_POST["Eid"]) : "";
 

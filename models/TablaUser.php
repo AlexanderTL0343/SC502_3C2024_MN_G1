@@ -343,6 +343,30 @@ class TablaUser extends Conexion
             return $error;
         }
     }
+   /* public function listarTablaUserAnalisis()
+    {
+        $query = " SELECT R.NOMBRE_ROL AS Rol, U.NOMBRE_USUARIO AS Nombre, U.FECHA_REGISTRO FROM ROLES R LEFT JOIN USUARIOS U ON R.ID_ROL_PK = U.ID_ROL_FK ORDER BY U.FECHA_REGISTRO DESC LIMIT 10;";
+        $arr = array();
+        try {
+            self::getConexion();
+            
+            $resultado = self::$cnx->prepare($query);
+            $resultado->execute();
+            self::desconectar();
+            foreach ($resultado->fetchAll() as $encontrado) {
+                $client = new TablaUser();
+                $client->setIdRol($encontrado['ID_ROL_FK']);
+                $client->setNombre($encontrado['NOMBRE_USUARIO']);
+                $client->setFechaRegistro($encontrado['FECHA_REGISTRO']);
+                $arr[] = $client;
+            }
+            return $arr;
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return json_encode($error);
+        }
+    }*/
 }
 
 //$mode = new Tablauser();
