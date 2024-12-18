@@ -111,7 +111,7 @@ class TablaPubli extends Conexion
                 $client->setFechaPublicacion($encontrado['FECHA_PUBLICACION']);
                 $client->setUbicacion($encontrado['UBICACION']);
                 $client->setPrecioAprox($encontrado['PRECIO_APROX']);
-                $client->setEstado($encontrado['ESTADO']);
+                $client->setEstado($encontrado['ID_ESTADO_FK']);
                 $arr[] = $client;
             }
             return $arr;
@@ -121,6 +121,92 @@ class TablaPubli extends Conexion
             return json_encode($error);
         }
     }
+
+    public function verificarExistenciaDb($id){
+        $query = "SELECT * FROM publicaciones where ID_PUBLICACION_PK=?";
+     try {
+         self::getConexion();
+            $resultado = self::$cnx->prepare($query);		
+            $resultado->bindParam(1,$id);
+            $resultado->execute();
+            self::desconectar();
+            $encontrado = false;
+
+
+            $nombre=$resultado->fetch();
+            if ($nombre!=null)
+            {
+                $encontrado = true;
+            }
+            return $encontrado;
+           } catch (PDOException $Exception) {
+               self::desconectar();
+               $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();
+             return $error;
+           }
+    }
+
+    public function llenarCampos($id){
+        $query = "SELECT * FROM publicaciones where ID_PUBLICACION_PK=:ID_PUBLICACION_PK";
+        try {
+        self::getConexion();
+        $resultado = self::$cnx->prepare($query);		 	
+        $resultado->bindParam(":ID_PUBLICACION_PK",$id,PDO::PARAM_INT);
+        $resultado->execute();
+        self::desconectar();
+        foreach ($resultado->fetchAll() as $encontrado) {
+            $this->setIdPublicacionesPk($encontrado['ID_PUBLICACION_PK']);
+            $this->setTituloPublicacion($encontrado['TITULO_PUBLICACION']);
+        }
+        } catch (PDOException $Exception) {
+        self::desconectar();
+        $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();;
+        return json_encode($error);
+        }
+    }
+
+    public function actualizarPublicaciones()
+    {
+        $query = "UPDATE publicaciones 
+        SET ID_USUARIO_FK = :ID_USUARIO_FK, 
+            TITULO_PUBLICACION = :TITULO_PUBLICACION, 
+            DESCRIPCION = :DESCRIPCION, 
+            UBICACION = :UBICACION, 
+            PRECIO_APROX = :PRECIO_APROX
+            
+        WHERE ID_PUBLICACION_PK = :ID_PUBLICACION_PK";
+        try {
+            self::getConexion();
+            $id = $this->getIdPublicacionesPk();
+            $usuario = $this->getIdUsuarioFk();
+            $titulo = $this->getTituloPublicacion();
+            $descripcion = $this->getDescripcion();
+            $ubicacion = $this->getUbicacion();
+            $precio = $this->getPrecioAprox();
+        
+            $resultado = self::$cnx->prepare($query);
+            $resultado->bindParam(":ID_PUBLICACION_PK", $id, PDO::PARAM_INT);
+            $resultado->bindParam(":ID_USUARIO_FK", $usuario, PDO::PARAM_INT);
+            $resultado->bindParam(":TITULO_PUBLICACION", $titulo, PDO::PARAM_STR);
+            $resultado->bindParam(":DESCRIPCION", $descripcion, PDO::PARAM_STR);
+            $resultado->bindParam(":UBICACION", $ubicacion, PDO::PARAM_STR);
+            $resultado->bindParam(":PRECIO_APROX", $precio, PDO::PARAM_INT);
+
+            self::$cnx->beginTransaction(); // desactiva el autocommit
+            $resultado->execute();
+            self::$cnx->commit(); // realiza el commit y vuelve al modo autocommit
+            self::desconectar();
+
+            return $resultado->rowCount();
+        } catch (PDOException $Exception) {
+            self::$cnx->rollBack();
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
+
+    
 }
 
 ?>

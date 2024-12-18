@@ -15,7 +15,7 @@ switch ($_GET['op']) {
                 "4" => $reg->getProfesion(),
                 "5" => $reg->getFechaRegistro(),
                 "6" => $reg->getIdRol(),
-                "7" => '<button class="btn btn-warning" id="modificarUsuario">Modificar</button> '.
+                "7" => '<button class="btn btn-warning" id="modificarUsuario">Modificar</button>  '.
                 '<button class="btn btn-danger" id="eliminarUsuario">Eliminar</button> '
                         
             );

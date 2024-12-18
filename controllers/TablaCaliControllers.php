@@ -1,5 +1,5 @@
 <?php
-include '../models/TablaCalificaiones.php';
+include '../models/TablaCalificaciones.php';
 
 switch ($_GET['op']) {
 
