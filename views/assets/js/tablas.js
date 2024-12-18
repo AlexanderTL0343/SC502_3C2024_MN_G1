@@ -531,6 +531,65 @@ $('#cate_insert').on('submit', function (event) {
   });
 });
 
+//MODIFICAR CATEGORIAS
+$(function () {
+  $('#formulario_update_cm').hide();
+  listarCateCrud();
+});
+
+
+
+$('#tblcateCrud tbody').on(
+  'click',
+  'button[id="modificarCategoria"]',
+  function () {
+    var data = $('#tblcateCrud').DataTable().row($(this).parents('tr')).data();
+    limpiarForms();
+    $('#formulario_add_cm').hide();
+    $('#formulario_update_cm').show();
+    $('#CMid').val(data[0]);
+    $('#CMnombre').val(data[1]);
+    $('#CMdescripcion').val(data[2]);
+
+    return false;
+  }
+);
+
+$('#cate_update').on('submit', function (event) {
+  event.preventDefault();
+  bootbox.confirm('¿Desea modificar los datos?', function (result) {
+    if (result) {
+      var formData = new FormData($('#cate_update')[0]);
+      $.ajax({
+
+        url: '../controllers/TablaCateController.php?op=editar',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+          alert(datos)
+          switch (String(datos)) {
+            case "0":
+              alert('Error al modificar los datos');
+              break;
+            case "1":
+              alert('Categoria actualizada exitosamente');
+              location.reload();
+              limpiarForms();
+              $('#formulario_update_cm').hide();
+              $('#formulario_add_cm').show();
+              break;
+            case "2":
+              alert('ID incorrecta');
+              break;
+          }
+        },
+      });
+    }
+  });
+});
+
 $(document).ready(function () {
   listarRolCrud();
 });

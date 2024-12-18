@@ -534,6 +534,64 @@
             <!-- /.card-body -->
         </div>
     </div>
+
+    <!-- Formulario de MODIFICACION de categorias -->
+    <div class="col-md-12" id="formulario_update_cm">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Modificando categorias......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="cate_update" id="cate_update" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID categoria</label>
+                                        <input type="text" class="form-control" id="CMid"
+                                            name="CMid" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre categoria</label>
+                                        <input type="text" class="form-control" id="CMnombre"
+                                            name="CMnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" class="form-control" id="CMdescripcion"
+                                            name="CMdescripcion" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Modificar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormCateMod()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
     <div class="content">
         <div class="container-fluid">
             <div class="row">

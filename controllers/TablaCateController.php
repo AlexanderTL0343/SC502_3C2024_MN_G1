@@ -47,5 +47,32 @@ switch ($_GET['op']) {
         }
     break;
 
+    case 'editar':
+        $id = isset($_POST["CMid"]) ? trim($_POST["CMid"]) : "";
+        $nombre = isset($_POST["CMnombre"]) ? trim($_POST["CMnombre"]) : "";
+        $descripcion = isset($_POST["CMdescripcion"]) ? trim($_POST["CMdescripcion"]) : "";
+    
+        $tabla = new TablaCate();
+
+        $encontrado = $tabla->verificarExistenciaDb($id);
+
+        if ($encontrado == 1) {
+            $tabla->llenarCampos($id);
+            $tabla->setNombreCategoria($nombre);
+            $tabla->setDescripcion($descripcion);
+    
+            $modificados = $tabla->actualizarCategoria();
+            if ($modificados > 0) {
+                echo 1;
+            } else {
+                echo 0;
+            }
+        } else {
+            print_r("ERROR DE CONTROLADOR");
+
+            echo 2; 
+        }
+    break;
+
 }
 ?>
