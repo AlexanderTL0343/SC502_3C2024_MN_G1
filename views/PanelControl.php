@@ -308,6 +308,104 @@
     <br>
     <br>
 
+    <!-- Formulario de INSERCION de profesiones -->
+    <div class="col-md-12" id="formulario_update_fi">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Insertando profesiones......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="profe_insert" id="profe_insert" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID profesion</label>
+                                        <input type="text" class="form-control" id="Fid"
+                                            name="Fid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre profesion</label>
+                                        <input type="text" class="form-control" id="Fnombre"
+                                            name="Fnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Agregar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormProfeInsert()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    <!-- Formulario de MODIFICACION de profesiones -->
+    <div class="col-md-12" id="formulario_update_fm">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Modificando profesiones......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="profe_update" id="profe_update" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID profesion</label>
+                                        <input type="text" class="form-control" id="Mid"
+                                            name="Mid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre profesion</label>
+                                        <input type="text" class="form-control" id="Mnombre"
+                                            name="Mnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Actualizar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormProfeMod()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    
+    
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -330,7 +428,7 @@
                                     <tfoot> 
                                         <tr> 
                                             <td colspan="3"> 
-                                                <button type="button" class="btn btn-primary">Agregar</button> 
+                                                <button id="agregarProfe" type="button" class="btn btn-primary">Agregar</button> 
                                             </td> 
                                         </tr> 
                                     </tfoot>
@@ -378,6 +476,64 @@
     <br>
     <br>
 
+
+    <!-- Formulario de INSERCION de categorias -->
+    <div class="col-md-12" id="formulario_update_ci">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Insertando categorias......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="cate_insert" id="cate_insert" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID categoria</label>
+                                        <input type="text" class="form-control" id="Cid"
+                                            name="Cid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre categoria</label>
+                                        <input type="text" class="form-control" id="Cnombre"
+                                            name="Cnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" class="form-control" id="Cdescripcion"
+                                            name="Cdescripcion" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Agregar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormCateInsert()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -401,7 +557,7 @@
                                     <tfoot> 
                                         <tr> 
                                             <td colspan="3"> 
-                                                <button type="button" class="btn btn-primary">Agregar</button> 
+                                            <button id="agregarCate" type="button" class="btn btn-primary">Agregar</button> 
                                             </td> 
                                         </tr> 
                                     </tfoot>

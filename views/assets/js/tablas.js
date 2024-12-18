@@ -1,10 +1,10 @@
-/Funcion para limpieza de los formularios/
+/*Funcion para limpieza de los formularios*/
 function limpiarForms() {
   $('#modulos_add').trigger('reset');
   $('#modulos_update').trigger('reset');
 }
 
-/Funcion para cancelacion del uso de formulario de modificación/
+/*Funcion para cancelacion del uso de formulario de modificación*/
 function cancelarForm() {
   limpiarForms();
   $('#formulario_add').show();
@@ -15,6 +15,30 @@ function cancelarFormPubli() {
   limpiarForms();
   $('#formulario_add_p').show();
   $('#formulario_update_p').hide();
+}
+
+function cancelarFormProfeInsert() {
+  limpiarForms();
+  $('#formulario_add_fi').show();
+  $('#formulario_update_fi').hide();
+}
+
+function cancelarFormProfeMod() {
+  limpiarForms();
+  $('#formulario_add_fm').show();
+  $('#formulario_update_fm').hide();
+}
+
+function cancelarFormCateInsert() {
+  limpiarForms();
+  $('#formulario_add_ci').show();
+  $('#formulario_update_ci').hide();
+}
+
+function cancelarFormCateMod() {
+  limpiarForms();
+  $('#formulario_add_cm').show();
+  $('#formulario_update_cm').hide();
 }
 
 function listarRolCrud() {
@@ -220,16 +244,12 @@ function listarCateCrud() {
 
 
 
-
+//CRUD USUARIOS
 $(function () {
   $('#formulario_update').hide();
   listarUserCrud();
 });
 
-/*
-CRUD USUARIOS
-*/
-/Habilitacion de form de modificacion al presionar el boton en la tabla/
 $('#tblUserCrud tbody').on(
   'click',
   'button[id="modificarUsuario"]',
@@ -248,7 +268,6 @@ $('#tblUserCrud tbody').on(
   }
 );
 
-/Funcion para modificacion de datos de usuario/
 $('#usuario_update').on('submit', function (event) {
   event.preventDefault();
   bootbox.confirm('¿Desea modificar los datos?', function (result) {
@@ -264,7 +283,7 @@ $('#usuario_update').on('submit', function (event) {
         success: function (datos) {
           switch (String(datos)) {
             case "0":
-              toastr.error('Error: No se pudieron actualizar los datos');
+              alert('Error al modificar los datos');
               break;
             case "1":
               alert('Usuario actualizado exitosamente');
@@ -274,7 +293,7 @@ $('#usuario_update').on('submit', function (event) {
               $('#formulario_add').show();
               break;
             case "2":
-              toastr.error('Error: ID no pertenece al usuario.');
+              alert('ID incorrecta');
               break;
           }
         },
@@ -283,14 +302,15 @@ $('#usuario_update').on('submit', function (event) {
   });
 });
 
+
+//CRUD PUBLICACIONES
 $(function () {
   $('#formulario_update_p').hide();
   listarPubliCrud();
 });
-/*
-CRUD PUBLICACIONES
-*/
-/Habilitacion de form de modificacion al presionar el boton en la tabla/
+
+
+
 $('#tblPublicacionesCrud tbody').on(
   'click',
   'button[id="modificarPubli"]',
@@ -310,7 +330,6 @@ $('#tblPublicacionesCrud tbody').on(
   }
 );
 
-/Funcion para modificacion de datos de una publicacion/
 $('#publi_update').on('submit', function (event) {
   event.preventDefault();
   bootbox.confirm('¿Desea modificar los datos?', function (result) {
@@ -327,7 +346,7 @@ $('#publi_update').on('submit', function (event) {
           alert(datos)
           switch (String(datos)) {
             case "0":
-              toastr.error('Error: No se pudieron actualizar los datos');
+              alert('Error al modificar los datos');
               break;
             case "1":
               alert('Publicacion actualizada exitosamente');
@@ -337,7 +356,173 @@ $('#publi_update').on('submit', function (event) {
               $('#formulario_add_p').show();
               break;
             case "2":
-              toastr.error('Error: ID no pertenece a la publicacion.');
+              alert('ID incorrecta');
+              break;
+          }
+        },
+      });
+    }
+  });
+});
+
+//CRUD PROFESIONES
+$(function () {
+  $('#formulario_update_fi').hide();
+  listarPubliCrud();
+});
+
+
+
+$('#tblProfeCrud').on('click', '#agregarProfe', function () {
+  var data = $('#tblProfeCrud').DataTable().row($(this).parents('tr')).data();
+  limpiarForms();
+  $('#formulario_add_fi').hide();
+  $('#formulario_update_fi').show();
+  $('#Fid').val(data[0]);
+  $('#Fnombre').val(data[1]);
+  return false;
+});
+
+
+$('#profe_insert').on('submit', function (event) {
+  event.preventDefault();
+  bootbox.confirm('¿Desea insertar estos datos?', function (result) {
+    if (result) {
+      var formData = new FormData($('#profe_insert')[0]);
+      $.ajax({
+
+        url: '../controllers/TablaProfeController.php?op=insertar',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+          alert(datos)
+          switch (String(datos)) {
+            case "0":
+              alert('Error al insertar los datos');
+              break;
+            case "1":
+              alert('Profesion insertada exitosamente');
+              location.reload();
+              limpiarForms();
+              $('#formulario_update_fi').hide();
+              $('#formulario_add_fi').show();
+              break;
+            case "2":
+              alert('ID incorrecta');
+              break;
+          }
+        },
+      });
+    }
+  });
+});
+
+//MODIFICAR PROFESIONES
+$(function () {
+  $('#formulario_update_fm').hide();
+  listarPubliCrud();
+});
+
+$('#tblProfeCrud tbody').on(
+  'click',
+  'button[id="modificarProfesion"]',
+  function () {
+    var data = $('#tblProfeCrud').DataTable().row($(this).parents('tr')).data();
+    limpiarForms();
+    $('#formulario_add_fm').hide();
+    $('#formulario_update_fm').show();
+    $('#Mid').val(data[0]);
+    $('#Mnombre').val(data[1]);
+
+    return false;
+  }
+);
+
+$('#profe_update').on('submit', function (event) {
+  event.preventDefault();
+  bootbox.confirm('¿Desea modificar los datos?', function (result) {
+    if (result) {
+      var formData = new FormData($('#profe_update')[0]);
+      $.ajax({
+
+        url: '../controllers/TablaProfeController.php?op=editar',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+          alert(datos)
+          switch (String(datos)) {
+            case "0":
+              alert('Error al modificar los datos');
+              break;
+            case "1":
+              alert('Publicacion actualizada exitosamente');
+              location.reload();
+              limpiarForms();
+              $('#formulario_update_fm').hide();
+              $('#formulario_add_fm').show();
+              break;
+            case "2":
+              alert('ID incorrecta');
+              break;
+          }
+        },
+      });
+    }
+  });
+});
+
+//CRUD CATEGORIAS
+
+$(function () {
+  $('#formulario_update_ci').hide();
+  listarCateCrud();
+});
+
+
+
+$('#tblcateCrud').on('click', '#agregarCate', function () {
+  var data = $('#tblcateCrud').DataTable().row($(this).parents('tr')).data();
+  limpiarForms();
+  $('#formulario_add_ci').hide();
+  $('#formulario_update_ci').show();
+  $('#Cid').val(data[0]);
+  $('#Cnombre').val(data[1]);
+  $('#Cdescripcion').val(data[2]);
+  return false;
+});
+
+
+$('#cate_insert').on('submit', function (event) {
+  event.preventDefault();
+  bootbox.confirm('¿Desea insertar estos datos?', function (result) {
+    if (result) {
+      var formData = new FormData($('#cate_insert')[0]);
+      $.ajax({
+
+        url: '../controllers/TablaCateController.php?op=insertar',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+          alert(datos)
+          switch (String(datos)) {
+            case "0":
+              alert('Error al insertar los datos');
+              break;
+            case "1":
+              alert('Categoria insertada exitosamente');
+              location.reload();
+              limpiarForms();
+              $('#formulario_update_ci').hide();
+              $('#formulario_add_ci').show();
+              break;
+            case "2":
+              alert('ID incorrecta');
               break;
           }
         },

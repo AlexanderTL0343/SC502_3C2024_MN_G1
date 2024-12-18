@@ -346,4 +346,4 @@ class TablaUser extends Conexion
 }
 
 //$mode = new Tablauser();
-//var_dump($mode->verificarExistenciaDb(1));
+//var_dump($mode->llenarCampos(1));
