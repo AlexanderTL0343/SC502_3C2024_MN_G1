@@ -1,5 +1,5 @@
 <?php
-include '../models/TablaCalificaiones.php';
+include '../models/TablaCalificaciones.php';
 
 switch ($_GET['op']) {
 
@@ -10,9 +10,8 @@ case 'LlenarTablaCali':
             foreach ($clientes as $reg) {
                 $data[] = array(
                     "0" => $reg->getIdCalificacionPk(),
-                    "1" => $reg->getIdPublicacionFk(),
-                    "2" => $reg->getIdUsuarioFk(),
-                    "3" => $reg->getPuntuacion(),
+                    "1" => $reg->getIdUsuarioFk(),
+                    "2" => $reg->getPuntuacion(),
                 );
             }
             $resultados = array(
