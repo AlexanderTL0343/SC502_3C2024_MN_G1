@@ -53,6 +53,17 @@ include("./assets/fragmentos/head.php");
         </section>
     </div>
 
+    <br>
+
+    <div>
+        <section class=" py-5 d-flex flex-row wrap justify-content-center align-items-center">
+            <p style="justify-content:center align-items-center ;">Cantidad de Publicaciones por Categoria</p>
+            <div class="test-reporte w-25 h-25 m-3 bg-light rounded-3 p-2">
+                <canvas id="graf-publiPorCate"></canvas>
+            </div>
+        </section>
+    </div>
+
     <?php include("./assets/fragmentos/footer.php"); ?>
 </body>
 <?php include("./assets/fragmentos/scripts.php"); ?>

@@ -335,6 +335,24 @@ class User extends Conexion
             return json_encode(["status" => false, "message" => $error]);
         }
     }
+
+
+public function obtenerPublicacionesPorCategoria()
+    {
+        $SQL = "SELECT C.NOMBRE_CATEGORIA, COUNT(P.ID_PUBLICACION_PK) AS CANTIDAD FROM PUBLICACIONES P INNER JOIN CATEGORIAS C ON P.ID_CATEGORIA_FK = C.ID_CATEGORIA_PK GROUP BY C.NOMBRE_CATEGORIA ORDER BY CANTIDAD;";
+        try {
+            self::getConexion();
+            $res = self::$conn->prepare($SQL);
+            $res->execute();
+            self::desconectar();
+
+            return $res->fetchAll();
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return json_encode(["status" => false, "message" => $error]);
+        }
+    }
 }
 
 

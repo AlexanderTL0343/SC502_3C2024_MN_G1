@@ -219,3 +219,58 @@ function listarGrafUsuariosProfesion(profesion, datos) {
     },
   });
 }
+//--------------------------------------------------------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function () {
+  $.ajax({
+    url: "../controllers/GraficoControllers.php?op=getPubliPorCate",
+    type: "POST",
+    data: {},
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      console.log("Respuesta del servidor:", response); 
+      response = JSON.parse(response);
+
+      categoria =  [];
+      Cantidad  = [];
+
+      response.forEach(element => {
+        categoria.push(element.NOMBRE_CATEGORIA);
+        Cantidad.push(element.CANTIDAD);
+      });
+
+      listarGrafPublicacionCategoria(categoria, Cantidad);
+      
+    },
+    error: function (err) {
+      console.error("Error en la solicitud AJAX:", err);
+      alert("Error inesperado al obtener los datos");
+    },
+  });
+});
+
+function listarGrafPublicacionCategoria(categoria, datos) {
+  // Gráfico de cantidad de publicaciones por categoria 
+  const ctx3 = document.getElementById("graf-publiPorCate");
+  new Chart(ctx3, {
+    type: "bar",
+    data: {
+      labels: categoria,
+      datasets: [
+        {
+          label: "Categoria",
+          data: datos,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
