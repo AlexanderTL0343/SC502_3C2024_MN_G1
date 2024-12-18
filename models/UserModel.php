@@ -303,9 +303,9 @@ class User extends Conexion
         }
     }
 
-   /* public function obtenerUsuariosPorProfesion()
+    public function obtenerUsuariosPorProfesion()
     {
-        $SQL = "SELECT  PROFESION,  COUNT(*) AS CANTIDAD FROM  USUARIOS GROUP BY PROFESION ORDER BY CANTIDAD;";
+        $SQL = "SELECT p.NOMBRE_PROFESION, COUNT(*) AS CANTIDAD FROM PROFESIONES p JOIN USUARIOS u ON p.ID_PROFESION_PK = u.ID_PROFESION_FK GROUP BY p.NOMBRE_PROFESION ORDER BY CANTIDAD;";
         try {
             self::getConexion();
             $res = self::$conn->prepare($SQL);
@@ -318,7 +318,7 @@ class User extends Conexion
             $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
             return json_encode(["status" => false, "message" => $error]);
         }
-    }*/
+    }
 }
 
 
@@ -328,7 +328,7 @@ class User extends Conexion
 
 //if (is_array($resultado)) {
     //foreach ($resultado as $fila) {
-       // echo "Profesión: " . $fila['PROFESION'] . " - CANTIDAD: " . $fila['CANTIDAD'] . PHP_EOL;
+       // echo "NOMBRE_PROFESION: " . $fila['NOMBRE_PROFESION'] . " - CANTIDAD: " . $fila['CANTIDAD'] . PHP_EOL;
    // }
 //} else {
  //   echo "Error: " . $resultado;

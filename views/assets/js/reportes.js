@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
       Cantidad  = [];
 
       response.forEach(element => {
-        profesion.push(element.PROFESION);
+        profesion.push(element.NOMBRE_PROFESION);
         Cantidad.push(element.CANTIDAD);
       });
 
