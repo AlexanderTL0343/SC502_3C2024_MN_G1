@@ -41,3 +41,36 @@ $(document).ready(function () {
       });
     });
   });
+
+  $('#editaruser').on('submit', function (event) {
+    event.preventDefault();
+    bootbox.confirm('¿Desea modificar los datos?', function (result) {
+      if (result) {
+        var formData = new FormData($('#editaruser')[0]);
+        $.ajax({
+  
+          url: '../controllers/UserController.php?op=editar',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (datos) {
+            alert(datos)
+            switch (String(datos)) {
+              case "0":
+                alert('Error al modificar los datos');
+                location.reload();
+                break;
+              case "1":
+                alert('Usuario actualizado exitosamente');
+                location.reload();
+                break;
+              case "2":
+                alert('ID incorrecta');
+                break;
+            }
+          },
+        });
+      }
+    });
+  });

@@ -318,6 +318,91 @@ class User extends Conexion
         }
     }
 
+    public function verificarExistenciaDb($id)
+    {
+        $query = "SELECT * FROM usuarios where ID_USUARIO_PK=?";
+        try {
+            self::getConexion();
+            $resultado = self::$conn->prepare($query);
+            //$id= $this->getId();	
+            //$resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
+            $resultado->bindParam(1, $id);
+            $resultado->execute();
+            self::desconectar();
+            //var_dump($resultado->fetchAll());
+            $encontrado = false;
+
+
+            $nombre = $resultado->fetch();
+            if ($nombre != null) {
+                $encontrado = true;
+                //var_dump($nombre);
+            }
+            //foreach ($resultado->fetchAll() as $reg) {
+            //var_dump($encontrado);
+            //$encontrado = true;
+            //}
+            return $encontrado;
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
+
+
+    public function modificarUsuario() {
+        $query = "UPDATE usuarios 
+                  SET NOMBRE_USUARIO = :NOMBRE_USUARIO, 
+                      ID_PROFESION_FK = :ID_PROFESION_FK, 
+                      DIRECCION = :DIRECCION,
+                      TELEFONO = :TELEFONO,  
+                      EMAIL = :EMAIL, 
+                      INSTAGRAM = :INSTAGRAM,
+                      FACEBOOK = :FACEBOOK,
+                      CEDULA_USUARIO = :CEDULA_USUARIO,
+                      IMAGEN_URL = :IMAGEN_URL
+                  WHERE ID_USUARIO_PK = :ID_USUARIO_PK";
+    
+        try {
+            self::getConexion();
+            $id = $this->getId();
+            $nombre = $this->getNombre();
+            $direccion = $this->getDireccion();
+            $telefono = $this->getTelefono();
+            $email = $this->getEmail();
+            $instagram = $this->getInstagram();
+            $facebook = $this->getFacebook();
+            $cedula = $this->getCedula();
+            $imagen_url = $this->getImagenUrl();
+            $profesion = $this->getIdProfesion();
+    
+            $resultado = self::$conn->prepare($query);
+            $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
+            $resultado->bindParam(":NOMBRE_USUARIO", $nombre, PDO::PARAM_STR);
+            $resultado->bindParam(":DIRECCION", $direccion, PDO::PARAM_STR);
+            $resultado->bindParam(":TELEFONO", $telefono, PDO::PARAM_STR);
+            $resultado->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+            $resultado->bindParam(":INSTAGRAM", $instagram, PDO::PARAM_STR);
+            $resultado->bindParam(":FACEBOOK", $facebook, PDO::PARAM_STR);
+            $resultado->bindParam(":CEDULA_USUARIO", $cedula, PDO::PARAM_INT);
+            $resultado->bindParam(":IMAGEN_URL", $imagen_url, PDO::PARAM_STR);
+            $resultado->bindParam(":ID_PROFESION_FK", $profesion, PDO::PARAM_INT);
+    
+            self::$conn->beginTransaction();
+            $resultado->execute();
+            self::$conn->commit();
+            self::desconectar();
+    
+            return $resultado->rowCount();
+        } catch (PDOException $Exception) {
+            self::$conn->rollBack();
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
+
     
 
 

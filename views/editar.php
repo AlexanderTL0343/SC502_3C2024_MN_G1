@@ -24,10 +24,13 @@ include("./assets/fragmentos/head.php");
       </div>
 
       </div>
-      <div class="mb-3">
-        <label for="profesion">Profesion</label>
-        <input name="profesion" type="text" class="form-control" id="profesion" placeholder="Ingrese su profesion" required />
-      </div>
+      <div class="form-group mb-4">
+                    <label for="profesion">Profesión:</label>
+                    <select name="profesion" class="form-control" id="profesion" required>
+                        <option value="">Seleccione una Profesión</option>
+                    </select>
+                    <p class="text-danger"></p>
+                </div>
      
       <div class="form-group mb-4">
         <label for="direccion">Dirección:</label>
@@ -57,11 +60,13 @@ include("./assets/fragmentos/head.php");
         <p class="text-danger"></p>
       </div>
 
-      <button type="submit"  class="btn btn-primary">Guardar</button>
+      <button id= "EditarUser" type="submit"  class="btn btn-primary">Guardar</button>
     </form>
   </section>
   <?php include("./assets/fragmentos/footer.php"); ?>
 </body>
 <?php include("./assets/fragmentos/scripts.php"); ?>
+<script src="plugins/bootbox/bootbox.min.js"></script>
+<script src="./assets/js/index.js"></script>
 
 </html>

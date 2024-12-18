@@ -50,11 +50,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="profesion">Profesion</label>
-                                        <select class="form-control" id="Eprofesion" name="Eprofesion" required>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                        <select name="Eprofesion" class="form-control" id="Eprofesion" required>
                                         </select>
                                     </div>
                                 </div>
@@ -62,9 +58,9 @@
                                     <div class="form-group">
                                         <label for="rol">Rol</label>
                                         <select class="form-control" id="Erol" name="Erol" required>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="1">ADMIN</option>
+                                            <option value="2">POSTULANTE</option>
+                                            <option value="3">RECLUTADOR</option>
                                         </select>
                                     </div>
                                 </div>
@@ -308,6 +304,104 @@
     <br>
     <br>
 
+    <!-- Formulario de INSERCION de profesiones -->
+    <div class="col-md-12" id="formulario_update_fi">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Insertando profesiones......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="profe_insert" id="profe_insert" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID profesion</label>
+                                        <input type="text" class="form-control" id="Fid"
+                                            name="Fid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre profesion</label>
+                                        <input type="text" class="form-control" id="Fnombre"
+                                            name="Fnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Agregar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormProfeInsert()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    <!-- Formulario de MODIFICACION de profesiones -->
+    <div class="col-md-12" id="formulario_update_fm">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Modificando profesiones......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="profe_update" id="profe_update" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID profesion</label>
+                                        <input type="text" class="form-control" id="Mid"
+                                            name="Mid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre profesion</label>
+                                        <input type="text" class="form-control" id="Mnombre"
+                                            name="Mnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Actualizar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormProfeMod()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    
+    
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -322,10 +416,18 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
+                                            <th>Administrar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot> 
+                                        <tr> 
+                                            <td colspan="3"> 
+                                                <button id="agregarProfe" type="button" class="btn btn-primary">Agregar</button> 
+                                            </td> 
+                                        </tr> 
+                                    </tfoot>
                                 </table>
                             </div>
                             </p>
@@ -370,6 +472,122 @@
     <br>
     <br>
 
+
+    <!-- Formulario de INSERCION de categorias -->
+    <div class="col-md-12" id="formulario_update_ci">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Insertando categorias......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="cate_insert" id="cate_insert" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID categoria</label>
+                                        <input type="text" class="form-control" id="Cid"
+                                            name="Cid" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre categoria</label>
+                                        <input type="text" class="form-control" id="Cnombre"
+                                            name="Cnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" class="form-control" id="Cdescripcion"
+                                            name="Cdescripcion" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Agregar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormCateInsert()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    <!-- Formulario de MODIFICACION de categorias -->
+    <div class="col-md-12" id="formulario_update_cm">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">Modificando categorias......</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md 10">
+                        <form name="cate_update" id="cate_update" method="POST">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="idp">ID categoria</label>
+                                        <input type="text" class="form-control" id="CMid"
+                                            name="CMid" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre categoria</label>
+                                        <input type="text" class="form-control" id="CMnombre"
+                                            name="CMnombre" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" class="form-control" id="CMdescripcion"
+                                            name="CMdescripcion" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="form-control btn btn-warning"
+                                        value="Modificar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="button" class="form-control btn btn-info"
+                                        value="Cancelar" onclick="cancelarFormCateMod()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -385,10 +603,18 @@
                                             <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
+                                            <th>Administrar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     </tbody>
+                                    <tfoot> 
+                                        <tr> 
+                                            <td colspan="3"> 
+                                            <button id="agregarCate" type="button" class="btn btn-primary">Agregar</button> 
+                                            </td> 
+                                        </tr> 
+                                    </tfoot>
                                 </table>
                             </div>
                             </p>

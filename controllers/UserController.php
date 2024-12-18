@@ -107,4 +107,41 @@ switch ($_GET['op']) {
             echo json_encode($response);
         }
         break;
+        case 'editar':
+            
+            $id = isset($_SESSION['usuario']['idUsuario']) ? $_SESSION['usuario']['idUsuario'] : null;
+            if ($id === null) {
+                echo 2; // Retorna error si no se encuentra el ID en la sesión
+                break;
+            }
+        
+            $nombre = isset($_POST["nombre"]) ? trim($_POST["nombre"]) : "";
+            $direccion = isset($_POST["direccion"]) ? trim($_POST["direccion"]) : "";
+            $telefono = isset($_POST["telefono"]) ? trim($_POST["telefono"]) : "";
+            $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+            $instagram = isset($_POST["instagram"]) ? trim($_POST["instagram"]) : "";
+            $facebook = isset($_POST["facebook"]) ? trim($_POST["facebook"]) : "";
+            $cedula = isset($_POST["cedula"]) ? trim($_POST["cedula"]) : "";
+            $imagen_url = isset($_POST["imagen"]) ? trim($_POST["imagen"]) : "";
+            $profesion = isset($_POST["profesion"]) ? trim($_POST["profesion"]) : "";
+        
+            $usuario = new User();
+            $usuario->setId($id);
+            $usuario->setNombre($nombre);
+            $usuario->setDireccion($direccion);
+            $usuario->setTelefono($telefono);
+            $usuario->setEmail($email);
+            $usuario->setInstagram($instagram);
+            $usuario->setFacebook($facebook);
+            $usuario->setCedula($cedula);
+            $usuario->setImagenUrl($imagen_url);
+            $usuario->setIdProfesion($profesion);
+        
+            $modificados = $usuario->modificarUsuario();
+            if ($modificados > 0) {
+                echo 1;
+            } else {
+                echo 0;
+            }
+            break;
 }

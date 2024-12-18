@@ -65,6 +65,96 @@ class TablaProfe extends Conexion
               return json_encode($error);
           }
       }
+      public function guardarProfesion(){
+        $query = "INSERT INTO `profesiones`(`ID_PROFESION_PK`, `NOMBRE_PROFESION`) VALUES (:ID_PROFESION_PK,:NOMBRE_PROFESION)";
+     try {
+         self::getConexion();
+         $id=$this->getIdProfesionPk();
+         $nombre=$this->getNombreProfesion();
+
+        $resultado = self::$cnx->prepare($query);
+        $resultado->bindParam(":ID_PROFESION_PK",$id,PDO::PARAM_INT);
+        $resultado->bindParam(":NOMBRE_PROFESION",$nombre,PDO::PARAM_STR);
+            $resultado->execute();
+            self::desconectar();
+           } catch (PDOException $Exception) {
+               self::desconectar();
+               $error = "Error ".$Exception->getCode( ).": ".$Exception->getMessage( );;
+             return json_encode($error);
+           }
+    }
+
+    public function verificarExistenciaDb($id){
+        $query = "SELECT * FROM profesiones where ID_PROFESION_PK=?";
+     try {
+         self::getConexion();
+            $resultado = self::$cnx->prepare($query);		
+            $resultado->bindParam(1,$id);
+            $resultado->execute();
+            self::desconectar();
+            $encontrado = false;
+
+
+            $nombre=$resultado->fetch();
+            if ($nombre!=null)
+            {
+                $encontrado = true;
+            }
+            return $encontrado;
+           } catch (PDOException $Exception) {
+               self::desconectar();
+               $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();
+             return $error;
+           }
+    }
+
+    public function llenarCampos($id)
+    {
+        $query = "SELECT * FROM profesiones where ID_PROFESION_PK=:ID_PROFESION_PK";
+        try {
+            self::getConexion();
+            $resultado = self::$cnx->prepare($query);
+            $resultado->bindParam(":ID_PROFESION_PK", $id, PDO::PARAM_INT);
+            $resultado->execute();
+            self::desconectar();
+            foreach ($resultado->fetchAll() as $encontrado) {
+                $this->setIdProfesionPk($encontrado['ID_PROFESION_PK']);
+                $this->setNombreProfesion($encontrado['NOMBRE_PROFESION']);
+            }
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();;
+            return json_encode($error);
+        }
+    }
+
+    public function actualizarProfesion()
+    {
+        $query = "UPDATE profesiones 
+            SET NOMBRE_PROFESION = :NOMBRE_PROFESION
+            WHERE ID_PROFESION_PK = :ID_PROFESION_PK";
+        try {
+            self::getConexion();
+            $id = $this->getIdProfesionPk();
+            $nombre = $this->getNombreProfesion();
+
+            $resultado = self::$cnx->prepare($query);
+            $resultado->bindParam(":ID_PROFESION_PK", $id, PDO::PARAM_INT);
+            $resultado->bindParam(":NOMBRE_PROFESION", $nombre, PDO::PARAM_STR);
+
+            self::$cnx->beginTransaction(); // desactiva el autocommit
+            $resultado->execute();
+            self::$cnx->commit(); // realiza el commit y vuelve al modo autocommit
+            self::desconectar();
+
+            return $resultado->rowCount();
+        } catch (PDOException $Exception) {
+            self::$cnx->rollBack();
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
+    }
 
 }
 ?>
