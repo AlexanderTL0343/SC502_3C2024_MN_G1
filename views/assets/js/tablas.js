@@ -71,6 +71,7 @@ function listarUserCrud() {
             { data: "5" },
             { data: "6" },
             { data: "7" },
+            { data: "8" },
         ]
     });
 }

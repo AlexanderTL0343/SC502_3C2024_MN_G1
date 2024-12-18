@@ -103,7 +103,13 @@ class TablaUser extends Conexion
         return $this->imagen_url;
     }
 
+    public function getEstado(){
+        return $this->estado;
+    }
+
     //----------------Setters-----------------
+
+    
 
     public function setId($id){
         $this->id = $id;
@@ -169,14 +175,19 @@ class TablaUser extends Conexion
         $this->imagen_url = $imagen_url;
     }
 
+    public function setEstado($estado){
+        $this->estado = $estado;
+    }
+
     //funcion para listar la tabla de los usuarios 
 
     public function listarTablaUser()
     {
-        $query = "SELECT u.ID_USUARIO_PK, u.NOMBRE_USUARIO, u.EDAD, u.EMAIL, p.NOMBRE_PROFESION, u.FECHA_REGISTRO, r.NOMBRE_ROL 
+        $query = "SELECT u.ID_USUARIO_PK, u.NOMBRE_USUARIO, u.EDAD, u.EMAIL, p.NOMBRE_PROFESION, u.FECHA_REGISTRO, r.NOMBRE_ROL, e.NOMBRE_ESTADO
           FROM usuarios u 
           JOIN roles r ON u.ID_ROL_FK = r.ID_ROL_PK 
-          JOIN profesiones p ON u.ID_PROFESION_FK = p.ID_PROFESION_PK";
+          JOIN profesiones p ON u.ID_PROFESION_FK = p.ID_PROFESION_PK
+          JOIN estados e  ON u.ID_ESTADO_FK = e.ID_ESTADO_PK";
 
         $arr = array();
         try {
@@ -194,6 +205,7 @@ class TablaUser extends Conexion
                 $client->setProfesion($encontrado['NOMBRE_PROFESION']);
                 $client->setFechaRegistro($encontrado['FECHA_REGISTRO']);
                 $client->setIdRol($encontrado['NOMBRE_ROL']);
+                $client->setEstado($encontrado['NOMBRE_ESTADO']);
                 $arr[] = $client;
             }
             return $arr;

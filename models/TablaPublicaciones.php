@@ -94,7 +94,10 @@ class TablaPubli extends Conexion
 
     public function listarTablaPubli()
     {
-        $query = "SELECT * from publicaciones ";
+        $query = "SELECT p.ID_PUBLICACION_PK, p.ID_USUARIO_FK, p.TITULO_PUBLICACION, p.DESCRIPCION,
+        p.FECHA_PUBLICACION, p.UBICACION, p.PRECIO_APROX, e.NOMBRE_ESTADO
+          FROM publicaciones p
+          JOIN estados e ON p.ID_ESTADO_FK = e.ID_ESTADO_PK";
         $arr = array();
         try {
             self::getConexion();
@@ -111,7 +114,7 @@ class TablaPubli extends Conexion
                 $client->setFechaPublicacion($encontrado['FECHA_PUBLICACION']);
                 $client->setUbicacion($encontrado['UBICACION']);
                 $client->setPrecioAprox($encontrado['PRECIO_APROX']);
-                $client->setEstado($encontrado['ID_ESTADO_FK']);
+                $client->setEstado($encontrado['NOMBRE_ESTADO']);
                 $arr[] = $client;
             }
             return $arr;

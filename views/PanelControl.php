@@ -112,6 +112,7 @@
                                             <th>Profesion</th>
                                             <th>Fecha Registro</th>
                                             <th>Rol</th>
+                                            <th>Estado</th>
                                             <th>Administrar</th>
                                         </tr>
                                     </thead>
@@ -152,7 +153,7 @@
                                         <div class="form-group">
                                             <label for="usuario">Usuario</label>
                                             <input type="text" class="form-control" id="Puser"
-                                                name="Puser" required>
+                                                name="Puser" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -272,13 +273,6 @@
             </div>
 
             <br>
-
-            <div style="justify-content: center align-items-center;">
-                <div class="form-group col-md-12">
-                    <input type="submit" class="form-control btn btn-success"
-                        value="Agregar">
-                </div>
-
                 <br>
 
                 <div class="content">
