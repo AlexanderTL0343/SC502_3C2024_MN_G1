@@ -1,10 +1,10 @@
-/*Funcion para limpieza de los formularios*/
+/Funcion para limpieza de los formularios/
 function limpiarForms() {
   $('#modulos_add').trigger('reset');
   $('#modulos_update').trigger('reset');
 }
 
-/*Funcion para cancelacion del uso de formulario de modificación*/
+/Funcion para cancelacion del uso de formulario de modificación/
 function cancelarForm() {
   limpiarForms();
   $('#formulario_add').show();
