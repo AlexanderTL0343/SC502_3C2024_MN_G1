@@ -345,7 +345,6 @@ $('#publi_update').on('submit', function (event) {
         contentType: false,
         processData: false,
         success: function (datos) {
-          alert(datos)
           switch (String(datos)) {
             case "0":
               alert('Error al modificar los datos');
@@ -399,7 +398,7 @@ $('#profe_insert').on('submit', function (event) {
         contentType: false,
         processData: false,
         success: function (datos) {
-          alert(datos)
+        
           switch (String(datos)) {
             case "0":
               alert('Error al insertar los datos');
@@ -455,7 +454,7 @@ $('#profe_update').on('submit', function (event) {
         contentType: false,
         processData: false,
         success: function (datos) {
-          alert(datos)
+      
           switch (String(datos)) {
             case "0":
               alert('Error al modificar los datos');
@@ -511,7 +510,7 @@ $('#cate_insert').on('submit', function (event) {
         contentType: false,
         processData: false,
         success: function (datos) {
-          alert(datos)
+    
           switch (String(datos)) {
             case "0":
               alert('Error al insertar los datos');
@@ -570,7 +569,6 @@ $('#cate_update').on('submit', function (event) {
         contentType: false,
         processData: false,
         success: function (datos) {
-          alert(datos)
           switch (String(datos)) {
             case "0":
               alert('Error al modificar los datos');
@@ -600,7 +598,7 @@ function listarProfesiones(){
       datos = JSON.parse(datos);
       switch (datos[0].status) {
         case true:
-          console.log(datos[0].datos);
+          console.log(dFatos[0].datos);
 
           const selectProfesion = document.getElementById("Eprofesion");
           selectProfesion.innerHTML = ""; // Limpiar las opciones existentes
