@@ -212,6 +212,7 @@ class TablaPubli extends Conexion
 
     public function eliminarPublicacion($id) {
         try {
+<<<<<<< Updated upstream
             $sql = "DELETE FROM publicaciones WHERE ID_PUBLICACION_PK = ?";
             self::getConexion();
             $stmt = self::$cnx->prepare($sql); 
@@ -224,6 +225,21 @@ class TablaPubli extends Conexion
             self::desconectar();
             $error = "Error " . $e->getCode() . ": " . $e->getMessage(); 
             return 0; 
+=======
+            // Preparar la consulta SQL para eliminar la publicación
+            $sql = "DELETE FROM publicaciones WHERE ID_PUBLICACION_PK = ?";
+            self::getConexion();
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowCount = $stmt->rowCount();
+            self::desconectar();
+            return $rowCount; // Retornar el número de filas afectadas
+        } catch (PDOException $e) {
+            self::desconectar();
+            error_log("Error al eliminar publicación: " . $e->getMessage());
+            return 0; // Retornar 0 si hay un error
+>>>>>>> Stashed changes
         }
     }
     

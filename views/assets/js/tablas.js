@@ -262,6 +262,7 @@ $('#publi_update').on('submit', function (event) {
   });
 });
 
+<<<<<<< Updated upstream
 $('#tblUserCrud tbody').on(
   'click',
   'button[id="eliminarUsuario"]',
@@ -318,6 +319,68 @@ $('#tblPublicacionesCrud tbody').on(
     return false;
   }
 );
+=======
+$('#tblUserCrud tbody').on('click', 'button[id="eliminarUsuario"]', function () {
+  var data = $('#tblUserCrud').DataTable().row($(this).parents('tr')).data();
+  var idUsuario = data[0]; // Supongamos que el ID está en la columna 0
+
+  if (confirm(`¿Estás seguro de que deseas eliminar al usuario con ID ${idUsuario} y nombre ${data[1]}?`)) {
+      $.ajax({
+          url: '../controllers/TablaUserControllers.php?op=eliminar', // URL del controlador
+          type: 'POST',
+          data: { id: idUsuario }, // Pasar el ID en el cuerpo de la solicitud
+          success: function (response) {
+              // Parsear la respuesta para manejar el JSON
+              var result = JSON.parse(response);
+              if (result.status === 'success') {
+                  alert(result.message); // Mensaje de éxito
+                  $('#tblUserCrud').DataTable().ajax.reload(); // Recargar la tabla
+              } else {
+                  alert(result.message); // Mensaje de error
+              }
+          },
+          error: function (xhr, status, error) {
+              alert('Hubo un error al eliminar el usuario.');
+              console.error(`Error: ${status}, ${error}`);
+          }
+      });
+  }
+
+  return false; // Evitar cualquier comportamiento predeterminado
+});
+
+$('#tblPublicacionesCrud tbody').on('click', 'button[id="eliminarPubli"]', function () {
+  var data = $('#tblPublicacionesCrud').DataTable().row($(this).parents('tr')).data();
+  var idPublicacion = data[0]; // Supongamos que el ID está en la primera columna
+
+  if (confirm(`¿Estás seguro de que deseas eliminar la publicación con ID ${idPublicacion} y título ${data[2]}?`)) {
+      $.ajax({
+          url: '../controllers/TablaPubliControllers.php?op=eliminar', // URL del controlador PHP para eliminar la publicación
+          type: 'POST',
+          data: { id: idPublicacion }, // Pasar el ID de la publicación en el cuerpo de la solicitud
+          success: function (response) {
+              // Parsear la respuesta para manejar el JSON
+              var result = JSON.parse(response);
+              if (result.status === 'success') {
+                  alert(result.message); // Mensaje de éxito
+                  $('#tblPublicacionesCrud').DataTable().ajax.reload(); // Recargar la tabla de publicaciones
+              } else {
+                  alert(result.message); // Mensaje de error
+              }
+          },
+          error: function (xhr, status, error) {
+              alert('Hubo un error al eliminar la publicación.');
+              console.error(`Error: ${status}, ${error}`);
+          }
+      });
+  }
+
+  return false; // Evitar cualquier comportamiento predeterminado
+});
+
+
+
+>>>>>>> Stashed changes
 
 $(document).ready(function () {
     listarRolCrud();

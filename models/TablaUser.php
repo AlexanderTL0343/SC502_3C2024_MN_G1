@@ -347,9 +347,15 @@ class TablaUser extends Conexion
 
     public function eliminarUsuario($id) {
         try {
+<<<<<<< Updated upstream
             $sql = "DELETE FROM USUARIOS WHERE ID_USUARIO_PK = ?";
             self::getConexion();
             $stmt = self::$conn->prepare($sql);
+=======
+            $sql = "DELETE FROM usuarios WHERE ID_USUARIO_PK = ?";
+            self::getConexion();
+            $stmt = self::$cnx->prepare($sql);
+>>>>>>> Stashed changes
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             $stmt->execute();
             $rowCount = $stmt->rowCount();
@@ -357,9 +363,17 @@ class TablaUser extends Conexion
             return $rowCount; 
         } catch (PDOException $e) {
             self::desconectar();
+<<<<<<< Updated upstream
             return 0; 
         }
     }
+=======
+            error_log("Error al eliminar usuario: " . $e->getMessage());
+            return 0; 
+        }
+    }
+    
+>>>>>>> Stashed changes
 }
 
 //$mode = new Tablauser();

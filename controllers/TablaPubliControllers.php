@@ -64,13 +64,23 @@ switch ($_GET['op']) {
             break;
             case 'eliminar':
                 $id = isset($_POST['id']) ? trim($_POST['id']) : '';
+<<<<<<< Updated upstream
                 error_log('ID recibido en eliminar: ' . $id);
                 if ($id === '') {
                     echo 2; 
+=======
+                error_log("Datos enviados al controlador: " . print_r($_POST, true)); // Ver datos enviados
+                error_log("ID recibido para eliminar: " . $id);
+            
+                if ($id === '') {
+                    error_log("Error: ID de publicación no proporcionado.");
+                    echo json_encode(['status' => 'error', 'message' => 'ID de publicación no proporcionado.']);
+>>>>>>> Stashed changes
                     break;
                 }
             
                 $publicacion = new TablaPubli();
+<<<<<<< Updated upstream
                 $encontrado = $publicacion->verificarExistenciaDb($id);
             
                 if ($encontrado == 1) {
@@ -85,5 +95,25 @@ switch ($_GET['op']) {
                     echo 2; 
                 }
                 break;
+=======
+                $encontrado = $publicacion->verificarExistenciaDb($id); // Verificar si la publicación existe
+                error_log("Resultado de verificarExistenciaDb: " . ($encontrado ? "Publicación encontrada" : "Publicación no encontrada"));
+            
+                if ($encontrado) {
+                    $eliminado = $publicacion->eliminarPublicacion($id); // Eliminar la publicación
+            
+                    if ($eliminado > 0) {
+                        error_log("Publicación con ID $id eliminada exitosamente.");
+                        echo json_encode(['status' => 'success', 'message' => 'Publicación eliminada exitosamente.']);
+                    } else {
+                        error_log("Error: No se pudo eliminar la publicación con ID $id.");
+                        echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la publicación.']);
+                    }
+                } else {
+                    error_log("Error: Publicación con ID $id no encontrada.");
+                    echo json_encode(['status' => 'error', 'message' => 'Publicación no encontrada.']);
+                }
+            break;
+>>>>>>> Stashed changes
             }
 ?>
