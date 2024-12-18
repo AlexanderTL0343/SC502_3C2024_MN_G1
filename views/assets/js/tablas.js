@@ -264,6 +264,8 @@ $('#tblUserCrud tbody').on(
     $('#Eemail').val(data[3]);
     $('#Eprofesion').val(data[4]);
     $('#Erol').val(data[6]);
+
+    listarProfesiones();
     return false;
   }
 );
@@ -589,6 +591,40 @@ $('#cate_update').on('submit', function (event) {
     }
   });
 });
+
+function listarProfesiones(){
+  $.ajax({
+    url: "../controllers/UserController.php?op=obtenerProfesiones",
+    type: "GET",
+    success: function (datos) {
+      datos = JSON.parse(datos);
+      switch (datos[0].status) {
+        case true:
+          console.log(datos[0].datos);
+
+          const selectProfesion = document.getElementById("Eprofesion");
+          selectProfesion.innerHTML = ""; // Limpiar las opciones existentes
+          
+          datos[0].datos.forEach(profesion => {
+            const opt = document.createElement("option");//crear el option
+            opt.value = profesion.ID_PROFESION_PK; //asignar el valor
+            opt.text = profesion.NOMBRE_PROFESION; //asignar el texto que se muestra
+            selectProfesion.appendChild(opt); //insertar el option en el select
+          });
+          
+          break;
+
+        case false:
+          alert("Error al obtener las profesiones");
+          break;
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", xhr.status, xhr.statusText);
+      alert("Error inesperado al obtener las profesiones");
+    },
+  });
+}
 
 $(document).ready(function () {
   listarRolCrud();

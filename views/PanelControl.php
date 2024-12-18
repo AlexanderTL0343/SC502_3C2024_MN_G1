@@ -50,11 +50,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="profesion">Profesion</label>
-                                        <select class="form-control" id="Eprofesion" name="Eprofesion" required>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                        <select name="Eprofesion" class="form-control" id="Eprofesion" required>
                                         </select>
                                     </div>
                                 </div>
@@ -62,9 +58,9 @@
                                     <div class="form-group">
                                         <label for="rol">Rol</label>
                                         <select class="form-control" id="Erol" name="Erol" required>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="1">ADMIN</option>
+                                            <option value="2">POSTULANTE</option>
+                                            <option value="3">RECLUTADOR</option>
                                         </select>
                                     </div>
                                 </div>
