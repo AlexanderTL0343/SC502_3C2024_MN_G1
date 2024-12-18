@@ -162,3 +162,44 @@ $("#login").on("submit", function (e) {
     },
   });
 });
+document.getElementById("olvidasteContrasena").addEventListener("click", function () {
+  
+  Swal.fire({
+    title: "¿Olvidaste tu contraseña?",
+    text: "Ingresa tu correo electrónico para recuperar tu contraseña.",
+    input: "email", // Campo para ingresar un correo electrónico
+    inputAttributes: {
+      autocapitalize: "off"
+    },
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Enviar",
+    showLoaderOnConfirm: true,
+    preConfirm: async (email) => {
+      try {
+        // Redirige al controlador con el correo como parámetro
+        //alert(email);
+        $.ajax({
+          url: "../controllers/UserController.php?op=enviarEmailContrasena&email=" + email,
+          type: "GET",
+          success: function (data) {
+            console.log(email);
+            Swal.fire({
+              title: "Correo enviado!",
+              text: "Te hemos enviado un correo electrónico con las instrucciones para recuperar tu contraseña.",
+              icon: "success",
+              confirmButtonText: "Aceptar",
+              allowOutsideClick: () => !Swal.isLoading(),
+            });
+          },
+          error: function (xhr, status, error) {
+            Swal.showValidationMessage(`Error al enviar el correo: ${error}`);
+          }
+        });
+      } catch (error) {
+        Swal.showValidationMessage(`Error al redirigir: ${error}`);
+      }
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }); 
+});

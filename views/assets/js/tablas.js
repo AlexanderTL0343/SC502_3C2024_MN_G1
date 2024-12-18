@@ -303,6 +303,33 @@ $('#usuario_update').on('submit', function (event) {
     }
   });
 });
+ //INACTIVAR USUARIOS
+ $('#tblUserCrud tbody').on('click', 'button[id="eliminarUsuario"]', function () {
+  var data = $('#tblUserCrud').DataTable().row($(this).parents('tr')).data();
+  var idUsuario = data[0]; // Supongamos que el ID está en la columna 0
+
+  if (confirm("¿Estás seguro de que deseas eliminar al usuario?")) {
+      $.ajax({
+          url: '../controllers/TablaUserControllers.php?op=eliminar', 
+          type: 'POST',
+          data: { id: idUsuario }, 
+          success: function (response) {
+              var result = JSON.parse(response);
+              if (result.status === 'success') {
+                  alert(result.message);
+                  $('#tblUserCrud').DataTable().ajax.reload(); 
+              } else {
+                  alert(result.message); 
+              }
+          },
+          error: function (xhr, status, error) {
+              alert('Hubo un error al eliminar el usuario.');
+          }
+      });
+  }
+
+  return false; 
+});
 
 
 //CRUD PUBLICACIONES

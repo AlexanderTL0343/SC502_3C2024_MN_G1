@@ -147,4 +147,56 @@ switch ($_GET['op']) {
                 echo 0;
             }
             break;
+            case 'enviarEmailContrasena':
+
+                $emailObtenido = isset($_GET['email']) ? trim($_GET['email']) : "";
+        
+        
+                // Validar email
+                if (empty($emailObtenido) || !filter_var($emailObtenido, FILTER_VALIDATE_EMAIL)) {
+                    echo json_encode(["status" => "error", "message" => "Correo inválido"]);
+                    exit;
+                }
+        
+                $api_key = "re_8ffVGDs3_2Ru4aefJSSwTYb5MVWm3ZCAL";
+        
+                $data = [
+                    "from" => "Workly <onboarding@resend.dev>",
+                    "to" => [$emailObtenido],
+                    "subject" => "Restablece tu contraseña",
+                    "html" => "
+                    <h1 style='color: #4CAF50;'>¡Hola!</h1>
+                    <p>Parece que olvidaste tu contraseña. No te preocupes, ¡estamos aquí para ayudarte!</p>
+                    <p>Haz clic en el botón de abajo para restablecer tu contraseña:</p>
+                    <form action='localhost/SC502_3C2024_MN_G1/views/recuperarContrasena.php' method='POST'>
+                        <input type='hidden' name='email' value='" . urlencode($emailObtenido) . "'>
+                        <button type='submit' style='background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;'>Restablecer contraseña</button>
+                    </form>
+                    <br />
+                    <p>Si no solicitaste restablecer tu contraseña, ignora este correo.</p>
+                    <p>Atentamente,</p>
+                    <p>El equipo de soporte de Workly.</p>
+                "
+                ];
+        
+                $ch = curl_init("https://api.resend.com/emails");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    "Authorization: Bearer $api_key",
+                    "Content-Type: application/json"
+                ]);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+                $response = curl_exec($ch);
+                $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+        
+                if ($http_code === 200) {
+                    echo json_encode(["status" => "success", "message" => "Correo enviado exitosamente"]);
+                } else {
+                    echo json_encode(["status" => "error", "message" => $response]);
+                }
+        
+                break;
 }
