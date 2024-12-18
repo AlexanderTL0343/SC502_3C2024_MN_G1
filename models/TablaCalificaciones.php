@@ -7,7 +7,6 @@ class TablaCali extends Conexion
 
     protected static $cnx;
     private $idCalificacionPk;
-    private $idPublicacionFk;
     private $idUsuarioFk;
     private $puntuacion;
     			
@@ -33,11 +32,6 @@ class TablaCali extends Conexion
     {
         return $this->idCalificacionPk;
     }
-
-    public  function  getIdPublicacionFk()
-    {
-        return $this->idPublicacionFk;
-    }
     public  function  getIdUsuarioFk()
     {
         return $this->idUsuarioFk;
@@ -49,9 +43,6 @@ class TablaCali extends Conexion
 
     public function setIdCalificacionPk($idCalificacionPk){
         $this->idCalificacionPk = $idCalificacionPk;
-    }
-    public function setIdPublicacionFk($idPublicacionFk){
-        $this->idPublicacionFk = $idPublicacionFk;
     }
     public function setIdUsuarioFk($idUsuarioFk){
         $this->idUsuarioFk = $idUsuarioFk;
@@ -75,7 +66,6 @@ class TablaCali extends Conexion
             foreach ($resultado->fetchAll() as $encontrado) {
                 $client = new TablaCali();
                 $client->setIdCalificacionPk($encontrado['ID_CALIFICACION_PK']);
-                $client->setIdPublicacionFk($encontrado['ID_PUBLICACION_FK']);
                 $client->setIdUsuarioFk($encontrado['ID_USUARIO_FK']);
                 $client->setPuntuacion($encontrado['PUNTUACION']);
                 $arr[] = $client;

@@ -16,6 +16,7 @@ class TablaUser extends Conexion
     private $edad;
     private $direccion;
     private $telefono;
+    private $estado;
     private $email;
     private $contrasena;
     private $facebook;
@@ -39,143 +40,177 @@ class TablaUser extends Conexion
 
     // metodos set y get 
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getIdRol(){
+    public function getIdRol()
+    {
         return $this->idRol;
     }
 
-    public function getCedula(){
+    public function getCedula()
+    {
         return $this->cedula;
     }
 
-    public function getNombre(){
-        return $this->nombre;    
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 
-    public function getApellido1(){
+    public function getApellido1()
+    {
         return $this->apellido1;
     }
 
-    public function getApellido2(){
+    public function getApellido2()
+    {
         return $this->apellido2;
     }
 
-    public function getProfesion(){
+    public function getProfesion()
+    {
         return $this->profesion;
     }
 
-    public function getEdad(){
+    public function getEdad()
+    {
         return $this->edad;
     }
 
-    public function getDireccion(){
+    public function getDireccion()
+    {
         return $this->direccion;
     }
-    
-    public function getTelefono(){
+
+    public function getTelefono()
+    {
         return $this->telefono;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function getContrasena(){
+    public function getContrasena()
+    {
         return $this->contrasena;
     }
 
-    public function getFacebook(){
+    public function getFacebook()
+    {
         return $this->facebook;
     }
 
-    public function getInstagram(){
+    public function getInstagram()
+    {
         return $this->instagram;
     }
 
-    public function getFechaRegistro(){
+    public function getFechaRegistro()
+    {
         return $this->fecha_registro;
     }
 
-    public function getImagenUrl(){
+    public function getImagenUrl()
+    {
         return $this->imagen_url;
     }
 
-    public function getEstado(){
+    public function getEstado()
+    {
         return $this->estado;
     }
 
     //----------------Setters-----------------
 
-    
 
-    public function setId($id){
+
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function setIdRol($idRol){
+    public function setIdRol($idRol)
+    {
         $this->idRol = $idRol;
     }
 
-    public function setCedula($cedula){
-        $this->cedula = $cedula;    
+    public function setCedula($cedula)
+    {
+        $this->cedula = $cedula;
     }
 
-    public function setNombre($nombre){
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
 
-    public function setApellido1($apellido1){
+    public function setApellido1($apellido1)
+    {
         $this->apellido1 = $apellido1;
     }
 
-    public function setApellido2($apellido2){
+    public function setApellido2($apellido2)
+    {
         $this->apellido2 = $apellido2;
     }
 
-    public function setProfesion($profesion){
+    public function setProfesion($profesion)
+    {
         $this->profesion = $profesion;
     }
 
-    public function setEdad($edad){
+    public function setEdad($edad)
+    {
         $this->edad = $edad;
     }
 
-    public function setDireccion($direccion){ 
+    public function setDireccion($direccion)
+    {
         $this->direccion = $direccion;
     }
 
-    public function setTelefono($telefono){
+    public function setTelefono($telefono)
+    {
         $this->telefono = $telefono;
     }
 
-    public function setEmail($email){
-        $this->email = $email; 
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
-    public function setContrasena($contrasena){
+    public function setContrasena($contrasena)
+    {
         $this->contrasena = $contrasena;
     }
 
-    public function setFacebook($facebook){
-        $this->facebook = $facebook;  
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
     }
 
-    public function setInstagram($instagram){
+    public function setInstagram($instagram)
+    {
         $this->instagram = $instagram;
     }
 
-    public function setFechaRegistro($fecha_registro){
-        $this->fecha_registro = $fecha_registro; 
+    public function setFechaRegistro($fecha_registro)
+    {
+        $this->fecha_registro = $fecha_registro;
     }
 
-    public function setImagenUrl($imagen_url){
+    public function setImagenUrl($imagen_url)
+    {
         $this->imagen_url = $imagen_url;
     }
 
-    public function setEstado($estado){
+    public function setEstado($estado)
+    {
         $this->estado = $estado;
     }
 
@@ -192,7 +227,7 @@ class TablaUser extends Conexion
         $arr = array();
         try {
             self::getConexion();
-            
+
             $resultado = self::$cnx->prepare($query);
             $resultado->execute();
             self::desconectar();
@@ -216,55 +251,56 @@ class TablaUser extends Conexion
         }
     }
 
-    
-    public function verificarExistenciaDb($id){
+
+    public function verificarExistenciaDb($id)
+    {
         $query = "SELECT * FROM usuarios where ID_USUARIO_PK=?";
-     try {
-         self::getConexion();
-            $resultado = self::$cnx->prepare($query);		
+        try {
+            self::getConexion();
+            $resultado = self::$cnx->prepare($query);
             //$id= $this->getId();	
             //$resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
-            $resultado->bindParam(1,$id);
+            $resultado->bindParam(1, $id);
             $resultado->execute();
             self::desconectar();
             //var_dump($resultado->fetchAll());
             $encontrado = false;
 
 
-            $nombre=$resultado->fetch();
-            if ($nombre!=null)
-            {
+            $nombre = $resultado->fetch();
+            if ($nombre != null) {
                 $encontrado = true;
                 //var_dump($nombre);
             }
             //foreach ($resultado->fetchAll() as $reg) {
-                //var_dump($encontrado);
-                //$encontrado = true;
+            //var_dump($encontrado);
+            //$encontrado = true;
             //}
             return $encontrado;
-           } catch (PDOException $Exception) {
-               self::desconectar();
-               $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();
-             return $error;
-           }
+        } catch (PDOException $Exception) {
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();
+            return $error;
+        }
     }
 
-    public function llenarCampos($id){
+    public function llenarCampos($id)
+    {
         $query = "SELECT * FROM usuarios where ID_USUARIO_PK=:ID_USUARIO_PK";
         try {
-        self::getConexion();
-        $resultado = self::$cnx->prepare($query);		 	
-        $resultado->bindParam(":ID_USUARIO_PK",$id,PDO::PARAM_INT);
-        $resultado->execute();
-        self::desconectar();
-        foreach ($resultado->fetchAll() as $encontrado) {
-            $this->setId($encontrado['ID_USUARIO_PK']);
-            $this->setNombre($encontrado['NOMBRE_USUARIO']);
-        }
+            self::getConexion();
+            $resultado = self::$cnx->prepare($query);
+            $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
+            $resultado->execute();
+            self::desconectar();
+            foreach ($resultado->fetchAll() as $encontrado) {
+                $this->setId($encontrado['ID_USUARIO_PK']);
+                $this->setNombre($encontrado['NOMBRE_USUARIO']);
+            }
         } catch (PDOException $Exception) {
-        self::desconectar();
-        $error = "Error ".$Exception->getCode().": ".$Exception->getMessage();;
-        return json_encode($error);
+            self::desconectar();
+            $error = "Error " . $Exception->getCode() . ": " . $Exception->getMessage();;
+            return json_encode($error);
         }
     }
 
@@ -285,7 +321,7 @@ class TablaUser extends Conexion
             $email = $this->getEmail();
             $profesion = $this->getProfesion();
             $rol = $this->getIdRol();
-        
+
             $resultado = self::$cnx->prepare($query);
             $resultado->bindParam(":ID_USUARIO_PK", $id, PDO::PARAM_INT);
             $resultado->bindParam(":NOMBRE_USUARIO", $nombre, PDO::PARAM_STR);
@@ -307,10 +343,7 @@ class TablaUser extends Conexion
             return $error;
         }
     }
-
 }
 
 //$mode = new Tablauser();
-    //var_dump($mode->verificarExistenciaDb(1));
-
-?>
+//var_dump($mode->verificarExistenciaDb(1));

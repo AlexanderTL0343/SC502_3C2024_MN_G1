@@ -9,6 +9,45 @@ function limpiarFormulario() {
   document.getElementById("telefono").value = "";
 }
 
+function listarProfesiones(){
+  $.ajax({
+    url: "../controllers/UserController.php?op=obtenerProfesiones",
+    type: "GET",
+    success: function (datos) {
+      datos = JSON.parse(datos);
+      switch (datos[0].status) {
+        case true:
+          console.log(datos[0].datos);
+
+          const selectProfesion = document.getElementById("profesion");
+          selectProfesion.innerHTML = ""; // Limpiar las opciones existentes
+          
+          datos[0].datos.forEach(profesion => {
+            const opt = document.createElement("option");//crear el option
+            opt.value = profesion.ID_PROFESION_PK; //asignar el valor
+            opt.text = profesion.NOMBRE_PROFESION; //asignar el texto que se muestra
+            selectProfesion.appendChild(opt); //insertar el option en el select
+          });
+          
+          break;
+
+        case false:
+          alert("Error al obtener las profesiones");
+          break;
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", xhr.status, xhr.statusText);
+      alert("Error inesperado al obtener las profesiones");
+    },
+  });
+}
+/*document.getElementById("profesion").addEventListener("change", function () {
+  console.log(document.getElementById("profesion").value);
+});*/
+listarProfesiones();
+
+
 //FUNCION PARA HABILITAR EL BOTON DE REGISTRAR POR EL CHECKBOX
 document.addEventListener("DOMContentLoaded", function () {
   // Referencias a los elementos
@@ -47,8 +86,7 @@ $(document).ready(function () {
                 timer: 1800,
               }).then(() => {
                 // Redirigir después de que el cuadro desaparezca
-                window.location.href = "index.php";  // Redirigir a la pagina de PAOLA
-
+                window.location.href = "index.php";  
               })
             break;
 
@@ -82,6 +120,7 @@ $("#login").on("submit", function (e) {
     processData: false,
     
     success: function (datos) {
+      console.log(datos);
       datos = JSON.parse(datos);
       switch (datos[0].status) {
         case true:
@@ -94,17 +133,17 @@ $("#login").on("submit", function (e) {
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
-              // Redirigir después de que el cuadro desaparezca
-              var sessionAdmin = datos[0].nombreRol;
-           
-              if (sessionAdmin == "ADMIN") {
-                window.location.href = "reportes.php";
-              }else if (sessionAdmin == "RECLUTADOR") {
-                window.location.href = "main.php";
-              }else if (sessionAdmin == "POSTULANTE") {
-                window.location.href = "main.php";
-              }  
-               //Redirigir a la pagina de PAOLA
+            // Redirigir después de que el cuadro desaparezca
+            var sessionAdmin = datos[0].nombreRol;
+            
+            if (sessionAdmin == "ADMIN") {
+              window.location.href = "reportes.php";
+            }else if (sessionAdmin == "RECLUTADOR") {
+              window.location.href = "main.php";
+            }else if (sessionAdmin == "POSTULANTE") {
+              window.location.href = "main.php";
+            }  
+             //Redirigir a la pagina de PAOLA
             });
           break;
 
