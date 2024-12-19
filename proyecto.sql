@@ -127,3 +127,21 @@ INSERT INTO PUBLICACIONES(ID_ESTADO_FK, ID_CATEGORIA_FK, TITULO_PUBLICACION, DES
 VALUES (1, 4, 'Servicios de Arreglos Florales', 'Descripcion de la publicacion', 1, 'Calle Real 789', 100.00);
 
 SELECT * FROM USUARIOS;
+
+
+INSERT INTO `publicaciones` (`ID_PUBLICACION_PK`, `ID_ESTADO_FK`, `ID_CATEGORIA_FK`, `ID_CALIFICACION_FK`, `TITULO_PUBLICACION`, `DESCRIPCION`, `FECHA_PUBLICACION`, `ID_USUARIO_FK`, `UBICACION`, `PRECIO_APROX`) VALUES
+(22, 1, 1, NULL, 'Cuidado de Niños', 'Se busca persona para cuidar niños en casa.', '2024-12-18 18:44:22', 2, 'San José', 50),
+(23, 1, 2, NULL, 'Servicios de Jardinería', 'Se ofrece servicio de jardinería y mantenimiento de jardines.', '2024-12-18 18:44:22', 2, 'Cartago', 75),
+(24, 1, 3, NULL, 'Reparación de Ropa', 'Servicios de costura y reparación de ropa.', '2024-12-18 18:44:22', 3, 'Alajuela', 30),
+(25, 1, 4, NULL, 'Limpieza de Hogar', 'Servicios de limpieza a domicilio.', '2024-12-18 18:44:22', 3, 'Heredia', 40),
+(26, 1, 1, NULL, 'Cuidado de Niños en Casa', 'Busco persona responsable para cuidar a mis dos hijos en casa durante las tardes.', '2024-12-18 18:44:23', 1, 'San José', 40),
+(27, 1, 2, NULL, 'Jardinero a Domicilio', 'Ofrezco servicios de jardinería, poda y mantenimiento de jardines.', '2024-12-18 18:44:23', 2, 'Cartago', 50),
+(28, 1, 3, NULL, 'Costurera para Arreglos', 'Se busca costurera para arreglos de ropa y confección de prendas.', '2024-12-18 18:44:23', 3, 'Alajuela', 30),
+(29, 1, 4, NULL, 'Limpieza de Oficinas', 'Ofrezco servicios de limpieza para oficinas y locales comerciales.', '2024-12-18 18:44:23', 1, 'Heredia', 60),
+(30, 1, 5, NULL, 'Cuidado de Mascotas', 'Busco persona que cuide a mi perro durante mis vacaciones.', '2024-12-18 18:44:23', 2, 'San José', 25),
+(31, 1, 6, NULL, 'Reparación de Electrodomésticos', 'Se ofrece servicio de reparación de electrodomésticos a domicilio.', '2024-12-18 18:44:23', 3, 'Alajuela', 70),
+(32, 1, 7, NULL, 'Catering para Eventos', 'Ofrezco servicio de catering para eventos y fiestas.', '2024-12-18 18:44:23', 1, 'Cartago', 200),
+(33, 1, 8, NULL, 'Ventas de Productos Naturales', 'Se busca vendedor para productos naturales y orgánicos.', '2024-12-18 18:44:23', 2, 'San José', 100),
+(34, 1, 9, NULL, 'Asistente Personal', 'Busco asistente personal para tareas administrativas y de organización.', '2024-12-18 18:44:23', 3, 'Heredia', 80),
+(35, 1, 10, NULL, 'Servicios de Belleza a Domicilio', 'Ofrezco servicios de belleza, maquillaje y peinados a domicilio.', '2024-12-18 18:44:23', 1, 'Alajuela', 50),
+(36, 1, 11, NULL, 'Otros Servicios Generales', 'Se ofrecen servicios generales como mudanzas y limpieza.', '2024-12-18 18:44:23', 2, 'Cartago', 90);

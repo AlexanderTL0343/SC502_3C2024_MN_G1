@@ -14,7 +14,34 @@ include("./assets/fragmentos/sinSesion401.php");
 
 
 <body>
+<style>
+            /* Estilo general para las tarjetas */
+    .card {
+        transition: transform 0.2s; 
+        height: 100%; 
+        display: flex; 
+        flex-direction: column; 
+    }
 
+    /* Efecto de movimiento */
+    .card:hover {
+        transform: scale(1.05); 
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+    }
+
+    /* Asegura que las imágenes de las tarjetas sean del mismo tamaño */
+    .card-img-top {
+        height: 200px; 
+        object-fit: cover; 
+    }
+
+    /* Asegura que el cuerpo de la tarjeta ocupe el espacio restante */
+    .card-body {
+        flex-grow: 1; 
+    }
+
+
+     </style>
     <?php include("../config/session.php"); ?> <!--PARA COLOCAR EL HEADER DEPENDIENDO DEL ROL-->
 
     <!--Estructura HTML para el filtro-->
@@ -23,388 +50,120 @@ include("./assets/fragmentos/sinSesion401.php");
         <label for="categoryFilter">Filtrar por categoría:</label>
         <select id="categoryFilter" class="form-select" onchange="filterProducts()">
             <option value="all">Todas</option>
-            <option value="cuidado-ninos">Cuidado de Niños</option>
-            <option value="jardineria">Jardinería</option>
-            <option value="arreglo-ropa">Arreglo de Ropa</option>
-            <option value="limpieza">Limpieza</option>
-            <option value="cuidado-mascotas">Cuidado de Mascotas</option>
-            <option value="reparaciones">Reparaciones y Mantenimiento</option>
-            <option value="comida-catering">Comida y Catering</option>
-            <option value="ventas">Ventas y Comercio</option>
-            <option value="asistencia-personal">Asistencia Personal</option>
-            <option value="belleza">Servicios de Belleza</option>
-            <option value="otros-empleos">Otros</option>
-
-
+            <?php
+            include('../models/publicacionesModel.php');
+            $publicaciones = new Publicacion();
+            $arr = $publicaciones->listarCategorias();
+            foreach ($arr as $categoria) {
+                echo '<option value="' . $categoria['ID_CATEGORIA_PK'] . '">' . $categoria['NOMBRE_CATEGORIA'] . '</option>';
+            }
+            ?>
         </select>
 
-
         <!-- Botón para postular un nuevo trabajo -->
-        <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#postJobModal">Postular un nuevo trabajo</button>
+        <?php
+        if ($_SESSION['usuario']['nombreRol'] === 'POSTULANTE') {
+            echo '<button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#postJobModal">Postular un nuevo trabajo</button>';
+        }
+        ?>
 
     </div>
     <section>
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <ul class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="listaPublicaciones">
+                <?php
 
-                <!--Primer carta -->
-                <div class="col mb-5" data-category="cuidado-ninos">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Cuidado de Niños</h5>
-                                $40.00 - $80.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
+                function listarPublicaciones($publicaciones){
+                    //$publicaciones = new Publicacion();
+                    $arr = $publicaciones->listarPublicaciones();
+                    //var_dump($arr);
+                    foreach ($arr as $publicacion) {
+                        $card = '<li class="nav-item">
+    <div class="col mb-5" data-category="' . $publicacion['ID_CATEGORIA_FK'] . '">
+        <div class="card h-100">
+            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <h5 class="fw-bolder">' . $publicacion['TITULO_PUBLICACION'] . '</h5>
+                    ' . $publicacion['PRECIO_APROX'] . ' ₡
                 </div>
-                <!--Segunda  carta -->
-                <div class="col mb-5" data-category="jardineria">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Servicios de Arreglos Florales</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                    <a class="btn btn-outline-primary mt-auto" href="#" onclick="editPublication(' . $publicacion['ID_PUBLICACION_PK'] . ')" data-bs-toggle="modal" data-bs-target="#editJobModal">Editar</a>
+                    <button class="btn btn-danger mt-auto" onclick="deletePublication(' . $publicacion['ID_PUBLICACION_PK'] . ')">Eliminar</button>
+                    <a class="btn btn-outline-primary mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
                 </div>
-
-
-                <!--Tercera carta -->
-                <div class="col mb-5" data-category="cuidado-mascotas">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Cuidado y Paseo de Mascotas</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Cuarta carta -->
-                <div class="col mb-5" data-category="ventas">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Productos Ecológicos</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                $40.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Quinta carta -->
-                <div class="col mb-5" data-category="arreglo-ropa">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Venta de Ropa de Segunda Mano</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Quinta  carta -->
-                <div class="col mb-5" data-category="otros-empleos">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fotografía y Edición de Fotost</h5>
-                                <!-- Product price-->
-                                $120.00 - $280.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Sexta carta -->
-                <div class="col mb-5" data-category="jardineria">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Venta de Flores y Arreglos Florales</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Septima carta -->
-                <div class="col mb-5" data-category="ventas">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Productos Artesanales</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <!-- Product price-->
-                                $40.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Limpieza -->
-                <div class="col mb-5" data-category="limpieza">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Limpieza" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Servicios de Limpieza</h5>
-                                $25.00 - $70.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" data-toggle="modal" data-target="#contactModal">Ver empleo</a></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Cuidado de Mascotas -->
-                <div class="col mb-5" data-category="cuidado-mascotas">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Cuidado de Mascotas" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Cuidado y Paseo de Mascotas</h5>
-                                $30.00 - $50.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reparaciones y Mantenimiento -->
-                <div class="col mb-5" data-category="reparaciones">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Reparaciones" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Reparaciones y Mantenimiento</h5>
-                                $50.00 - $100.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" data-toggle="modal" data-target="#contactModal">Ver empleo</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comida y Catering -->
-                <div class="col mb-5" data-category="comida-catering">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Comida y Catering" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Comida a Domicilio o Catering</h5>
-                                $40.00 - $80.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ventas y Comercio -->
-                <div class="col mb-5" data-category="ventas">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Ventas y Comercio" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Productos Ecológicos</h5>
-                                $40.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Asistencia Personal -->
-                <div class="col mb-5" data-category="asistencia-personal">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Asistencia Personal" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Asistencia Personal</h5>
-                                $30.00 - $60.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Servicios de Belleza -->
-                <div class="col mb-5" data-category="belleza">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Servicios de Belleza" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Servicios de Belleza</h5>
-                                $50.00 - $100.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Otros Empleos -->
-                <div class="col mb-5" data-category="otros-empleos">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Otros Empleos" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">Fotografía y Edición de Fotos</h5>
-                                $120.00 - $280.00
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <a class="btn btn-outline-dark mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#applicationModal">Ver empleo</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
             </div>
         </div>
+    </div>
+</li>';
 
+                        switch ($_SESSION['usuario']['nombreRol']) {
+
+                            case 'ADMIN':
+                                if ($publicacion['ID_ESTADO_FK'] != 2) { //pintar solo publicaciones con estado activo (el 2 es el inactivo)
+                                    echo $card;
+                                }
+                                break;
+
+                            case 'RECLUTADOR':
+                                if ($publicacion['ID_ESTADO_FK'] != 2) { //mostrar todas las publicaciones activas
+                                    echo $card;
+                                }
+                                break;
+
+                            case 'POSTULANTE':
+                                if ($publicacion['ID_USUARIO_FK'] == $_SESSION['usuario']['idUsuario']) { //mostrar unicamente las publicaciones del usuario logueado
+                                    echo $card;
+                                }
+                                break;
+                        }
+                    }
+                }
+                //llamar al metodo de listar publicaciones
+                listarPublicaciones($publicaciones);
+
+                ?>
+            </ul>
 
     </section>
-
+<!-- Modal para editar publicación -->
+<div class="modal fade" id="editJobModal" tabindex="-1" aria-labelledby="editJobModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobModalLabel">Editar Publicación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditJob">
+                    <input type="hidden" id="editJobId" name="editJobId">
+                    <div class="mb-3">
+                        <label for="editTitulo" class="form-label">Título del Trabajo</label>
+                        <input type="text" class="form-control" id="editTitulo" name="editTitulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDescripcion" class="form-label">Descripción del Trabajo</label>
+                        <textarea class="form-control" id="editDescripcion" rows="3" name="editDescripcion" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editUbicacion" class="form-label">Ubicación</label>
+                        <input type="text" class="form-control" id="editUbicacion" name="editUbicacion" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPrecio" class="form-label">Precio aproximado</label>
+                        <input type="number" class="form-control" id="editPrecio" name="editPrecio" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="updateJob">Actualizar Publicación</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Modal para postular un nuevo trabajo -->
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="jobContainer">
@@ -416,24 +175,40 @@ include("./assets/fragmentos/sinSesion401.php");
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="postJobForm">
+                        <form id="formPostularTrabajo" >
                             <div class="mb-3">
-                                <label for="jobTitle" class="form-label">Título del Trabajo</label>
-                                <input type="text" class="form-control" id="jobTitle" required>
+                                <label for="titulo" class="form-label">Título del Trabajo</label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" required>
                             </div>
                             <div class="mb-3">
-                                <label for="jobDescription" class="form-label">Descripción del Trabajo</label>
-                                <textarea class="form-control" id="jobDescription" rows="3" required></textarea>
+                                <label for="descripcion" class="form-label">Descripción del Trabajo</label>
+                                <textarea class="form-control" id="descripcion" rows="3"  name="descripcion" required></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <select id="categoriaPublicacionSelect" class="form-select" name="categoria" required>
+                                    <?php
+                                    $cat = $publicaciones->listarCategorias();
+                                    foreach ($cat as $categoria) {
+                                        echo '<option value="' . $categoria['ID_CATEGORIA_PK'] . '">' . $categoria['NOMBRE_CATEGORIA'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ubicacion" class="form-label">Ubicación</label>
+                                <input type="text" class="form-control" id="ubicacion" name="ubicacion" name="ubicacion" required>
                             </div>
                             <div class="mb-3">
-                                <label for="jobPrice" class="form-label">Precio</label>
-                                <input type="text" class="form-control" id="jobPrice" required>
+                                <label for="precio" class="form-label">Precio aproximado</label>
+                                <input type="number" class="form-control" id="precio" name="precio" name="precio" required>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="submitJob">Subir Empleo</button>
+                        <button type="button" class="btn btn-primary" id="subirTrabajo">Subir Empleo</button>
                     </div>
                 </div>
             </div>
@@ -474,6 +249,7 @@ include("./assets/fragmentos/sinSesion401.php");
 
         <?php include("./assets/fragmentos/footer.php"); ?>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/publicaciones.js"></script>
 <?php include("./assets/fragmentos/scripts.php"); ?>
 

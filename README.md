@@ -5,4 +5,5 @@
 - Erick Daniel Benavides Rojas
 - Johnnatan Andres Chacon Hernandez
 - Brandon Ariel Aguirre Ortiz
+- Stephano Baldi Bellanero
 - Paola Ugalde Alvarez

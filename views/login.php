@@ -42,7 +42,7 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <a href="#">¿Olvidaste tu contraseña?</a>
+                                        <a id="olvidasteContrasena" href="#">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </div>
 

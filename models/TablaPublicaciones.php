@@ -208,6 +208,24 @@ class TablaPubli extends Conexion
             return $error;
         }
     }
+    public function eliminarUsuario($id) {
+        try {
+            $sql = "UPDATE usuarios
+            SET ID_ESTADO_FK = 2
+            WHERE ID_USUARIO_PK = ?";
+            self::getConexion();
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowCount = $stmt->rowCount();
+            self::desconectar();
+            return $rowCount; 
+        } catch (PDOException $e) {
+            self::desconectar();
+            error_log("Error al eliminar usuario: " . $e->getMessage());
+            return 0; 
+        }
+    }
 
     
 }
