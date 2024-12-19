@@ -25,7 +25,7 @@ include("./assets/fragmentos/sinSesion401.php");
             <option value="all">Todas</option>
             <?php
             include('../models/publicacionesModel.php');
-            $publicaciones = new Publicacion();
+            $publicaciones = new publicacion();
             $arr = $publicaciones->listarCategorias();
             foreach ($arr as $categoria) {
                 echo '<option value="' . $categoria['ID_CATEGORIA_PK'] . '">' . $categoria['NOMBRE_CATEGORIA'] . '</option>';
